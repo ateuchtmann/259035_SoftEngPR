@@ -1,1 +1,1 @@
-# 259035_SoftEngPR
+# Software Engineering Praktikum (LVA 259035)
