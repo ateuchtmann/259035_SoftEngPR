@@ -1,35 +1,19 @@
 import java.awt.EventQueue;
 import java.awt.Font;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.JEditorPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextArea;
-import javax.swing.JList;
-import javax.swing.JSplitPane;
-import java.awt.Panel;
 import java.awt.SystemColor;
-
-import javax.swing.JScrollBar;
-
 public class Soft {
 
 	private JFrame frame;
@@ -49,7 +33,7 @@ public class Soft {
 		});
 	}
 	
-	//coordinates for panelss
+	//coordinates for panels
 	
 	static int y = 101;
 	static int x = 15;
@@ -159,7 +143,7 @@ public class Soft {
 						//adding area to input the name
 						
 						JTextArea inputNameArea = new JTextArea();
-						inputNameArea.setBounds(114, 30, 150, 35);
+						inputNameArea.setBounds(114, 33, 150, 24);
 						inputNameArea.setFont(new Font("Verdana", Font.PLAIN, 15));
 						contentPane.add(inputNameArea);
 						
@@ -219,7 +203,7 @@ public class Soft {
 		}); // createProjectButton (Listener - he has only one method: action performed (bzw. the above one))
 		
 		frame.getContentPane().setLayout(null); 
-		frame.getContentPane().add(btnCreateProject);  //adding button for creating project
+		frame.getContentPane().add(btnCreateProject);
 		
 	}
 }
