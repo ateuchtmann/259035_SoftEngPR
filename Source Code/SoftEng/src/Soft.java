@@ -90,7 +90,7 @@ public class Soft {
 				
 				
 				
-				editFrames.put(panel.hashCode(), editClass);  //****************************************************
+				editFrames.put(panel.hashCode(), editClass);  //**************************************************
 				
 				
 				JLabel lblName = new JLabel("Name:");   // adding indication of "name"
