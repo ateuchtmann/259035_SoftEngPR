@@ -12,17 +12,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import Daten.Aufgabe;
+import Daten.Aufgabenbereich;
+
 public class AufgabenbereichView {
 
-	private static JFrame frame;
-	private static Map<Integer, Integer> yList = new HashMap<>();
-	private JTextField textField;
-	private JTextField textField2;
+	private static JFrame aufgabenbereichFrame;
+	private static Map<Integer, Integer> yCoordinateList = new HashMap<>();
+	private static Aufgabenbereich aufgabenB;
 
 	/**
 	 * Launch the application.
@@ -31,8 +32,8 @@ public class AufgabenbereichView {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AufgabenbereichView window = new AufgabenbereichView(frame);
-					window.frame.setVisible(true);
+					AufgabenbereichView window = new AufgabenbereichView(aufgabenbereichFrame, aufgabenB);
+					AufgabenbereichView.aufgabenbereichFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -43,8 +44,9 @@ public class AufgabenbereichView {
 	/**
 	 * Create the application.
 	 */
-	public AufgabenbereichView(JFrame frame) {
-		this.frame = frame;
+	public AufgabenbereichView(JFrame frame, Aufgabenbereich aufgabenB) {
+		AufgabenbereichView.aufgabenbereichFrame = frame;
+		AufgabenbereichView.aufgabenB = aufgabenB; 
 		initialize();
 	}
 
@@ -53,104 +55,107 @@ public class AufgabenbereichView {
 	 */
 	private void initialize() {
 		
-		JPanel aufBereichPanel = new JPanel();    
-		yList.put(aufBereichPanel.hashCode(), 100); 
+		JPanel aufgabenBPanel = new JPanel();    
+		yCoordinateList.put(aufgabenBPanel.hashCode(), 100); 
 		
-		aufBereichPanel.setBackground(Color.LIGHT_GRAY);
-		aufBereichPanel.setBounds(CreateAufgabenbereichView.x, 120, 355, 780);
-		frame.getContentPane().add(aufBereichPanel);
+		aufgabenBPanel.setBackground(Color.LIGHT_GRAY);
+		aufgabenBPanel.setBounds(CreateAufgabenbereichView.x, 120, 355, 780);
+		aufgabenbereichFrame.getContentPane().add(aufgabenBPanel);
 		Border projectBorder = new MatteBorder(2,2,3,2,Color.BLACK);
-		aufBereichPanel.setBorder(projectBorder);
-		aufBereichPanel.setLayout(null);
+		aufgabenBPanel.setBorder(projectBorder);
+		aufgabenBPanel.setLayout(null);
 		
-		JLabel aufBereichName = new JLabel("Default Name");
-		aufBereichName.setBackground(new Color(255, 255, 255));
-		aufBereichName.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		aufBereichName.setBounds(12, 13, 294, 34);
-		aufBereichPanel.add(aufBereichName);
+		JLabel lblAufgabenBName = new JLabel("Default Name");
+		lblAufgabenBName.setBackground(new Color(255, 255, 255));
+		lblAufgabenBName.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblAufgabenBName.setBounds(12, 13, 294, 34);
+		aufgabenBPanel.add(lblAufgabenBName);
 		
 		 // new panel behind name (for better view)
 		
-		JPanel contentPaneName = new JPanel();
-		contentPaneName.setBorder(new EmptyBorder(22,22,22,22));
-		contentPaneName.setBackground(Color.WHITE);
-		contentPaneName.setBounds(0, 0, 355, 63);
+		JPanel namePanel = new JPanel();
+		namePanel.setBorder(new EmptyBorder(22,22,22,22));
+		namePanel.setBackground(Color.WHITE);
+		namePanel.setBounds(0, 0, 355, 63);
 		Border paneNameBorder = new MatteBorder(3,3,4,3,Color.DARK_GRAY);
-		contentPaneName.setBorder(paneNameBorder);
-		contentPaneName.setLayout(null);
+		namePanel.setBorder(paneNameBorder);
+		namePanel.setLayout(null);
 		
-		JButton buttonEditName = new JButton("..."); //button for editing name of project
-		buttonEditName.setBounds(318, 19, 25, 25);
+		JButton btnEdditName = new JButton("..."); //button for editing name of project
+		btnEdditName.setBounds(318, 19, 25, 25);
 	
 		
 		// specifying the action after pressing the button for name edit
 		
-		buttonEditName.addActionListener(new ActionListener() {
+		btnEdditName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				//creating second frame (window) to make input when editing name of project
 				
-				JFrame frame2 = new JFrame(); 
+				JFrame inputNameFrame = new JFrame(); 
 		
-				JPanel contentPane = new JPanel();
-				contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-				contentPane.setLayout(null);
+				JPanel inputNamePanel = new JPanel();
+				inputNamePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+				inputNamePanel.setLayout(null);
 				
 				//adding "set name:" next to input
 				
-				JLabel lblNewLabel2 = new JLabel("Set name: ");
-				lblNewLabel2.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblNewLabel2.setBounds(31, 30, 113, 25);
-				contentPane.add(lblNewLabel2);
+				JLabel lblSetName = new JLabel("Set name: ");
+				lblSetName.setFont(new Font("Verdana", Font.PLAIN, 15));
+				lblSetName.setBounds(31, 30, 113, 25);
+				inputNamePanel.add(lblSetName);
 				
 				//adding area to input the name
 				
-				JTextArea inputNameArea = new JTextArea();
-				inputNameArea.setBounds(114, 30, 320, 25);
-				inputNameArea.setFont(new Font("Verdana", Font.PLAIN, 15));
-				contentPane.add(inputNameArea);
+				JTextArea fldInputName = new JTextArea();
+				fldInputName.setBounds(114, 30, 320, 25);
+				fldInputName.setFont(new Font("Verdana", Font.PLAIN, 15));
+				inputNamePanel.add(fldInputName);
 				
 				//creating button to save name and close second frame 
 	
-				JButton btnNewButton_3 = new JButton("ok");
-				btnNewButton_3.setBounds(450, 30, 57, 35);
-				contentPane.add(btnNewButton_3);
-				btnNewButton_3.addActionListener(new ActionListener() {
+				JButton btnOk = new JButton("ok");
+				btnOk.setBounds(450, 30, 57, 35);
+				inputNamePanel.add(btnOk);
+				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String str = inputNameArea.getText();
-						aufBereichName.setText(str);  
-						frame2.dispose();
+						String str = fldInputName.getText();
+						lblAufgabenBName.setText(str); 
+						aufgabenB.setName(fldInputName.getText());
+						inputNameFrame.dispose();
 					}
 				});
 				
 				
 				// specifying second frame attributes
 				
-				frame2.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
-				frame2.setBounds(700, 400, 550,169);
-				frame2.getContentPane().setBackground(new Color(102, 153, 204));
-				frame2.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				frame2.getContentPane().add(contentPane);
-				frame2.setVisible(true);
+				inputNameFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+				inputNameFrame.setBounds(700, 400, 550,169);
+				inputNameFrame.getContentPane().setBackground(new Color(102, 153, 204));
+				inputNameFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				inputNameFrame.getContentPane().add(inputNamePanel);
+				inputNameFrame.setVisible(true);
 		        
 				
 			}
 		}); //buttonEditName
 		
-		aufBereichPanel.add(buttonEditName);
-		aufBereichPanel.add(contentPaneName);
+		aufgabenBPanel.add(btnEdditName);
+		aufgabenBPanel.add(namePanel);
 		
 		
 		JButton btnAufgabeHinzufgen = new JButton("Aufgabe Hinzuf\u00FCgen");
 		btnAufgabeHinzufgen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-			   AufgabeView aufgabe = new AufgabeView(frame, aufBereichPanel, yList);
+			
+			   Aufgabe aufgabe = new Aufgabe();
+			   aufgabenB.addAufgabe(aufgabe);
+			   AufgabeView aufgabeView = new AufgabeView(aufgabenbereichFrame, aufgabenBPanel, yCoordinateList, aufgabe);
 			   
 			}
 		});
 		btnAufgabeHinzufgen.setBounds(105, 62, 147, 25);
-		aufBereichPanel.add(btnAufgabeHinzufgen);
+		aufgabenBPanel.add(btnAufgabeHinzufgen);
 		
 		
 		CreateAufgabenbereichView.x = CreateAufgabenbereichView.x + 375;

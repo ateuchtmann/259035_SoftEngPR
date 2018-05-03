@@ -9,13 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Daten.Aufgabe;
+
 public class AufgabeView {
 
-	private static JFrame frame;
+	private static JFrame aufgabeFrame;
 	private static JPanel aufBereichPanel;
-	private JTextField textField;
-	private JTextField textField2;
-	private static Map<Integer, Integer> yList = new HashMap<>();
+	private JTextField fldIstZeit;
+	private JTextField fldSollZeit;
+	private static Map<Integer, Integer> yCoordinateList = new HashMap<>();
+	private static Aufgabe aufgabe;
 
 	/**
 	 * Launch the application.
@@ -24,8 +27,8 @@ public class AufgabeView {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AufgabeView window = new AufgabeView(frame, aufBereichPanel, yList);
-					window.frame.setVisible(true);
+					AufgabeView window = new AufgabeView(aufgabeFrame, aufBereichPanel, yCoordinateList, aufgabe);
+					AufgabeView.aufgabeFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -36,10 +39,11 @@ public class AufgabeView {
 	/**
 	 * Create the application.
 	 */
-	public AufgabeView(JFrame frame, JPanel panel, Map list) {
-		this.frame = frame;
-		this.aufBereichPanel = panel;
-		AufgabeView.yList = list;
+	public AufgabeView(JFrame frame, JPanel panel, Map<Integer, Integer> list, Aufgabe aufgabe) {
+		AufgabeView.aufgabeFrame = frame;
+		AufgabeView.aufBereichPanel = panel;
+		AufgabeView.aufgabe = aufgabe;
+		AufgabeView.yCoordinateList = list;
 		initialize();
 	}
 
@@ -51,43 +55,44 @@ public class AufgabeView {
 		//adding panel behind input area (better look)
 		
 		JPanel aufgabePanel = new JPanel();
-		aufgabePanel.setBounds(12, yList.get(aufBereichPanel.hashCode()), 331, 100);
+		aufgabePanel.setBounds(12, yCoordinateList.get(aufBereichPanel.hashCode()), 331, 100);
 		aufgabePanel.setLayout(null);
 		
 		//adding input area for aufgabe text
 		
-		JTextArea aufgabeArea = new JTextArea();
-		aufgabeArea.setBounds(0, 0, 331, 74);
-		aufgabePanel.add(aufgabeArea);
+		JTextArea fldAufgabeBeschreibung = new JTextArea();
+		fldAufgabeBeschreibung.setBounds(0, 0, 331, 74);
+		aufgabePanel.add(fldAufgabeBeschreibung);
 		
 		//adding sollzeit
 		
-		JLabel aufgabeSollzeit = new JLabel("Sollzeit:");
-		aufgabeSollzeit.setBounds(10, 81, 56, 16);
-		aufgabePanel.add(aufgabeSollzeit);
+		JLabel lblSollzeit = new JLabel("Sollzeit:");
+		lblSollzeit.setBounds(10, 81, 56, 16);
+		aufgabePanel.add(lblSollzeit);
 		
-		textField = new JTextField();
-		textField.setBounds(60, 78, 45, 22);
-		aufgabePanel.add(textField);
-		textField.setColumns(10);
+		fldIstZeit = new JTextField();
+		fldIstZeit.setBounds(60, 78, 45, 22);
+		aufgabePanel.add(fldIstZeit);
+		fldIstZeit.setColumns(10);
 		
 		//adding istzeit
 		
-		JLabel aufgabeIstzeit = new JLabel("Istzeit:");
-		aufgabeIstzeit.setBounds(210, 81, 56, 16);
-		aufgabePanel.add(aufgabeIstzeit);
+		JLabel fldIstZeit = new JLabel("Istzeit:");
+		fldIstZeit.setBounds(210, 81, 56, 16);
+		aufgabePanel.add(fldIstZeit);
 		
-		textField2 = new JTextField();
-		textField2.setBounds(253, 78, 45, 22);
-		aufgabePanel.add(textField2);
-		textField2.setColumns(10);
+		fldSollZeit = new JTextField();
+		fldSollZeit.setBounds(253, 78, 45, 22);
+		aufgabePanel.add(fldSollZeit);
+		fldSollZeit.setColumns(10);
 		
 		
 		aufBereichPanel.add(aufgabePanel);
-		frame.repaint();
+		aufgabeFrame.repaint();
+		aufgabe.setBeschreibung(fldIstZeit.getText());
 
 		//adding to the y coordinate
-		yList.put(aufBereichPanel.hashCode(), yList.get(aufBereichPanel.hashCode()) + 110);
+		yCoordinateList.put(aufBereichPanel.hashCode(), yCoordinateList.get(aufBereichPanel.hashCode()) + 110);
 		
 	}//initialize
 

@@ -9,6 +9,9 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+
+import Daten.Aufgabenbereich;
+
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -19,10 +22,8 @@ import javax.swing.JTextField;
 
 public class CreateAufgabenbereichView {
 
-	private JFrame frame;
+	private JFrame createAufgabenbereichFrame;
 	protected static int x = 20; // coordinate for moving aufgabenbereich to the right
-	private JTextField textField;
-	private JTextField textField2;
 	
 	/**
 	 * Launch the application.
@@ -33,7 +34,7 @@ public class CreateAufgabenbereichView {
 			public void run() {
 				try {
 					CreateAufgabenbereichView window = new CreateAufgabenbereichView();
-					window.frame.setVisible(true);
+					window.createAufgabenbereichFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,7 +43,7 @@ public class CreateAufgabenbereichView {
 	}
 	
 	public JFrame getFrame() {
-		return frame;
+		return createAufgabenbereichFrame;
 	}
 
 	/**
@@ -56,36 +57,32 @@ public class CreateAufgabenbereichView {
 s	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(0, 0, 1920, 1080);
-		frame.getContentPane().setBackground(new Color(102, 153, 204));
-		frame.getContentPane().setLayout(null);
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		
-		
+		createAufgabenbereichFrame = new JFrame();
+		createAufgabenbereichFrame.setBounds(0, 0, 1920, 1080);
+		createAufgabenbereichFrame.getContentPane().setBackground(new Color(102, 153, 204));
+		createAufgabenbereichFrame.getContentPane().setLayout(null);
+		createAufgabenbereichFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		JButton btnCreateAufgabenbereich = new JButton("Neuen Aufgabenbereich erstellen");
 		btnCreateAufgabenbereich.setBounds(767, 13, 362, 57);
 		
 		btnCreateAufgabenbereich.setFont(new Font("Sitka Small", Font.PLAIN, 20));
 		btnCreateAufgabenbereich.setBackground(SystemColor.LIGHT_GRAY);
-		Border b1 = new MatteBorder(3,3,4,3,Color.BLACK);
-		btnCreateAufgabenbereich.setBorder(b1);
+		Border borderBtnCreateAB = new MatteBorder(3,3,4,3,Color.BLACK);
+		btnCreateAufgabenbereich.setBorder(borderBtnCreateAB);
 		
 		//specifying what happens after we press "create new aufgabenbsereich" 
 		
 		btnCreateAufgabenbereich.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				AufgabenbereichView aufgabenbereich = new AufgabenbereichView(frame);
+				Aufgabenbereich aufgabenB = new Aufgabenbereich();
+				AufgabenbereichView aufgabenbereichView = new AufgabenbereichView(createAufgabenbereichFrame, aufgabenB);
 				
 			}
 		});
 		
-		
-		frame.getContentPane().add(btnCreateAufgabenbereich);
-		
-		
+		createAufgabenbereichFrame.getContentPane().add(btnCreateAufgabenbereich);
 		
 		        // code für bessere sicht //
 				//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
