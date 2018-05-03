@@ -4,15 +4,22 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
+
+import Daten.*;
+
 import java.awt.SystemColor;
 
 public class CreateProjektView {
 
-	private JFrame frame;
+	private JFrame createProjektFrame;
+	private static ProjektListe projektListe;
+	private static List<ProjektView> projektViewListe;
 
 	//launch the application
 	
@@ -21,7 +28,7 @@ public class CreateProjektView {
 			public void run() {
 				try {
 					CreateProjektView window = new CreateProjektView();
-					window.frame.setVisible(true);
+					window.createProjektFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -32,6 +39,8 @@ public class CreateProjektView {
 	// create the application
 	
 	public CreateProjektView() {
+		projektViewListe = new ArrayList<>();
+		projektListe = new ProjektListe();
 		initialize();
 	}
 	
@@ -39,11 +48,11 @@ public class CreateProjektView {
 	// contents of the frame
 	
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
-		frame.setBounds(0, 0, 1920, 1080);
-		frame.getContentPane().setBackground(new Color(102, 153, 204));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		createProjektFrame = new JFrame();
+		createProjektFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+		createProjektFrame.setBounds(0, 0, 1920, 1080);
+		createProjektFrame.getContentPane().setBackground(new Color(102, 153, 204));
+		createProjektFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// Start-Button to make new Project
 		
@@ -60,13 +69,16 @@ public class CreateProjektView {
 		btnCreateProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				ProjektView projekt = new ProjektView(frame);
+				Projekt p = new Projekt();
+				projektListe.addProjekt(p);
+				ProjektView projektView = new ProjektView(createProjektFrame, p);
+			    projektViewListe.add(projektView);
 				
 			} // createProjectButton (actionPerformed)	
 		}); // createProjectButton (Listener - he has only one method: action performed (bzw. the above one))
 		
-		frame.getContentPane().setLayout(null); 
-		frame.getContentPane().add(btnCreateProject);
+		createProjektFrame.getContentPane().setLayout(null); 
+		createProjektFrame.getContentPane().add(btnCreateProject);
 		
 	}
 }

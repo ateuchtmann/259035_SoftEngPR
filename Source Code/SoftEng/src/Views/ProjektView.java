@@ -14,10 +14,12 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
+import Daten.*;
 
 public class ProjektView {
 
-	private static JFrame frame;
+	private static JFrame projektFrame;
+	private static Projekt projekt;
 
 	/**
 	 * Launch the application.
@@ -26,7 +28,7 @@ public class ProjektView {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProjektView.frame.setVisible(true);
+					ProjektView.projektFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -36,21 +38,22 @@ public class ProjektView {
 	
 	//coordinates for projects
 	
-		static int y = 101;
+		static int y = 101;   
 		static int x = 15;
 
 	/**
 	 * Create the application.
 	 */
-	public ProjektView(JFrame frame) {
-		ProjektView.frame = frame;
+	public ProjektView(JFrame frame, Projekt projekt) {
+		ProjektView.projekt = projekt;
+		ProjektView.projektFrame = frame;
 		initialize();
 	}
 	
 	// list of aufgabenbereiche
 	
-		CreateAufgabenbereichView createAufgabenbereich;
-		static Map<Integer, CreateAufgabenbereichView> createAufgabenbereiche = new HashMap <>();
+		CreateAufgabenbereichView createAufgabenbereichView;
+		static Map<Integer, CreateAufgabenbereichView> createAufgabenbereicheCoordinates = new HashMap <>();
 
 
 	/**
@@ -58,112 +61,115 @@ public class ProjektView {
 	 */
 	private void initialize() {
 		
-		createAufgabenbereich = new CreateAufgabenbereichView();  
+		createAufgabenbereichView = new CreateAufgabenbereichView();  
 		
-		JPanel panel = new JPanel();           //panel for the project 
-		panel.setBackground(Color.LIGHT_GRAY);
-		panel.setBounds(x, y, 343, 240);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel projektPanel = new JPanel();           //panel for the project 
+		projektPanel.setBackground(Color.LIGHT_GRAY);
+		projektPanel.setBounds(x, y, 343, 240);
+		projektFrame.getContentPane().add(projektPanel);
+		projektPanel.setLayout(null);
 		Border projectBorder = new MatteBorder(3,3,4,3,Color.BLACK);
-		panel.setBorder(projectBorder);
-		frame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+		projektPanel.setBorder(projectBorder);
+		projektFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
 		
-		frame.repaint();	
+		projektFrame.repaint();	
 		
 		
-		createAufgabenbereiche.put(panel.hashCode(), createAufgabenbereich);  //****************************************************
+		createAufgabenbereicheCoordinates.put(projektPanel.hashCode(), createAufgabenbereichView);  //****************************************************
 		
 		
 		JLabel lblName = new JLabel("Name:");   // adding indication of "name"
 		lblName.setBounds(15, 19, 69, 20);
-		panel.add(lblName);
+		projektPanel.add(lblName);
 		
-		JLabel textField = new JLabel("Projektname"); // adding space to hold the input name
-		textField.setBounds(110, 16, 166, 26);
-		panel.add(textField);
+		JLabel lblInputName = new JLabel("Projektname"); // adding space to hold the input name
+		lblInputName.setBounds(110, 16, 166, 26);
+		projektPanel.add(lblInputName);
 		
 		
 		JLabel lblBeschreibung = new JLabel("Beschreibung:");  //adding indication of "description"
 		lblBeschreibung.setBounds(15, 65, 114, 20);
-		panel.add(lblBeschreibung);
+		projektPanel.add(lblBeschreibung);
 		
-		JTextArea textArea = new JTextArea();  //adding area to input description of project
-		textArea.setBounds(110, 65, 210, 102);
-		textArea.setLineWrap(true);
+		JTextArea fldInputBeschreibung = new JTextArea();  //adding area to input description of project
+		fldInputBeschreibung.setBounds(110, 65, 210, 102);
+		fldInputBeschreibung.setLineWrap(true);
 		Border textAreaBorder = new MatteBorder(3,3,4,3,Color.GRAY);
-		textArea.setBorder(textAreaBorder);
-		panel.add(textArea);
+		fldInputBeschreibung.setBorder(textAreaBorder);
+		projektPanel.add(fldInputBeschreibung);
 		
 		JButton btnEdit = new JButton("Edit");  // button for editing the project (Aufgabenbereiche etc.)
 		btnEdit.setBounds(111, 195, 115, 29);
-		panel.add(btnEdit);
+		projektPanel.add(btnEdit);
 		
-		JButton buttonEditName = new JButton("..."); //button for editing name of project
-		buttonEditName.setBounds(280, 16, 40, 26);
+		JButton btnEditName = new JButton("..."); //button for editing name of project
+		btnEditName.setBounds(280, 16, 40, 26);
 		
 		// specifying the action after pressing the button for name edit
 		
-		buttonEditName.addActionListener(new ActionListener() {
+		btnEditName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				//creating second frame (window) to make input when editing name of project
 				
-				JFrame frame2 = new JFrame(); 
+				JFrame inputNameFrame = new JFrame(); 
 		
-				JPanel contentPane = new JPanel();
-				contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-				contentPane.setLayout(null);
+				JPanel inputNamePanel = new JPanel();
+				inputNamePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+				inputNamePanel.setLayout(null);
 				
 				//adding "set name:" next to input
 				
-				JLabel lblNewLabel2 = new JLabel("Set name: ");
-				lblNewLabel2.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblNewLabel2.setBounds(31, 30, 113, 25);
-				contentPane.add(lblNewLabel2);
+				JLabel lblSetName = new JLabel("Set name: ");
+				lblSetName.setFont(new Font("Verdana", Font.PLAIN, 15));
+				lblSetName.setBounds(31, 30, 113, 25);
+				inputNamePanel.add(lblSetName);
 				
 				//adding area to input the name
 				
-				JTextArea inputNameArea = new JTextArea();
-				inputNameArea.setBounds(114, 33, 150, 24);
-				inputNameArea.setFont(new Font("Verdana", Font.PLAIN, 15));
-				contentPane.add(inputNameArea);
+				JTextArea fldInputName = new JTextArea();
+				fldInputName.setBounds(114, 33, 150, 24);
+				fldInputName.setFont(new Font("Verdana", Font.PLAIN, 15));
+				inputNamePanel.add(fldInputName);
 				
 				//creating button to save name and close second frame 
 	
-				JButton btnNewButton_3 = new JButton("ok");
-				btnNewButton_3.setBounds(271, 30, 57, 35);
-				contentPane.add(btnNewButton_3);
-				btnNewButton_3.addActionListener(new ActionListener() {
+				JButton btnOk = new JButton("ok");
+				btnOk.setBounds(271, 30, 57, 35);
+				inputNamePanel.add(btnOk);
+				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						String str = inputNameArea.getText();
-						textField.setText(str);  
-						frame2.dispose();
+						
+						projekt.setName(fldInputName.getText());
+						String name = fldInputName.getText();
+						fldInputName.setText(name);  
+						inputNameFrame.dispose();
 					}
 				});
 				
 				// specifying second frame attributes
 				
-				frame2.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
-				frame2.setBounds(700, 400, 350,169);
-				frame2.getContentPane().setBackground(new Color(102, 153, 204));
-				frame2.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				frame2.getContentPane().add(contentPane);
-				frame2.setVisible(true);
+				inputNameFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+				inputNameFrame.setBounds(700, 400, 350,169);
+				inputNameFrame.getContentPane().setBackground(new Color(102, 153, 204));
+				inputNameFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				inputNameFrame.getContentPane().add(inputNamePanel);
+				inputNameFrame.setVisible(true);
 		        
 				
 			}
 		}); //buttonEditName
 		
-		panel.add(buttonEditName); // adding the EDIT button to the panel of the project
+		projektPanel.add(btnEditName); // adding the EDIT button to the panel of the project
 		
 		btnEdit.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
-				
+				projekt.setBeschreibung(fldInputBeschreibung.getText());
+	
 				// specifying the editing of a project (aufgabenbereiche etc.)
 				
-				JFrame frame3 = createAufgabenbereiche.get(panel.hashCode()).getFrame();
-				frame3.setVisible(true);
+				JFrame aufgabeBereichFrame = createAufgabenbereicheCoordinates.get(projektPanel.hashCode()).getFrame();
+				aufgabeBereichFrame.setVisible(true);
 				
 			}
 		});

@@ -7,8 +7,16 @@ public class Projekt {
 	
 	private String name;
 	private String beschreibung;
-	private List<Aufgabenbereich> aBereiche = new ArrayList<>();
-	private List<Person> personen = new ArrayList<>();
+	private List<Aufgabenbereich> aBereiche;
+	private List<Person> personen;
+	
+	public Projekt() {
+		name = "Projekt name";
+		beschreibung = " ";
+		aBereiche = new ArrayList<>();
+		personen = new ArrayList<>();
+		
+	}
 	
     public void setName(String name) {
     	this.name = name;
