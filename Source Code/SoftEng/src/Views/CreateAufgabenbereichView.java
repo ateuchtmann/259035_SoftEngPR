@@ -23,27 +23,19 @@ import javax.swing.JTextField;
 public class CreateAufgabenbereichView {
 
 	private JFrame createAufgabenbereichFrame;
-	protected static int x = 20; // coordinate for moving aufgabenbereich to the right
+	protected int xCoordinate = 20; // coordinate for moving aufgabenbereich to the right
 	
 	/**
 	 * Launch the application.
 	 */
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CreateAufgabenbereichView window = new CreateAufgabenbereichView();
-					window.createAufgabenbereichFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 	
 	public JFrame getFrame() {
 		return createAufgabenbereichFrame;
+	}
+	
+	public int getX() {
+		return xCoordinate;
 	}
 
 	/**
@@ -74,11 +66,10 @@ s	 * Initialize the contents of the frame.
 		//specifying what happens after we press "create new aufgabenbsereich" 
 		
 		btnCreateAufgabenbereich.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
+			public void actionPerformed(ActionEvent e) {			
 				Aufgabenbereich aufgabenB = new Aufgabenbereich();
-				AufgabenbereichView aufgabenbereichView = new AufgabenbereichView(createAufgabenbereichFrame, aufgabenB);
-				
+				AufgabenbereichView aufgabenbereichView = new AufgabenbereichView(createAufgabenbereichFrame, aufgabenB, xCoordinate);
+				xCoordinate = xCoordinate + 385;
 			}
 		});
 		
