@@ -24,29 +24,19 @@ public class AufgabenbereichView {
 	private static JFrame aufgabenbereichFrame;
 	private static Map<Integer, Integer> yCoordinateList = new HashMap<>();
 	private static Aufgabenbereich aufgabenB;
+	private int x;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AufgabenbereichView window = new AufgabenbereichView(aufgabenbereichFrame, aufgabenB);
-					AufgabenbereichView.aufgabenbereichFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
-	public AufgabenbereichView(JFrame frame, Aufgabenbereich aufgabenB) {
+	public AufgabenbereichView(JFrame frame, Aufgabenbereich aufgabenB, int x) {
 		AufgabenbereichView.aufgabenbereichFrame = frame;
 		AufgabenbereichView.aufgabenB = aufgabenB; 
+		this.x = x;
 		initialize();
 	}
 
@@ -59,7 +49,7 @@ public class AufgabenbereichView {
 		yCoordinateList.put(aufgabenBPanel.hashCode(), 100); 
 		
 		aufgabenBPanel.setBackground(Color.LIGHT_GRAY);
-		aufgabenBPanel.setBounds(CreateAufgabenbereichView.x, 120, 355, 780);
+		aufgabenBPanel.setBounds(x, 120, 355, 780);
 		aufgabenbereichFrame.getContentPane().add(aufgabenBPanel);
 		Border projectBorder = new MatteBorder(2,2,3,2,Color.BLACK);
 		aufgabenBPanel.setBorder(projectBorder);
@@ -156,9 +146,7 @@ public class AufgabenbereichView {
 		});
 		btnAufgabeHinzufgen.setBounds(105, 62, 147, 25);
 		aufgabenBPanel.add(btnAufgabeHinzufgen);
-		
-		
-		CreateAufgabenbereichView.x = CreateAufgabenbereichView.x + 375;
+	
 
 	}
 

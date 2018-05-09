@@ -24,22 +24,11 @@ public class ProjektView {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProjektView.projektFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
 	//coordinates for projects
 	
-		static int y = 101;   
-		static int x = 15;
+		static int yCoordinate = 101;   
+		static int xCoordinate = 15;
 
 	/**
 	 * Create the application.
@@ -65,7 +54,7 @@ public class ProjektView {
 		
 		JPanel projektPanel = new JPanel();           //panel for the project 
 		projektPanel.setBackground(Color.LIGHT_GRAY);
-		projektPanel.setBounds(x, y, 343, 240);
+		projektPanel.setBounds(xCoordinate, yCoordinate, 343, 240);
 		projektFrame.getContentPane().add(projektPanel);
 		projektPanel.setLayout(null);
 		Border projectBorder = new MatteBorder(3,3,4,3,Color.BLACK);
@@ -74,9 +63,7 @@ public class ProjektView {
 		
 		projektFrame.repaint();	
 		
-		
 		createAufgabenbereicheCoordinates.put(projektPanel.hashCode(), createAufgabenbereichView);  //****************************************************
-		
 		
 		JLabel lblName = new JLabel("Name:");   // adding indication of "name"
 		lblName.setBounds(15, 19, 69, 20);
@@ -142,7 +129,8 @@ public class ProjektView {
 						
 						projekt.setName(fldInputName.getText());
 						String name = fldInputName.getText();
-						fldInputName.setText(name);  
+						lblInputName.setText(name);
+					    System.out.println(projekt.getName());
 						inputNameFrame.dispose();
 					}
 				});
@@ -164,6 +152,9 @@ public class ProjektView {
 		
 		btnEdit.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				
 				projekt.setBeschreibung(fldInputBeschreibung.getText());
 	
 				// specifying the editing of a project (aufgabenbereiche etc.)
@@ -178,11 +169,11 @@ public class ProjektView {
 		
 		// calculating correct position of every project 
 		
-		if(y < 661){
-			y = y + 280;
+		if(yCoordinate < 661){
+			yCoordinate = yCoordinate + 280;
 		}else{
-			y = 101;
-			x = x + 380;
+			yCoordinate = 101;
+			xCoordinate = xCoordinate + 380;
 		}
 		
 	}

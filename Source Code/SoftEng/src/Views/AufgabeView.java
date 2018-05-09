@@ -21,22 +21,6 @@ public class AufgabeView {
 	private static Aufgabe aufgabe;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AufgabeView window = new AufgabeView(aufgabeFrame, aufBereichPanel, yCoordinateList, aufgabe);
-					AufgabeView.aufgabeFrame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public AufgabeView(JFrame frame, JPanel panel, Map<Integer, Integer> list, Aufgabe aufgabe) {
