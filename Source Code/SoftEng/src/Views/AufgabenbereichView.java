@@ -4,7 +4,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import javax.swing.border.MatteBorder;
 
 import Daten.Aufgabe;
 import Daten.Aufgabenbereich;
+import Daten.Person;
 
 public class AufgabenbereichView {
 
@@ -79,6 +82,8 @@ public class AufgabenbereichView {
 		
 		btnEdditName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				
 				//creating second frame (window) to make input when editing name of project
 				

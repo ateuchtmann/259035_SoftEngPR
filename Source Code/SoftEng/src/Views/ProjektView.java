@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,7 +30,9 @@ public class ProjektView {
 	//coordinates for projects
 	
 		static int yCoordinate = 101;   
-		static int xCoordinate = 15;
+		static int xCoordinate = 50;
+	    int xPersCoor = 88;
+	    final Random rColor = new Random();
 
 	/**
 	 * Create the application.
@@ -54,11 +58,11 @@ public class ProjektView {
 		
 		JPanel projektPanel = new JPanel();           //panel for the project 
 		projektPanel.setBackground(Color.LIGHT_GRAY);
-		projektPanel.setBounds(xCoordinate, yCoordinate, 343, 240);
+		projektPanel.setBounds(xCoordinate, yCoordinate, 550, 286);
 		projektFrame.getContentPane().add(projektPanel);
 		projektPanel.setLayout(null);
 		Border projectBorder = new MatteBorder(3,3,4,3,Color.BLACK);
-		projektPanel.setBorder(projectBorder);
+		projektPanel.setBorder(new MatteBorder(2, 2, 3, 2, (Color) new Color(25, 25, 112)));
 		projektFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
 		
 		projektFrame.repaint();	
@@ -79,14 +83,14 @@ public class ProjektView {
 		projektPanel.add(lblBeschreibung);
 		
 		JTextArea fldInputBeschreibung = new JTextArea();  //adding area to input description of project
-		fldInputBeschreibung.setBounds(110, 65, 210, 102);
+		fldInputBeschreibung.setBounds(110, 65, 403, 102);
 		fldInputBeschreibung.setLineWrap(true);
 		Border textAreaBorder = new MatteBorder(3,3,4,3,Color.GRAY);
-		fldInputBeschreibung.setBorder(textAreaBorder);
+		fldInputBeschreibung.setBorder(new MatteBorder(2, 2, 3, 2, (Color) new Color(128, 128, 128)));
 		projektPanel.add(fldInputBeschreibung);
 		
 		JButton btnEdit = new JButton("Edit");  // button for editing the project (Aufgabenbereiche etc.)
-		btnEdit.setBounds(111, 195, 115, 29);
+		btnEdit.setBounds(237, 244, 120, 29);
 		projektPanel.add(btnEdit);
 		
 		JButton btnEditName = new JButton("..."); //button for editing name of project
@@ -150,6 +154,131 @@ public class ProjektView {
 		
 		projektPanel.add(btnEditName); // adding the EDIT button to the panel of the project
 		
+		
+		JButton btnPersonen = new JButton("+");
+		btnPersonen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(xPersCoor <= 463) {
+					
+				//create and add person
+				Person newPerson = new Person();
+				Person p = new Person();
+				projekt.addPerson(p);
+				
+				JButton btnNewButton = new JButton("X.X.\r\n");
+				btnNewButton.setBackground(new Color(210,rColor.nextInt(256),rColor.nextInt(256)));
+				btnNewButton.setForeground(new Color(0, 0, 0));
+				btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				btnNewButton.setBounds(xPersCoor, 180, 69, 51);
+				projektPanel.add(btnNewButton);
+				projektFrame.repaint();
+				xPersCoor += 75;
+	
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						JFrame inputNameFrame = new JFrame(); 
+						
+						JPanel inputNamePanel = new JPanel();
+						inputNamePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+						inputNamePanel.setLayout(null);
+						
+						//adding "set name:" next to input
+						
+						JLabel lblSetName = new JLabel("Set name: ");
+						lblSetName.setFont(new Font("Verdana", Font.PLAIN, 15));
+						lblSetName.setBounds(31, 30, 113, 25);
+						inputNamePanel.add(lblSetName);
+						
+						//adding area to input the name
+						
+						JTextArea fldInputName = new JTextArea();
+						fldInputName.setBounds(114, 33, 150, 24);
+						fldInputName.setFont(new Font("Verdana", Font.PLAIN, 15));
+						inputNamePanel.add(fldInputName);
+						
+						//creating button to save name and close second frame 
+			
+						JButton btnOk = new JButton("ok");
+						btnOk.setBounds(271, 30, 57, 35);
+						inputNamePanel.add(btnOk);
+						btnOk.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								
+								btnNewButton.setText(fldInputName.getText());
+								String name = fldInputName.getText();
+								p.setName(name);
+								inputNameFrame.dispose();
+							}
+						});
+						
+						// specifying second frame attributes
+						
+						inputNameFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+						inputNameFrame.setBounds(700, 400, 350,169);
+						inputNameFrame.getContentPane().setBackground(new Color(102, 153, 204));
+						inputNameFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+						inputNameFrame.getContentPane().add(inputNamePanel);
+						inputNameFrame.setVisible(true);
+				        
+						
+						
+					}
+					
+					
+				});
+				}else {  //if number of persons over max
+				
+					JFrame overMaxFrame = new JFrame(); 
+					
+					JPanel overMaxPanel = new JPanel();
+					overMaxPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+					overMaxPanel.setLayout(null);
+					
+					//adding "error message:" next to input
+					
+					JLabel lblErrorMessage = new JLabel("Maximum erreicht!");
+					lblErrorMessage.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblErrorMessage.setBounds(31, 30, 150, 25);
+					overMaxPanel.add(lblErrorMessage);
+					
+					//adding area to input the name
+					
+					//creating button to close overMax frame 
+		
+					JButton btnOk = new JButton("ok");
+					btnOk.setBounds(220, 23, 57, 35);
+					overMaxPanel.add(btnOk);
+					btnOk.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							overMaxFrame.dispose();
+						}
+					});
+					
+					// specifying overMax frame attributes
+					
+					overMaxFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+					overMaxFrame.setBounds(700, 400, 350,130);
+					overMaxFrame.getContentPane().setBackground(new Color(102, 153, 204));
+					overMaxFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					overMaxFrame.getContentPane().add(overMaxPanel);
+					overMaxFrame.setVisible(true);
+					
+				}//overMaxPersonsError
+				
+			}//buttonAddPerson
+		});
+		btnPersonen.setBounds(25, 224, 51, 26);
+		projektPanel.add(btnPersonen);
+		
+		JLabel lblPersonen = new JLabel("Personen:");
+		lblPersonen.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPersonen.setBounds(15, 199, 69, 16);
+		projektPanel.add(lblPersonen);
+		
+		
+		
 		btnEdit.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -170,12 +299,17 @@ public class ProjektView {
 		// calculating correct position of every project 
 		
 		if(yCoordinate < 661){
-			yCoordinate = yCoordinate + 280;
+			yCoordinate = yCoordinate + 295;
 		}else{
 			yCoordinate = 101;
-			xCoordinate = xCoordinate + 380;
+			xCoordinate = xCoordinate + 600;
 		}
 		
 	}
-
+	
+	//helping methods
+	
+	private static int randomWithRange(int min, int max) {
+		return (int)Math.random() * (max - min) + min;
+	}
 }
