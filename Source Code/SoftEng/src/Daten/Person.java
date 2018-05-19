@@ -2,15 +2,15 @@ package Daten;
 
 public class Person {
 	
-	String name;
+	String vorname;
+	String nachname;
 	Projekt projekt;
 	Aufgabenbereich aBereich;
 	Aufgabe aufgabe;
 	
-	public void setName(String name) {
-    	this.name = name;
+	public void setVorname(String n) {
+    	this.vorname = n;
     }
-	
 	
 	public void setProjekt(Projekt p) {
 		this.projekt = p;
@@ -24,8 +24,8 @@ public class Person {
 		this.aufgabe = a;
 	}
 	
-	public String getName() {
-		return name;
+	public String getVorname() {
+		return vorname;
 	}
 	
 	public Projekt getProjekt() {

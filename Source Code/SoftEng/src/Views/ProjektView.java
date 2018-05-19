@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -22,6 +25,11 @@ public class ProjektView {
 
 	private static JFrame projektFrame;
 	private static Projekt projekt;
+	String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20";
+	String username = "u48005db20";
+	String password = "prse2018";
+
+	
 
 	/**
 	 * Launch the application.
@@ -53,6 +61,12 @@ public class ProjektView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		try (Connection connection = DriverManager.getConnection(url, username, password)) {
+		    System.out.println("Database connected!");
+		} catch (SQLException e) {
+		    throw new IllegalStateException("Cannot connect the database!", e);
+		}
 		
 		createAufgabenbereichView = new CreateAufgabenbereichView();  
 		
@@ -155,7 +169,8 @@ public class ProjektView {
 		projektPanel.add(btnEditName); // adding the EDIT button to the panel of the project
 		
 		
-		JButton btnPersonen = new JButton("+");
+		
+		JButton btnPersonen = new JButton("+"); 
 		btnPersonen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -208,7 +223,7 @@ public class ProjektView {
 								
 								btnNewButton.setText(fldInputName.getText());
 								String name = fldInputName.getText();
-								p.setName(name);
+								p.setVorname(name);
 								inputNameFrame.dispose();
 							}
 						});
