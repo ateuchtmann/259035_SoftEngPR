@@ -31,7 +31,6 @@ public class ProjektView {
 	String username = "u48005db20";
 	String password = "prse2018";
 
-
 	/**
 	 * Launch the application.
 	 */
@@ -74,7 +73,7 @@ public class ProjektView {
 		    throw new IllegalStateException("Cannot connect the database!", e);
 		}
 		*/
-		createAufgabenbereichView = new CreateAufgabenbereichView();  
+		createAufgabenbereichView = new CreateAufgabenbereichView(projekt);  
 		
 		JPanel projektPanel = new JPanel();           //panel for the project 
 		projektPanel.setBackground(Color.LIGHT_GRAY);
@@ -184,10 +183,10 @@ public class ProjektView {
 					
 				//create and add person
 				Person newPrs = new Person();
-				projekt.addPerson(newPrs);
+				
 				
 				JButton btnPrsInfo = new JButton("X.X.\r\n");
-				personViewMap.put(btnPrsInfo, new PersonView(newPrs, btnPrsInfo));
+				personViewMap.put(btnPrsInfo, new PersonView(newPrs, btnPrsInfo,projekt));
 				
 				System.out.println(colorCount);
 				switch(colorCount) {      //set right color

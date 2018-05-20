@@ -9,6 +9,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.text.BadLocationException;
 
 import Daten.Person;
+import Daten.Projekt;
 
 import java.awt.Color;
 import javax.swing.GroupLayout;
@@ -28,6 +29,7 @@ public class PersonView {
 	private JTextField fldSname;
 	private Person prs;
 	private JButton btnPrsInfo;
+	static Projekt projekt;
 
 	/**
 	 * Launch the application.
@@ -39,9 +41,10 @@ public class PersonView {
 	/**
 	 * Create the application.
 	 */
-	public PersonView(Person prs, JButton btnPrsInfo) {
+	public PersonView(Person prs, JButton btnPrsInfo, Projekt projekt) {
 		this.prs = prs;
 		this.btnPrsInfo = btnPrsInfo;
+		this.projekt = projekt;
 		initialize();
 	}
 
@@ -89,6 +92,8 @@ public class PersonView {
 				}
 				prs.setVorname(fldFname.getText());
 				prs.setNachname(fldSname.getText());
+				
+				projekt.addPerson(prs);
 				btnPrsInfo.setText(firstInitial + "." + secondInitial + ".");
 				personFrame.setVisible(false);
 			}
