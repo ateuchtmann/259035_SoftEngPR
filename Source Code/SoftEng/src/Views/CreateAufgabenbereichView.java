@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import Daten.Aufgabenbereich;
+import Daten.Projekt;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ public class CreateAufgabenbereichView {
 
 	private JFrame createAufgabenbereichFrame;
 	protected int xCoordinate = 20; // coordinate for moving aufgabenbereich to the right
+	private Projekt projekt;
 	
 	/**
 	 * Launch the application.
@@ -40,8 +42,10 @@ public class CreateAufgabenbereichView {
 
 	/**
 	 * Create the application.
+	 * @param projekt2 
 	 */
-	public CreateAufgabenbereichView() {
+	public CreateAufgabenbereichView(Projekt projekt) {
+		this.projekt = projekt;
 		initialize();
 	}
 
@@ -68,7 +72,7 @@ s	 * Initialize the contents of the frame.
 		btnCreateAufgabenbereich.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
 				Aufgabenbereich aufgabenB = new Aufgabenbereich();
-				AufgabenbereichView aufgabenbereichView = new AufgabenbereichView(createAufgabenbereichFrame, aufgabenB, xCoordinate);
+				AufgabenbereichView aufgabenbereichView = new AufgabenbereichView(createAufgabenbereichFrame, aufgabenB, xCoordinate, projekt);
 				xCoordinate = xCoordinate + 385;
 			}
 		});

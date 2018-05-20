@@ -21,6 +21,7 @@ import javax.swing.border.MatteBorder;
 import Daten.Aufgabe;
 import Daten.Aufgabenbereich;
 import Daten.Person;
+import Daten.Projekt;
 
 public class AufgabenbereichView {
 
@@ -28,6 +29,7 @@ public class AufgabenbereichView {
 	private static Map<Integer, Integer> yCoordinateList = new HashMap<>();
 	private static Aufgabenbereich aufgabenB;
 	private int x;
+	private static Projekt projekt;
 
 	/**
 	 * Launch the application.
@@ -35,11 +37,13 @@ public class AufgabenbereichView {
 
 	/**
 	 * Create the application.
+	 * @param projekt 
 	 */
-	public AufgabenbereichView(JFrame frame, Aufgabenbereich aufgabenB, int x) {
+	public AufgabenbereichView(JFrame frame, Aufgabenbereich aufgabenB, int x, Projekt projekt) {
 		AufgabenbereichView.aufgabenbereichFrame = frame;
 		AufgabenbereichView.aufgabenB = aufgabenB; 
 		this.x = x;
+		this.projekt = projekt;
 		initialize();
 	}
 
@@ -145,7 +149,7 @@ public class AufgabenbereichView {
 			
 			   Aufgabe aufgabe = new Aufgabe();
 			   aufgabenB.addAufgabe(aufgabe);
-			   AufgabeView aufgabeView = new AufgabeView(aufgabenbereichFrame, aufgabenBPanel, yCoordinateList, aufgabe);
+			   AufgabeView aufgabeView = new AufgabeView(aufgabenbereichFrame, aufgabenBPanel, yCoordinateList, aufgabe, projekt);
 			   
 			}
 		});

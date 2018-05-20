@@ -1,15 +1,24 @@
 package Views;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Daten.Activity;
 import Daten.Aufgabe;
+import Daten.Projekt;
 
 public class AufgabeView {
 
@@ -19,28 +28,47 @@ public class AufgabeView {
 	private JTextField fldSollZeit;
 	private static Map<Integer, Integer> yCoordinateList = new HashMap<>();
 	private static Aufgabe aufgabe;
-
+	private static Projekt projekt;
+	
+	private static CreateActivityView createActivityView;
+	
+	
+	
 	/**
 	 * Create the application.
+	 * @param projekt 
 	 */
-	public AufgabeView(JFrame frame, JPanel panel, Map<Integer, Integer> list, Aufgabe aufgabe) {
+	public AufgabeView(JFrame frame, JPanel panel, Map<Integer, Integer> list, Aufgabe aufgabe, Projekt projekt) {
 		AufgabeView.aufgabeFrame = frame;
 		AufgabeView.aufBereichPanel = panel;
 		AufgabeView.aufgabe = aufgabe;
 		AufgabeView.yCoordinateList = list;
+		createActivityView = new CreateActivityView(projekt);
+		this.projekt = projekt;
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
+
+	static Map<JButton, CreateActivityView> createActivityViewMap = new HashMap<>();
+
+	
+	
+	
 	private void initialize() {
+		
+		
 
 		//adding panel behind input area (better look)
 		
 		JPanel aufgabePanel = new JPanel();
 		aufgabePanel.setBounds(12, yCoordinateList.get(aufBereichPanel.hashCode()), 331, 100);
 		aufgabePanel.setLayout(null);
+		
+		
 		
 		//adding input area for aufgabe text
 		
@@ -58,17 +86,32 @@ public class AufgabeView {
 		fldIstZeit.setBounds(60, 78, 45, 22);
 		aufgabePanel.add(fldIstZeit);
 		fldIstZeit.setColumns(10);
+
 		
 		//adding istzeit
 		
-		JLabel fldIstZeit = new JLabel("Istzeit:");
-		fldIstZeit.setBounds(210, 81, 56, 16);
-		aufgabePanel.add(fldIstZeit);
+		JButton btnIstZeit = new JButton("Zeiterfassung");
+		btnIstZeit.setBounds(180, 81, 120, 16);
 		
-		fldSollZeit = new JTextField();
-		fldSollZeit.setBounds(253, 78, 45, 22);
-		aufgabePanel.add(fldSollZeit);
-		fldSollZeit.setColumns(10);
+		createActivityViewMap.put(btnIstZeit, createActivityView);
+		
+		
+		btnIstZeit.addActionListener(new ActionListener() {  
+			public void actionPerformed(ActionEvent arg0) {
+			
+				JFrame createAct = createActivityViewMap.get(btnIstZeit).getFrame();
+				createAct.setVisible(true);
+			
+				
+				
+			}
+		});
+		
+		
+		
+		aufgabePanel.add(btnIstZeit);
+		
+	
 		
 		
 		aufBereichPanel.add(aufgabePanel);
@@ -77,6 +120,8 @@ public class AufgabeView {
 
 		//adding to the y coordinate
 		yCoordinateList.put(aufBereichPanel.hashCode(), yCoordinateList.get(aufBereichPanel.hashCode()) + 110);
+		
+
 		
 	}//initialize
 
