@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -25,11 +26,11 @@ public class ProjektView {
 
 	private static JFrame projektFrame;
 	private static Projekt projekt;
+	private int colorCount = 0;
 	String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20";
 	String username = "u48005db20";
 	String password = "prse2018";
 
-	
 
 	/**
 	 * Launch the application.
@@ -54,7 +55,11 @@ public class ProjektView {
 	// list of aufgabenbereiche
 	
 		CreateAufgabenbereichView createAufgabenbereichView;
-		static Map<Integer, CreateAufgabenbereichView> createAufgabenbereicheCoordinates = new HashMap <>();
+		static Map<Integer, CreateAufgabenbereichView> createAufgabenbereicheMap = new HashMap <>();
+		
+	// list of persons
+		
+		static Map<JButton, PersonView> personViewMap = new HashMap<>();
 
 
 	/**
@@ -62,12 +67,13 @@ public class ProjektView {
 	 */
 	private void initialize() {
 		
+		/*
 		try (Connection connection = DriverManager.getConnection(url, username, password)) {
 		    System.out.println("Database connected!");
 		} catch (SQLException e) {
 		    throw new IllegalStateException("Cannot connect the database!", e);
 		}
-		
+		*/
 		createAufgabenbereichView = new CreateAufgabenbereichView();  
 		
 		JPanel projektPanel = new JPanel();           //panel for the project 
@@ -78,10 +84,9 @@ public class ProjektView {
 		Border projectBorder = new MatteBorder(3,3,4,3,Color.BLACK);
 		projektPanel.setBorder(new MatteBorder(2, 2, 3, 2, (Color) new Color(25, 25, 112)));
 		projektFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
-		
 		projektFrame.repaint();	
 		
-		createAufgabenbereicheCoordinates.put(projektPanel.hashCode(), createAufgabenbereichView);  //****************************************************
+		createAufgabenbereicheMap.put(projektPanel.hashCode(), createAufgabenbereichView);  
 		
 		JLabel lblName = new JLabel("Name:");   // adding indication of "name"
 		lblName.setBounds(15, 19, 69, 20);
@@ -170,75 +175,58 @@ public class ProjektView {
 		
 		
 		
-		JButton btnPersonen = new JButton("+"); 
-		btnPersonen.addActionListener(new ActionListener() {
+		// specifying the action after pressing the button + (add person)
+		JButton btnAddPerson = new JButton("+"); 
+		btnAddPerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(xPersCoor <= 463) {
 					
 				//create and add person
-				Person newPerson = new Person();
-				Person p = new Person();
-				projekt.addPerson(p);
+				Person newPrs = new Person();
+				projekt.addPerson(newPrs);
 				
-				JButton btnNewButton = new JButton("X.X.\r\n");
-				btnNewButton.setBackground(new Color(210,rColor.nextInt(256),rColor.nextInt(256)));
-				btnNewButton.setForeground(new Color(0, 0, 0));
-				btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-				btnNewButton.setBounds(xPersCoor, 180, 69, 51);
-				projektPanel.add(btnNewButton);
+				JButton btnPrsInfo = new JButton("X.X.\r\n");
+				personViewMap.put(btnPrsInfo, new PersonView(newPrs, btnPrsInfo));
+				
+				System.out.println(colorCount);
+				switch(colorCount) {      //set right color
+				case 0:
+					btnPrsInfo.setBackground(new Color(102,205,170));
+					break;
+				case 1:
+					btnPrsInfo.setBackground(new Color(255,182,193));
+					break;
+				case 2:
+					btnPrsInfo.setBackground(new Color(154,205,50));
+					break;
+				case 3:
+					btnPrsInfo.setBackground(new Color(255,255,102));
+					break;
+				case 4:
+					btnPrsInfo.setBackground(new Color(189,183,107));
+					break;
+				case 5:
+					btnPrsInfo.setBackground(new Color(152,251,152));
+					break;
+				case 6:
+					btnPrsInfo.setBackground(new Color(188,143,143));
+				}
+				colorCount++;
+				btnPrsInfo.setForeground(new Color(0, 0, 0));
+				btnPrsInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				btnPrsInfo.setBounds(xPersCoor, 180, 69, 51);
+				projektPanel.add(btnPrsInfo);
 				projektFrame.repaint();
 				xPersCoor += 75;
 	
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+				//adding person info (opening person view)
+				btnPrsInfo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {		
 						
-						JFrame inputNameFrame = new JFrame(); 
-						
-						JPanel inputNamePanel = new JPanel();
-						inputNamePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-						inputNamePanel.setLayout(null);
-						
-						//adding "set name:" next to input
-						
-						JLabel lblSetName = new JLabel("Set name: ");
-						lblSetName.setFont(new Font("Verdana", Font.PLAIN, 15));
-						lblSetName.setBounds(31, 30, 113, 25);
-						inputNamePanel.add(lblSetName);
-						
-						//adding area to input the name
-						
-						JTextArea fldInputName = new JTextArea();
-						fldInputName.setBounds(114, 33, 150, 24);
-						fldInputName.setFont(new Font("Verdana", Font.PLAIN, 15));
-						inputNamePanel.add(fldInputName);
-						
-						//creating button to save name and close second frame 
-			
-						JButton btnOk = new JButton("ok");
-						btnOk.setBounds(271, 30, 57, 35);
-						inputNamePanel.add(btnOk);
-						btnOk.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								
-								btnNewButton.setText(fldInputName.getText());
-								String name = fldInputName.getText();
-								p.setVorname(name);
-								inputNameFrame.dispose();
-							}
-						});
-						
-						// specifying second frame attributes
-						
-						inputNameFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
-						inputNameFrame.setBounds(700, 400, 350,169);
-						inputNameFrame.getContentPane().setBackground(new Color(102, 153, 204));
-						inputNameFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-						inputNameFrame.getContentPane().add(inputNamePanel);
-						inputNameFrame.setVisible(true);
-				        
-						
-						
+						PersonView pView = personViewMap.get(btnPrsInfo);
+						JFrame personViewFrame = pView.getFrame();
+						personViewFrame.setVisible(true);
 					}
 					
 					
@@ -284,8 +272,8 @@ public class ProjektView {
 				
 			}//buttonAddPerson
 		});
-		btnPersonen.setBounds(25, 224, 51, 26);
-		projektPanel.add(btnPersonen);
+		btnAddPerson.setBounds(25, 224, 51, 26);
+		projektPanel.add(btnAddPerson);
 		
 		JLabel lblPersonen = new JLabel("Personen:");
 		lblPersonen.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -293,17 +281,14 @@ public class ProjektView {
 		projektPanel.add(lblPersonen);
 		
 		
-		
+		//handling task areas of project 
 		btnEdit.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
-				
 				projekt.setBeschreibung(fldInputBeschreibung.getText());
-	
 				// specifying the editing of a project (aufgabenbereiche etc.)
 				
-				JFrame aufgabeBereichFrame = createAufgabenbereicheCoordinates.get(projektPanel.hashCode()).getFrame();
+				JFrame aufgabeBereichFrame = createAufgabenbereicheMap.get(projektPanel.hashCode()).getFrame();
 				aufgabeBereichFrame.setVisible(true);
 				
 			}
@@ -320,11 +305,5 @@ public class ProjektView {
 			xCoordinate = xCoordinate + 600;
 		}
 		
-	}
-	
-	//helping methods
-	
-	private static int randomWithRange(int min, int max) {
-		return (int)Math.random() * (max - min) + min;
 	}
 }

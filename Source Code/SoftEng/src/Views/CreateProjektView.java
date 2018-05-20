@@ -2,6 +2,7 @@ package Views;
 import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,6 +15,9 @@ import javax.swing.border.MatteBorder;
 import Daten.*;
 
 import java.awt.SystemColor;
+import java.awt.Scrollbar;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class CreateProjektView {
 
@@ -78,7 +82,7 @@ public class CreateProjektView {
 		}); // createProjectButton (Listener - he has only one method: action performed (bzw. the above one))
 		
 		createProjektFrame.getContentPane().setLayout(null); 
-		createProjektFrame.getContentPane().add(btnCreateProject);
+		createProjektFrame.getContentPane().add(btnCreateProject);	
 		
 	}
 }

@@ -8,9 +8,13 @@ public class Person {
 	Aufgabenbereich aBereich;
 	Aufgabe aufgabe;
 	
-	public void setVorname(String n) {
-    	this.vorname = n;
+	public void setVorname(String v) {
+    	this.vorname = v;
     }
+	
+	public void setNachname(String n) {
+		this.nachname = n;
+	}
 	
 	public void setProjekt(Projekt p) {
 		this.projekt = p;
@@ -26,6 +30,10 @@ public class Person {
 	
 	public String getVorname() {
 		return vorname;
+	}
+	
+	public String getNachname() {
+		return nachname;
 	}
 	
 	public Projekt getProjekt() {
