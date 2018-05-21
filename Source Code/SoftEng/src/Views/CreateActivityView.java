@@ -20,6 +20,7 @@ import Daten.Projekt;
 
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 
 public class CreateActivityView {
@@ -29,6 +30,10 @@ public class CreateActivityView {
 	
 	private int yCoordinate = 104;
 	private int sum;
+	double hours;
+	double min;
+	Map<Integer, Double> sumMap;
+	int id;
 
 	/**
 	 * Launch the application.
@@ -38,9 +43,15 @@ public class CreateActivityView {
 	/**
 	 * Create the application.
 	 * @param projekt 
+	 * @param min 
+	 * @param hours 
+	 * @param i 
 	 */
-	public CreateActivityView(Projekt projekt) {
+	public CreateActivityView(Projekt projekt, double hours, double min) {
 		this.projekt = projekt;
+		this.hours = hours;
+		this.min = min;
+		this.id = id;
 		initialize();
 	}
 	
@@ -105,23 +116,46 @@ public class CreateActivityView {
 		btnActivity.setBorder(b1);
 		createActivityFrame.getContentPane().add(btnActivity);
 		
+		
+		JLabel lblDifferenz = new JLabel("Differenz: ");
+		lblDifferenz.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblDifferenz.setBounds(60, 959, 131, 35);
+		createActivityFrame.getContentPane().add(lblDifferenz);
+		
+		JLabel labelDiff = new JLabel("00:00");
+		labelDiff.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelDiff.setBounds(172, 963, 76, 30);
+		
 		JButton btnUpdate = new JButton("UPDATE");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			
+				double IstZeit = sum * 60;
+				double sollZeit = (hours * 60) + min;
+				double diff = sollZeit - IstZeit; //min
+				double diff2 = diff / 60;
+				labelDiff.setText(diff2 + "h");
+				
+				
 				double sum = ActivityView.getSum();
 				String s = sum + "h";
-				
 				lblH_1.setText(s);
+	
+				
 				
 			}
 		});
 		btnUpdate.setBounds(1442, 959, 115, 29);
 		createActivityFrame.getContentPane().add(btnUpdate);
+		
+		
+		
+		
+		
+		createActivityFrame.getContentPane().add(labelDiff);
 		createActivityFrame.repaint();
 			
 	
 	}
-	
-	
 }
 

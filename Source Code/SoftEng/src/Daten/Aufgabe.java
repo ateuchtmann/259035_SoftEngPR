@@ -9,6 +9,7 @@ public class Aufgabe {
 	private List<Person> personen = new ArrayList<>();
 	private List<Activity> activities = new ArrayList<>();
 	
+	
     public void setBeschreibung(String b) {
     	this.beschreibung = b;
     }

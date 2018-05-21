@@ -86,7 +86,7 @@ public class Projekt {
 		return aBereiche;
 	}
 	
-    public List getPeronen() {
+    public List getPersonen() {
     	return personen;
     }
 	

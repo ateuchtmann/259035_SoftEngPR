@@ -1,31 +1,28 @@
 package Views;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import Daten.Activity;
-import Daten.Aufgabe;
-import Daten.Aufgabenbereich;
 import Daten.Person;
 import Daten.Projekt;
+import Daten.Time;
 
 public class ActivityView {
 
@@ -37,9 +34,13 @@ public class ActivityView {
 	private JTextField textFieldStunden;
 	private Projekt projekt;
 	int yCheckBoxCoor = 30;
+	int xPersonCoordinate = 998;
 	
 	private int yCoordinate;
 	private static double sum;
+	
+	
+	List<Person> personenList = new ArrayList();
 
 	/**
 	 * Launch the application.
@@ -47,7 +48,7 @@ public class ActivityView {
 
 	/**
 	 * Create the application.
-	 * @param projekt 
+	
 	 */
 	public ActivityView(JFrame frame, Activity act, int y, Projekt projekt) {
 		ActivityView.activityFrame = frame;
@@ -61,8 +62,14 @@ public class ActivityView {
 		return sum;
 	}
 	
+	public void setSum(double sum){
+		this.sum = sum;
+	}
+	
 	
 	Map<Person, JCheckBox> chechkboxList = new HashMap<>();
+	
+	Set<JLabel> labelList = new LinkedHashSet<>();
 	
 
 	/**
@@ -70,8 +77,7 @@ public class ActivityView {
 	 */
 	private void initialize() {
 		
-		System.out.println(projekt.getName());
-		List<Person> list = projekt.getPeronen();
+		List<Person> list = projekt.getPersonen();
 		
 		JPanel activityPanel = new JPanel();
 		activityPanel.setBackground(SystemColor.activeCaption);
@@ -97,12 +103,12 @@ public class ActivityView {
 		lblEnd.setBounds(1512, 16, 33, 20);
 		activityPanel.add(lblEnd);
 		
-		textFieldStart = new JTextField("00:00");
+		textFieldStart = new JTextField("00.00");
 		textFieldStart.setBounds(1549, 13, 50, 26);
 		activityPanel.add(textFieldStart);
 		textFieldStart.setColumns(10);
 		
-		textFieldEnd = new JTextField("00:00");
+		textFieldEnd = new JTextField("00.00");
 		textFieldEnd.setBounds(1459, 13, 50, 26);
 		activityPanel.add(textFieldEnd);
 		textFieldEnd.setColumns(10);
@@ -111,7 +117,7 @@ public class ActivityView {
 		lblStunden.setBounds(1614, 16, 69, 20);
 		activityPanel.add(lblStunden);
 		
-		textFieldStunden = new JTextField("0");
+		textFieldStunden = new JTextField("00.00");
 		textFieldStunden.setBounds(1680, 13, 42, 26);
 		activityPanel.add(textFieldStunden);
 		textFieldStunden.setColumns(10);
@@ -135,11 +141,58 @@ public class ActivityView {
 				PersonFrame.getContentPane().setLayout(null);
 				PersonFrame.setVisible(true);
 				
+				JButton btnSave = new JButton("ok");
+				btnSave.addActionListener(new ActionListener(){
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						
+						//removing existing labels
+						for(JLabel j : labelList){
+							activityPanel.remove(j);
+						}
+						
+						
+						//listing all persons and checking if selected
+						for(Person p: list){
+							if(chechkboxList.containsKey(p)){	
+								if(chechkboxList.get(p).isSelected()) {
+								
+									String firstInitial = p.getNachname().substring(0,1);
+									String secondInitial = p.getVorname().substring(0,1);
+									
+									
+									JLabel lblNewLabel = new JLabel("  "+ secondInitial + "." + firstInitial + ".");
+									lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+									lblNewLabel.setForeground(SystemColor.windowText);
+									lblNewLabel.setBounds(xPersonCoordinate, 13, 50, 26);
+									lblNewLabel.setBorder(new MatteBorder(1,1,1,1,Color.BLACK));
+									labelList.add(lblNewLabel);
+									activityPanel.add(lblNewLabel);
+									activityPanel.repaint();
+									xPersonCoordinate += 60;
+									personenList.add(p);
+									
+											
+								}			
+							}	
+						}//end for
+						xPersonCoordinate = 998;
+							
+					}
+							
+				});
 				
+				
+
+				btnSave.setBounds(141, 275, 59, 25);
+				PersonFrame.add(btnSave);
+				
+				//adding checkbox
 				for(Person p : list){
 					
 					JCheckBox chckbxNewCheckBox = new JCheckBox(p.getNachname());
 					chckbxNewCheckBox.setBackground(Color.LIGHT_GRAY);
+					chckbxNewCheckBox.setFont(new Font("Verdana", Font.PLAIN, 18));
 					chckbxNewCheckBox.setBounds(11, yCheckBoxCoor, 139, 29);
 					PersonFrame.getContentPane().add(chckbxNewCheckBox);
 					chechkboxList.put(p, chckbxNewCheckBox);
@@ -156,28 +209,32 @@ public class ActivityView {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String h = textFieldStunden.getText();
-				int nr = Integer.parseInt(h);		
-				sum = sum + nr;	
 				
+				
+				
+				String h = textFieldStunden.getText();
+				double nr = Double.parseDouble(h);	
+				sum = sum + nr;
+					
+				activity.setBeschreibung(textFieldBesch.getText());
+				String hour = textFieldStart.getText().substring(0,2) ;
+				int hours = Integer.parseInt(hour);
+				String min = textFieldStart.getText().substring(3,4);
+				int minuten = Integer.parseInt(min);
+				Time start = new Time(hours, minuten);
+				activity.setStart(start);
+				
+				String h1 = textFieldEnd.getText().substring(0,2) ;
+				hours = Integer.parseInt(h1);
+				String m = textFieldStart.getText().substring(3,4);
+				minuten = Integer.parseInt(m);
+				Time end = new Time(hours, minuten);
+				activity.setStart(end);
+				activity.setPersonen(personenList);
 				
 			}
 		});
 		btnOk.setBounds(1739, 12, 57, 29);
-		activityPanel.add(btnOk);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(1001, 13, 57, 26);
-		activityPanel.add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblMd = new JLabel("m.d.");
-		lblMd.setBounds(0, 0, 58, 26);
-		panel.add(lblMd);
-		
-	
-        
-		
-		
+		activityPanel.add(btnOk);	
 }
 }

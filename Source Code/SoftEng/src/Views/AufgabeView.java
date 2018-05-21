@@ -24,7 +24,6 @@ public class AufgabeView {
 
 	private static JFrame aufgabeFrame;
 	private static JPanel aufBereichPanel;
-	private JTextField fldIstZeit;
 	private JTextField fldSollZeit;
 	private static Map<Integer, Integer> yCoordinateList = new HashMap<>();
 	private static Aufgabe aufgabe;
@@ -43,7 +42,7 @@ public class AufgabeView {
 		AufgabeView.aufBereichPanel = panel;
 		AufgabeView.aufgabe = aufgabe;
 		AufgabeView.yCoordinateList = list;
-		createActivityView = new CreateActivityView(projekt);
+		
 		this.projekt = projekt;
 		initialize();
 	}
@@ -55,7 +54,6 @@ public class AufgabeView {
 
 	static Map<JButton, CreateActivityView> createActivityViewMap = new HashMap<>();
 
-	
 	
 	
 	private void initialize() {
@@ -82,11 +80,22 @@ public class AufgabeView {
 		lblSollzeit.setBounds(10, 81, 56, 16);
 		aufgabePanel.add(lblSollzeit);
 		
-		fldIstZeit = new JTextField();
-		fldIstZeit.setBounds(60, 78, 45, 22);
-		aufgabePanel.add(fldIstZeit);
-		fldIstZeit.setColumns(10);
-
+		fldSollZeit = new JTextField("00.00");
+		fldSollZeit.setBounds(60, 78, 45, 22);
+		aufgabePanel.add(fldSollZeit);
+		fldSollZeit.setColumns(10);
+		
+		
+		String sollzeitHour = fldSollZeit.getText().substring(0,2);
+		String sollZeitMin = fldSollZeit.getText().substring(2,4);
+		
+		double hours = Double.parseDouble(sollzeitHour);
+		double min = Double.parseDouble(sollZeitMin);
+		
+		
+		createActivityView = new CreateActivityView(projekt,hours, min);
+		
+	
 		
 		//adding istzeit
 		
@@ -116,7 +125,7 @@ public class AufgabeView {
 		
 		aufBereichPanel.add(aufgabePanel);
 		aufgabeFrame.repaint();
-		aufgabe.setBeschreibung(fldIstZeit.getText());
+		aufgabe.setBeschreibung(fldSollZeit.getText());
 
 		//adding to the y coordinate
 		yCoordinateList.put(aufBereichPanel.hashCode(), yCoordinateList.get(aufBereichPanel.hashCode()) + 110);

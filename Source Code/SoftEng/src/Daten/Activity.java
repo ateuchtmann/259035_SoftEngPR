@@ -1,15 +1,14 @@
 package Daten;
 
+import java.util.List;
+
 public class Activity {
-	private Person person;
 	private Time start;
 	private Time end;
 	private String beschreibung;
+	private List<Person> personen;
 	
 	
-	public Person getPerson(){
-		return this.person;
-	}
 	
 	public Time getStart(){
 		return this.start;
@@ -23,8 +22,12 @@ public class Activity {
 		return this.beschreibung;
 	}
 	
-	public void setPerson(Person p){
-		this.person = p;
+	public List getPersonen(){
+		return this.personen;
+	}
+	
+	public void setPersonen(List p){
+		this.personen = p;
 	}
 	
 	public void setStart(Time t){
