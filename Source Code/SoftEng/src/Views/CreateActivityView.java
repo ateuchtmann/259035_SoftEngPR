@@ -20,6 +20,9 @@ import Daten.Projekt;
 
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.awt.event.ActionEvent;
 
@@ -30,9 +33,9 @@ public class CreateActivityView {
 	
 	private int yCoordinate = 104;
 	private int sum;
-	double hours;
-	double min;
-	Map<Integer, Double> sumMap;
+	private double planHour;
+	private double planMin;
+	List<ActivityView> activityViewList;
 	int id;
 
 	/**
@@ -47,11 +50,10 @@ public class CreateActivityView {
 	 * @param hours 
 	 * @param i 
 	 */
-	public CreateActivityView(Projekt projekt, double hours, double min) {
+	public CreateActivityView(Projekt projekt) {
 		this.projekt = projekt;
-		this.hours = hours;
-		this.min = min;
 		this.id = id;
+		this.activityViewList = new ArrayList<>();
 		initialize();
 	}
 	
@@ -60,7 +62,13 @@ public class CreateActivityView {
 		return this.createActivityFrame;
 	}
 	
+	public void setPlanHours(double pH) {
+		this.planHour = pH;
+	}
 	
+	public void setPlanMin(double pM) {
+		this.planMin = pM;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -76,11 +84,13 @@ public class CreateActivityView {
 		
 		
 		JButton btnActivity = new JButton("+ Aktivit\u00E4t");
+	
 		btnActivity.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Activity activity = new Activity();
-				ActivityView activityView = new ActivityView(createActivityFrame, activity, yCoordinate,projekt);
+				ActivityView activityView = new ActivityView(createActivityFrame, activity, yCoordinate,projekt, btnActivity.hashCode());
+				activityViewList.add(activityView);
 				
 				if(yCoordinate <880){
 					yCoordinate += 60;
@@ -88,8 +98,6 @@ public class CreateActivityView {
 				
 				createActivityFrame.repaint();
 				
-				
-					
 			}
 		});
 		btnActivity.setBounds(767, 13, 362, 57);
@@ -122,37 +130,61 @@ public class CreateActivityView {
 		lblDifferenz.setBounds(60, 959, 131, 35);
 		createActivityFrame.getContentPane().add(lblDifferenz);
 		
-		JLabel labelDiff = new JLabel("00:00");
-		labelDiff.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		labelDiff.setBounds(172, 963, 76, 30);
+		JLabel lblDiffNumber = new JLabel("00:00");
+		lblDiffNumber.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblDiffNumber.setBounds(172, 963, 76, 30);
 		
 		JButton btnUpdate = new JButton("UPDATE");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
-				double IstZeit = sum * 60;
-				double sollZeit = (hours * 60) + min;
-				double diff = sollZeit - IstZeit; //min
-				double diff2 = diff / 60;
-				labelDiff.setText(diff2 + "h");
+
+				//Map<JButton, ActivityView> activityViewMap;
+				double sum = 0;
+				for(ActivityView av : activityViewList) {
+					if(av.getId() == btnActivity.hashCode()) {
+						sum = sum + av.getTime();
+					}
+				}
 				
+				double planTime = planHour + (planMin/60);
+				double diffTime = planTime - sum;
 				
-				double sum = ActivityView.getSum();
-				String s = sum + "h";
-				lblH_1.setText(s);
+				int roundedCur = (int)sum;
+				int roundedPlan= (int)diffTime;
+				
+				double restCur = sum - roundedCur; 
+				double restPlan= diffTime - roundedPlan;
+				
+				if(restCur == 0.75) {
+					sum = sum - 0.3;
+				}else if(restCur == 0.50) {
+					sum = sum - 0.2;
+				}else if(restCur == 0.25){
+					sum = sum - 0.1;
+				}
+
+				String curTime = sum + "h";
+				lblH_1.setText(curTime);
+				
+				if(restPlan == 0.75) {
+					diffTime = diffTime - 0.3;
+				}else if(restPlan == 0.50) {
+					diffTime = diffTime - 0.2;
+				}else if(restPlan == 0.25){
+					diffTime = diffTime - 0.1;
+				}
+				
+				String resDiffTime = diffTime + "h";
+				lblDiffNumber.setText(resDiffTime);
 	
-				
-				
+		
 			}
 		});
 		btnUpdate.setBounds(1442, 959, 115, 29);
 		createActivityFrame.getContentPane().add(btnUpdate);
 		
 		
-		
-		
-		
-		createActivityFrame.getContentPane().add(labelDiff);
+		createActivityFrame.getContentPane().add(lblDiffNumber);
 		createActivityFrame.repaint();
 			
 	

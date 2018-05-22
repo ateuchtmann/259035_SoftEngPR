@@ -31,13 +31,15 @@ public class ActivityView {
 	private JTextField textFieldBesch;
 	private JTextField textFieldStart;
 	private JTextField textFieldEnd;
-	private JTextField textFieldStunden;
+	private JTextField fldTime;
 	private Projekt projekt;
+	private int btnId;
+	private double time;
 	int yCheckBoxCoor = 30;
 	int xPersonCoordinate = 998;
 	
 	private int yCoordinate;
-	private static double sum;
+
 	
 	
 	List<Person> personenList = new ArrayList();
@@ -48,24 +50,29 @@ public class ActivityView {
 
 	/**
 	 * Create the application.
+	 * @param id 
 	
 	 */
-	public ActivityView(JFrame frame, Activity act, int y, Projekt projekt) {
+	public ActivityView(JFrame frame, Activity act, int y, Projekt projekt, int id) {
 		ActivityView.activityFrame = frame;
 		ActivityView.activity = act; 
 		this.yCoordinate = y;
 		this.projekt = projekt;
+		this.btnId = id;
 		initialize();
 	}
 	
-	public static double getSum(){
-		return sum;
+	public double getTime(){
+		return time;
 	}
 	
 	public void setSum(double sum){
-		this.sum = sum;
+		
 	}
 	
+	public int getId() {
+		return btnId;
+	}
 	
 	Map<Person, JCheckBox> chechkboxList = new HashMap<>();
 	
@@ -117,12 +124,11 @@ public class ActivityView {
 		lblStunden.setBounds(1614, 16, 69, 20);
 		activityPanel.add(lblStunden);
 		
-		textFieldStunden = new JTextField("00.00");
-		textFieldStunden.setBounds(1680, 13, 42, 26);
-		activityPanel.add(textFieldStunden);
-		textFieldStunden.setColumns(10);
+		fldTime = new JTextField("00.00");
+		fldTime.setBounds(1680, 13, 42, 26);
+		activityPanel.add(fldTime);
+		fldTime.setColumns(10);
 		
-	
 		
 		JLabel lblH = new JLabel("h");
 		lblH.setBounds(1729, 16, 21, 20);
@@ -141,6 +147,21 @@ public class ActivityView {
 				PersonFrame.getContentPane().setLayout(null);
 				PersonFrame.setVisible(true);
 				
+				//adding checkbox
+				for(Person p : list){
+					
+					JCheckBox chckbxNewCheckBox = new JCheckBox(p.getNachname());
+					chckbxNewCheckBox.setBackground(Color.LIGHT_GRAY);
+					chckbxNewCheckBox.setFont(new Font("Verdana", Font.PLAIN, 18));
+					chckbxNewCheckBox.setBounds(11, yCheckBoxCoor, 139, 29);
+					PersonFrame.getContentPane().add(chckbxNewCheckBox);
+					chechkboxList.put(p, chckbxNewCheckBox);
+					yCheckBoxCoor += 40;	
+				}
+				yCheckBoxCoor = 30;
+				
+				
+				
 				JButton btnSave = new JButton("ok");
 				btnSave.addActionListener(new ActionListener(){
 					@Override
@@ -154,7 +175,7 @@ public class ActivityView {
 						
 						//listing all persons and checking if selected
 						for(Person p: list){
-							if(chechkboxList.containsKey(p)){	
+							if(chechkboxList.containsKey(p)){
 								if(chechkboxList.get(p).isSelected()) {
 								
 									String firstInitial = p.getNachname().substring(0,1);
@@ -186,19 +207,7 @@ public class ActivityView {
 
 				btnSave.setBounds(141, 275, 59, 25);
 				PersonFrame.add(btnSave);
-				
-				//adding checkbox
-				for(Person p : list){
-					
-					JCheckBox chckbxNewCheckBox = new JCheckBox(p.getNachname());
-					chckbxNewCheckBox.setBackground(Color.LIGHT_GRAY);
-					chckbxNewCheckBox.setFont(new Font("Verdana", Font.PLAIN, 18));
-					chckbxNewCheckBox.setBounds(11, yCheckBoxCoor, 139, 29);
-					PersonFrame.getContentPane().add(chckbxNewCheckBox);
-					chechkboxList.put(p, chckbxNewCheckBox);
-					yCheckBoxCoor += 40;	
-				}
-				yCheckBoxCoor = 30;
+
 
 			}
 		});
@@ -209,16 +218,18 @@ public class ActivityView {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				String typedHour = fldTime.getText().substring(0,2);
+				String typedMin = fldTime.getText().substring(3,5);
+			
+				double h = Double.parseDouble(typedHour);
+				double m = Double.parseDouble(typedMin) / 60;
 				
-				
-				
-				String h = textFieldStunden.getText();
-				double nr = Double.parseDouble(h);	
-				sum = sum + nr;
-					
+				time = h + m;
+	
 				activity.setBeschreibung(textFieldBesch.getText());
 				String hour = textFieldStart.getText().substring(0,2) ;
 				int hours = Integer.parseInt(hour);
+				
 				String min = textFieldStart.getText().substring(3,4);
 				int minuten = Integer.parseInt(min);
 				Time start = new Time(hours, minuten);
@@ -226,8 +237,8 @@ public class ActivityView {
 				
 				String h1 = textFieldEnd.getText().substring(0,2) ;
 				hours = Integer.parseInt(h1);
-				String m = textFieldStart.getText().substring(3,4);
-				minuten = Integer.parseInt(m);
+				String m1 = textFieldStart.getText().substring(3,4);
+				minuten = Integer.parseInt(m1);
 				Time end = new Time(hours, minuten);
 				activity.setStart(end);
 				activity.setPersonen(personenList);

@@ -28,6 +28,8 @@ public class AufgabeView {
 	private static Map<Integer, Integer> yCoordinateList = new HashMap<>();
 	private static Aufgabe aufgabe;
 	private static Projekt projekt;
+	double planHours;
+	double planMin;
 	
 	private static CreateActivityView createActivityView;
 	
@@ -85,19 +87,10 @@ public class AufgabeView {
 		aufgabePanel.add(fldSollZeit);
 		fldSollZeit.setColumns(10);
 		
-		
-		String sollzeitHour = fldSollZeit.getText().substring(0,2);
-		String sollZeitMin = fldSollZeit.getText().substring(2,4);
-		
-		double hours = Double.parseDouble(sollzeitHour);
-		double min = Double.parseDouble(sollZeitMin);
-		
-		
-		createActivityView = new CreateActivityView(projekt,hours, min);
-		
 	
+		createActivityView = new CreateActivityView(projekt);
 		
-		//adding istzeit
+		//adding button planTime
 		
 		JButton btnIstZeit = new JButton("Zeiterfassung");
 		btnIstZeit.setBounds(180, 81, 120, 16);
@@ -108,10 +101,19 @@ public class AufgabeView {
 		btnIstZeit.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
 			
-				JFrame createAct = createActivityViewMap.get(btnIstZeit).getFrame();
-				createAct.setVisible(true);
-			
+				CreateActivityView myCreateActivityView =  createActivityViewMap.get(btnIstZeit);
 				
+				//save planedTime
+				String typedPlanHour = fldSollZeit.getText().substring(0,2);
+				String typedPlanMin = fldSollZeit.getText().substring(3,5);
+				planHours = Double.parseDouble(typedPlanHour);
+				planMin = Double.parseDouble(typedPlanMin);
+				
+				myCreateActivityView.setPlanHours(planHours);
+				myCreateActivityView.setPlanMin(planMin);
+			
+				JFrame createActFrame = myCreateActivityView.getFrame();
+				createActFrame.setVisible(true);
 				
 			}
 		});
