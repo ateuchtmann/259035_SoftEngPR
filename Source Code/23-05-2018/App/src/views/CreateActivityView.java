@@ -72,7 +72,7 @@ public class CreateActivityView {
 		createActFrame = new JFrame();
 		createActFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
 		createActFrame.setBounds(0, 0, 1920, 1080);
-		createActFrame.getContentPane().setBackground(new Color(102, 153, 204));
+		createActFrame.getContentPane().setBackground(new Color(255, 255, 255));
 		createActFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
 		

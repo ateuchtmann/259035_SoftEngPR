@@ -64,7 +64,7 @@ s	 * Initialize the contents of the frame.
 	private void initialize() {
 		creTaskGroupFrame = new JFrame();
 		creTaskGroupFrame.setBounds(0, 0, 1920, 1080);
-		creTaskGroupFrame.getContentPane().setBackground(new Color(102, 153, 204));
+		creTaskGroupFrame.getContentPane().setBackground(new Color(255, 255, 255));
 		creTaskGroupFrame.getContentPane().setLayout(null);
 		creTaskGroupFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
