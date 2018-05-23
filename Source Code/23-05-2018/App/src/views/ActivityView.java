@@ -175,6 +175,7 @@ public class ActivityView {
 							if(chechkboxList.containsKey(p)){
 								if(chechkboxList.get(p).isSelected()) {
 								
+									act.addPerson(p);
 									String firstInit = p.getFirstName().substring(0,1);
 									String scndInit = p.getLastname().substring(0,1);
 									JLabel lblPrsInit = new JLabel("  "+ firstInit + "." + scndInit + ".");
@@ -225,17 +226,19 @@ public class ActivityView {
 				String hour = fldStart.getText().substring(0,2) ;
 				int hours = Integer.parseInt(hour);
 				
-				String min = fldStart.getText().substring(3,4);
+				String min = fldStart.getText().substring(3,5);
 				int minuten = Integer.parseInt(min);
 				Time start = new Time(hours, minuten);
-				act.setStart(start);
+				//act.setStart(start);
 				
 				String h1 = fldEnd.getText().substring(0,2) ;
 				hours = Integer.parseInt(h1);
-				String m1 = fldStart.getText().substring(3,4);
+				String m1 = fldEnd.getText().substring(3,5);
 				minuten = Integer.parseInt(m1);
 				Time end = new Time(hours, minuten);
+				//act.setEnd(end);
 				act.setStart(end);
+				act.setEnd(start);
 				
 				
 			}

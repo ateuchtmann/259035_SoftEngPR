@@ -23,7 +23,7 @@ package views;
 public class TimeTrackerApp {
 	
 	public static void main(String[] args) {
-		
+				
 	    CreateProjectView cpv = new CreateProjectView();
 		cpv.start();
 	}
