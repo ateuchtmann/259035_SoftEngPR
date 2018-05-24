@@ -101,16 +101,16 @@ public class CreateActivityView {
 		Border b1 = new MatteBorder(3,3,4,3,Color.BLACK);
 		
 		JLabel lblCurTime = new JLabel("IST ZEIT: ");
-		lblCurTime.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblCurTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblCurTime.setBackground(SystemColor.activeCaption);
 		lblCurTime.setBounds(1572, 954, 105, 35);
 		createActFrame.getContentPane().add(lblCurTime);
 	
 		
-		JLabel lblCurTimeNum = new JLabel("0.0 h");
+		JLabel lblCurTimeNum = new JLabel("00:00");
 		lblCurTimeNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblCurTimeNum.setBackground(SystemColor.activeCaption);
-		lblCurTimeNum.setBounds(1675, 958, 76, 27);
+		lblCurTimeNum.setBounds(1675, 958, 76, 30);
 		createActFrame.getContentPane().add(lblCurTimeNum);
 		
 		
@@ -125,7 +125,7 @@ public class CreateActivityView {
 		createActFrame.getContentPane().add(lblDiff);
 		
 		JLabel lblDiffNum = new JLabel("00:00");
-		lblDiffNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblDiffNum.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblDiffNum.setBounds(172, 963, 76, 30);
 		
 		JButton btnUpdate = new JButton("UPDATE");
@@ -133,6 +133,53 @@ public class CreateActivityView {
 			public void actionPerformed(ActionEvent arg0) {
 
 				//Map<JButton, ActivityView> activityViewMap;
+				//
+				
+				double sumCurrTime = 0;
+				for(ActivityView av : actViewList) {
+					if(av.getId() == btnAct.hashCode()) {
+						sumCurrTime = sumCurrTime + av.getTime();
+					}
+				}
+				
+				double planTime = planHour + (planMin/60);
+				double diffTime = planTime - sumCurrTime;
+				
+				//Convert decimalTime to Time & Round DiffTime
+				int diffTimeHours = 0;
+				double diffTimeMinutes = 0;
+				diffTimeHours = (int) diffTime;
+				diffTimeMinutes = diffTime-diffTimeHours;
+				diffTimeMinutes = diffTimeMinutes*60;
+				
+				diffTimeMinutes=Math.round(100*diffTimeMinutes)/100;
+				
+				//Test DiffTime
+				System.out.print("\nDifftime: " + diffTime + " DiffHour: " + diffTimeHours + " DiffMinutes: " + diffTimeMinutes);
+				
+				//Convert decimalTime to Time & Round CurrTime
+				int currTimeHours = 0;
+				double currTimeMinutes = 0;
+				currTimeHours = (int) sumCurrTime;
+				currTimeMinutes = sumCurrTime-currTimeHours;
+				currTimeMinutes = currTimeMinutes*60;
+				
+				currTimeHours=Math.round(currTimeHours);
+				currTimeMinutes=Math.round(currTimeMinutes);
+				//currTimeMinutes=Math.round(100*currTimeMinutes)/100;
+				
+				//Test CurrTime
+				System.out.print("\nCurrtime: " + sumCurrTime + " CurrHour: " + currTimeHours + " CurrMinutes: " + currTimeMinutes);
+				
+				//Output DiffTime & CurrTime
+				String currTimeString = (int)currTimeHours + "h " + (int)currTimeMinutes+"m";
+				lblCurTimeNum.setText(currTimeString);
+				
+				String diffTimeString = (int)diffTimeHours + "h " + (int)diffTimeMinutes+"m";
+				lblDiffNum.setText(diffTimeString);
+						
+				/*
+				
 				double sum = 0;
 				for(ActivityView av : actViewList) {
 					if(av.getId() == btnAct.hashCode()) {
@@ -170,7 +217,7 @@ public class CreateActivityView {
 				
 				String resDiffTime = diffTime + "h";
 				lblDiffNum.setText(resDiffTime);
-	
+				*/
 		
 			}
 		});

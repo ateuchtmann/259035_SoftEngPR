@@ -125,7 +125,7 @@ public class ProjectView {
 		fldInpuDescr.setBorder(new MatteBorder(2, 2, 3, 2, SystemColor.LIGHT_GRAY));
 		prjctPanel.add(fldInpuDescr);
 		
-		JButton btnEdit = new JButton("Edit");  // button for editing the project (Tasks etc.)
+		JButton btnEdit = new JButton("Öffnen");  // button for editing the project (Tasks etc.)
 		btnEdit.setBounds(237, 244, 120, 29);
 		prjctPanel.add(btnEdit);
 		
