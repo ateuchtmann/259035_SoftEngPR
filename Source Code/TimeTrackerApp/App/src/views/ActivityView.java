@@ -47,7 +47,7 @@ public class ActivityView {
 	private JTextField fldDescr;
 	private JTextField fldStart;
 	private JTextField fldEnd;
-	private JTextField fldTime;
+	private static JTextField fldTime;
 	private Project prjct;
 	private int btnId;
 	private double time;
@@ -109,16 +109,17 @@ public class ActivityView {
 		JLabel lblEnd = new JLabel("End:");
 		lblEnd.setBounds(1512, 16, 33, 20);
 		actPanel.add(lblEnd);
-		
+
 		fldStart = new JTextField("00.00");
-		fldStart.setBounds(1549, 13, 50, 26);
+		fldStart.setBounds(1459, 13, 50, 26);
 		actPanel.add(fldStart);
 		fldStart.setColumns(10);
 		
 		fldEnd = new JTextField("00.00");
-		fldEnd.setBounds(1459, 13, 50, 26);
+		fldEnd.setBounds(1549, 13, 50, 26);
 		actPanel.add(fldEnd);
 		fldEnd.setColumns(10);
+		
 		
 		JLabel lblHour = new JLabel("Stunden:");
 		lblHour.setBounds(1614, 16, 69, 20);
@@ -215,34 +216,56 @@ public class ActivityView {
 		JButton btnOk = new JButton("ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				int hours=0;
+				int minutes=0;
+				double sumStartTime=0;
+				double sumEndTime=0;
 				
-				String typedHour = fldTime.getText().substring(0,2);
-				String typedMin = fldTime.getText().substring(3,5);
-			
+				/*
 				double h = Double.parseDouble(typedHour);
 				double m = Double.parseDouble(typedMin) / 60;
-				
+				String typedHour = fldTime.getText().substring(0,2);
+				String typedMin = fldTime.getText().substring(3,5);
 				time = h + m;
-	
+				*/
+				
 				act.setDescr(fldDescr.getText());
+				
+				// Read starttime
 				String hour = fldStart.getText().substring(0,2) ;
-				int hours = Integer.parseInt(hour);
-				
 				String min = fldStart.getText().substring(3,5);
-				int minuten = Integer.parseInt(min);
-				Time start = new Time(hours, minuten);
-				//act.setStart(start);
+				hours = Integer.parseInt(hour);
+				minutes = Integer.parseInt(min);
+				Time start = new Time(hours, minutes);
+				act.setStart(start);
+				sumStartTime=hours+(minutes/60.0);
 				
-				String h1 = fldEnd.getText().substring(0,2) ;
-				hours = Integer.parseInt(h1);
+				// Read endtime
+				String h1 = fldEnd.getText().substring(0,2);
 				String m1 = fldEnd.getText().substring(3,5);
-				minuten = Integer.parseInt(m1);
-				Time end = new Time(hours, minuten);
-				//act.setEnd(end);
-				act.setStart(end);
-				act.setEnd(start);
+				hours = Integer.parseInt(h1);
+				minutes = Integer.parseInt(m1);
+				Time end = new Time(hours, minutes);
+				act.setEnd(end);
+				sumEndTime=hours+(minutes/60.0);
 				
 				
+				System.out.print("\nsumEndTime: " + sumEndTime + "\nsumStartTime: " + sumStartTime);
+				System.out.print("\nEndTimemin: " + minutes + "\nEndTimeHours: " + hours);
+				
+				// Calc difference (end-start)
+				time = sumEndTime-sumStartTime;
+				
+				//extract Minutes and Hours from time
+				double diffHours=0;
+				double diffMinutes=0;	
+				diffHours = (int) time;
+				diffMinutes = time-diffHours;
+				diffMinutes *= 60;
+				String diffTimeString = (int)diffHours+":"+(int)diffMinutes;
+				//Output difference
+				views.ActivityView.fldTime.setText(diffTimeString);
+								
 			}
 		});
 		btnOk.setBounds(1739, 12, 57, 29);
