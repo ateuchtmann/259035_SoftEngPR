@@ -52,11 +52,11 @@ public class TaskView {
 	private static CreateActivityView createActView;
 	
 	
-	
 	/**
 	 * Create the application.
 	 * @param descr 
 	 * @param projekt 
+	 * @wbp.parser.constructor
 	 */
 	public TaskView(JFrame frame, JPanel tskGroupPanel, Map<Integer, Integer> list, Task tsk, Project prjct) {
 		TaskView.tskFrame = frame;
@@ -66,7 +66,11 @@ public class TaskView {
 		TaskView.yCoorList = list;
 		initialize();
 	}
+
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	// constructor with description
 	
 	public TaskView(JFrame frame, JPanel tskGroupPanel, Map<Integer, Integer> list, Task tsk, Project prjct, String descr, Time time) {
@@ -140,7 +144,7 @@ public class TaskView {
 		manageActivities.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
 			
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				CreateActivityView newCreateActView =  createActivityViewMap.get(manageActivities);
 				
 				//saving/parsing planedTime

@@ -100,10 +100,11 @@ public class PersonView {
 
 		JButton btnOk = new JButton("ok");
 		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				String firstInit = null;
 				String secondInit = null;
 				try {

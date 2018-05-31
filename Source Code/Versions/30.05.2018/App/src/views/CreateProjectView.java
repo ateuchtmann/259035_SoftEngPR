@@ -101,7 +101,7 @@ public class CreateProjectView {
 		btnCrePrjct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				Project prjct = new Project();
 				prjctList.addProject(prjct);
 				ProjectView projektView = new ProjectView(crePrjctFrame, prjct, xCoor, yCoor);

@@ -91,7 +91,7 @@ s	 * Initialize the contents of the frame.
 		
 		btnCreTaskGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				TaskGroup taskGroup = new TaskGroup();
 				prjct.addTaskGroup(taskGroup);
 				@SuppressWarnings("unused")

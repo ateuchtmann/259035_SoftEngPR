@@ -101,7 +101,7 @@ public class TaskGroupView {
 		btnEdditName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				//creating second frame (window) to make input when editing name of project
 				
 				JFrame inptNameFrame = new JFrame(); 
@@ -131,7 +131,7 @@ public class TaskGroupView {
 				inptNamePanel.add(btnOk);
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+						Sound.playSound(".\\sounds\\open.wav");
 						String str = fldInputName.getText();
 						lblTskName.setText(str); 
 						tskGroup.setName(fldInputName.getText());
@@ -172,7 +172,7 @@ public class TaskGroupView {
 		btnTaskAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-			Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+			Sound.playSound(".\\sounds\\open.wav");
 			   Task tsk = new Task();
 			   tskGroup.addTsk(tsk);
 			   @SuppressWarnings("unused")

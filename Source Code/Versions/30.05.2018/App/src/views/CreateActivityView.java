@@ -178,7 +178,7 @@ public class CreateActivityView {
 		btnAct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				Activity act = new Activity();
 				task.addActivity(act);
 				ActivityView actView = new ActivityView(createActFrame, act, yCoor,prjct, btnAct.hashCode(), currClass);

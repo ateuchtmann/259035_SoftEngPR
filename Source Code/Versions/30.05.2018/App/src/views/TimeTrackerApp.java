@@ -32,11 +32,10 @@ public class TimeTrackerApp {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 				
 	    CreateProjectView crePrjctView = new CreateProjectView();
 		crePrjctView.getFrame().setVisible(true);
-		Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\start.wav");
+		Sound.playSound(".\\sounds\\start.wav");
 	}
 	
 	

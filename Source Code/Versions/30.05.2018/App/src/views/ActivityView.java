@@ -191,7 +191,7 @@ public class ActivityView {
 		btnPrs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				listPrs = prjct.getPersonList();
 				btnGroup = new ButtonGroup();
 				JFrame prsFrame = new JFrame();
@@ -217,11 +217,12 @@ public class ActivityView {
 				ybtnRadioPrsCoor = 30;	
 				
 				JButton btnSave = new JButton("ok");
+				btnSave.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				btnSave.addActionListener(new ActionListener(){
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						
-						Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+						Sound.playSound(".\\sounds\\open.wav");
 						//removing existing labels
 						for(JLabel j : lblList){
 							actPanel.remove(j);
@@ -258,7 +259,7 @@ public class ActivityView {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				int hours=0;
 				int minutes=0;
 				double sumStartTime=0;

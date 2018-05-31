@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
@@ -140,7 +141,7 @@ public class ProjectView {
 		fldInputDescr = new JTextArea();  //adding area to input description of project
 		fldInputDescr.setBounds(110, 65, 403, 102);
 		fldInputDescr.setLineWrap(true);
-		fldInputDescr.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(64, 64, 64)));
+		fldInputDescr.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		prjctPanel.add(fldInputDescr);
 		
 		JButton btnEdit = new JButton("Öffnen");  // button for editing the project (Tasks etc.)
@@ -149,6 +150,7 @@ public class ProjectView {
 		prjctPanel.add(btnEdit);
 		
 		JButton btnEditName = new JButton("..."); //button for editing name of project
+		btnEditName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnEditName.setBounds(280, 16, 40, 26);
 		
 		// specifying the action after pressing the button for name edit
@@ -156,7 +158,7 @@ public class ProjectView {
 		btnEditName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				
 				//creating second frame (window) to make input when editing name of project
 				
@@ -183,12 +185,13 @@ public class ProjectView {
 				//creating button to save name and close second frame 
 	
 				JButton btnOk = new JButton("ok");
+				btnOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
 				btnOk.setBounds(271, 30, 57, 35);
 				inputNamePanel.add(btnOk);
 				btnOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+						Sound.playSound(".\\sounds\\open.wav");
 						prjct.setName(fldInputName.getText());
 						String name = fldInputName.getText();
 						lblInputName.setText(name);
@@ -284,7 +287,7 @@ public class ProjectView {
 		btnAddPerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				
 				if(xPrsCoor <= 463) {
 					
@@ -361,7 +364,7 @@ public class ProjectView {
 					overMaxPanel.add(btnOk);
 					btnOk.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+							Sound.playSound(".\\sounds\\open.wav");
 							overMaxFrame.dispose();
 						}
 					});
@@ -392,7 +395,7 @@ public class ProjectView {
 		btnEdit.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
 				
-				Sound.playSound("C:\\Users\\tomic\\Desktop\\SE-PR\\App\\open.wav");
+				Sound.playSound(".\\sounds\\open.wav");
 				
 				prjct.setDescr(fldInputDescr.getText());
 				// specifying the editing of a project (tasks etc.)
