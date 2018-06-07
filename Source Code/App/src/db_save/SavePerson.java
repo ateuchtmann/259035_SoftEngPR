@@ -6,11 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import files.Activity;
-import files.Person;
-import files.Project;
-import files.Task;
-import files.TaskGroup;
+import models.Activity;
+import models.Person;
+import models.Project;
+import models.Task;
+import models.TaskGroup;
 
 public class SavePerson {
 	

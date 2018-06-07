@@ -7,11 +7,12 @@ import javax.swing.JFrame;
 import db_load.LoadTaskGroup;
 import db_save.SaveProject;
 import db_save.SaveTaskGroup;
+import models.*;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import files.*;
+
 import sounds.Sound;
 
 /* Classname: CreateTaskGroupView

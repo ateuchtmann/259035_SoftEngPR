@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
 import db_save.SaveActivity;
-import files.*;
+import models.*;
 import sounds.Sound;
 
 /* Classname: ActivityView

@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import files.Person;
-import files.Task;
-import files.TaskGroup;
+import models.Person;
+import models.Task;
+import models.TaskGroup;
 
 public class LoadTaskGroup {
 	

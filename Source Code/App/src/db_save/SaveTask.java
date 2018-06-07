@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import files.Activity;
-import files.Person;
-import files.Task;
-import files.Time;
+import models.Activity;
+import models.Person;
+import models.Task;
+import models.Time;
 
 public class SaveTask {
 	

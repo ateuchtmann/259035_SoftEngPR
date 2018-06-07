@@ -6,9 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import files.Person;
-import files.Task;
-import files.TaskGroup;
+import models.Person;
+import models.Task;
+import models.TaskGroup;
 
 public class SaveTaskGroup {
 	

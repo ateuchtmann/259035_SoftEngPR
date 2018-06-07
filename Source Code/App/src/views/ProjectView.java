@@ -21,7 +21,7 @@ import javax.swing.border.MatteBorder;
 import db_load.LoadPerson;
 import db_save.SavePerson;
 import db_save.SaveProject;
-import files.*;
+import models.*;
 import sounds.Sound;
 
 /* Classname: ProjectView

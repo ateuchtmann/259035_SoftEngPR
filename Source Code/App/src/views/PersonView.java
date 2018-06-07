@@ -6,7 +6,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.text.BadLocationException;
 
 import db_save.SavePerson;
-import files.*;
+import models.*;
 import sounds.Sound;
 
 import java.awt.Color;
