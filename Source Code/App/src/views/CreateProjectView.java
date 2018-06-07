@@ -85,79 +85,8 @@ public class CreateProjectView {
 		// loading
 		// data************************************************************
 		
-		prjctListFiles = new LoadProject().allProjects();
-		for (Project p : prjctListFiles) {
-
-			p.setName(new LoadProject().projectName(p));
-			p.setDescr(new LoadProject().projectDescription(p));
-			prjctList.addProject(p);
-
-			List<Person> ProjectPersons = new LoadProject().projectPersons(p);
-
-			for (Person person : ProjectPersons) {
-				
-				person.setFirstName(new LoadPerson().personFirstname(person));
-				person.setLastname(new LoadPerson().personLastname(person));
-				
-				p.addPerson(person);
-			}
-
-			List<TaskGroup> taskGroupList = new LoadProject().projectTaskGroups(p);
-
-			for (TaskGroup tg : taskGroupList) {
-
-				tg.setName(new LoadTaskGroup().taskGroupName(tg));
-
-				List<Person> taskGroupPerson = new LoadTaskGroup().taskGroupPersons(tg);
-
-				for (Person person : taskGroupPerson) {
-					
-					person.setFirstName(new LoadPerson().personFirstname(person));
-					person.setLastname(new LoadPerson().personLastname(person));
-					
-					tg.addPerson(person);
-				}
-				p.addTaskGroup(tg);
-
-				List<Task> taskList = new LoadTaskGroup().taskGroupTasks(tg);
-
-				for (Task task : taskList) {
-
-					task.setName(new LoadTask().taskName(task));
-					task.setPlanTime(new LoadTask().taskPlanTime(task));
-
-					List<Person> taskPerson = new LoadTask().taskPersons(task);
-
-					for (Person person : taskPerson) {
-						
-						person.setFirstName(new LoadPerson().personFirstname(person));
-						person.setLastname(new LoadPerson().personLastname(person));
-						
-						task.addPerson(person);
-					}
-
-					tg.addTsk(task);
-
-					List<Activity> activityList =  new LoadTask().taskActivities(task);
-					
-					for (Activity activity : activityList) {
-
-						activity.setDescr(new LoadActivity().activityDescription(activity));
-						activity.setStart(new LoadActivity().activityStart(activity));
-						activity.setEnd(new LoadActivity().activityEnd(activity));
-						
-						Person per = new LoadActivity().activityPerson(activity); 
-						per.setFirstName(new LoadPerson().personFirstname(per));
-						per.setLastname(new LoadPerson().personLastname(per));
-						
-						activity.addPerson(per);
-						
-						task.addActivity(activity);
-					}
-				}	
-			}
-		}
-
+		prjctList = new LoadProject().everythingFromProjects(); 
+		
 		// creating views for existing projects
 
 		prjctListFiles = prjctList.getProjectList(); 
