@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import files.Activity;
-import files.Person;
-import files.Time;
+import models.Activity;
+import models.Person;
+import models.Time;
 
 public class SaveActivity {
 

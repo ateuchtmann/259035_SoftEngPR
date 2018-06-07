@@ -1,14 +1,9 @@
-package files;
+package models;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/* Classname: TaskGroup
+/* Classname: Task
 *
 * Programmers/Authors: 
 * 
@@ -28,17 +23,18 @@ import java.util.List;
 * - Time scheduling of projects, tasks etc.
 */
 
-public class TaskGroup {
+public class Task {
 
 	private int id;
 	private String name;
-	private List<Task> taskList;
 	private List<Person> personList;
+	private Time planTime;
+	private List<Activity> activityList;
 
-	public TaskGroup(int id) {
+	public Task(int id) {
 		this.id = id;
-		taskList = new ArrayList<>();
 		personList = new ArrayList<>();
+		activityList = new ArrayList<>();
 	}
 
 	public int getId() {
@@ -49,28 +45,35 @@ public class TaskGroup {
 		this.name = name;
 	}
 
-	public void addTsk(Task a) {
-		this.taskList.add(a);
-	}
-
 	public void addPerson(Person p) {
 		this.personList.add(p);
+	}
+
+	public void setPlanTime(Time planTime) {
+		this.planTime = planTime;
+	}
+
+	public Time getPlanTime() {
+		return this.planTime;
+	}
+
+	public void addActivity(Activity a) {
+		this.activityList.add(a);
 	}
 
 	public String getName() {
 		return this.name;
 	}
 
-	public List<Task> getTaskList() {
-		return this.taskList;
-	}
-
 	public List<Person> getPersonList() {
 		return this.personList;
 	}
 
-	public void deleteTask(Task a) {
-		this.taskList.remove(a);
+	public List<Activity> getActivities() {
+		return this.activityList;
 	}
 
+	public void deleteActivity(Activity a) {
+		this.activityList.remove(a);
+	}
 }

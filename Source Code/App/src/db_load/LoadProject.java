@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import files.Activity;
-import files.Person;
-import files.Project;
-import files.ProjectList;
-import files.Task;
-import files.TaskGroup;
+import models.Activity;
+import models.Person;
+import models.Project;
+import models.ProjectList;
+import models.Task;
+import models.TaskGroup;
 
 public class LoadProject {
 	// ******************************************************************
