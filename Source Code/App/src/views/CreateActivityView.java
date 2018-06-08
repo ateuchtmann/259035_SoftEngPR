@@ -42,29 +42,29 @@ import java.awt.event.ActionEvent;
 
 public class CreateActivityView {
 
-	private JFrame createActFrame;
-	private Project prjct;
+	private JFrame createActivityFrame;
+	private Project project;
 	private int yCoor = 104;
 	private double planHour;
 	private double planMin;
-	private List<ActivityView> actViewList;
+	private List<ActivityView> activityViewList;
 	private Task task; 
-	private JLabel lblCurTimeNum;
-	private JLabel lblDiffNum;
-	private JButton btnAct;
+	private JLabel labelCurrTimeNum;
+	private JLabel labelDiffNum;
+	private JButton buttonActivity;
 	private CreateActivityView currClass;
 	private double time;
 	
-	public CreateActivityView(Project prjct, Task task) {
-		this.prjct = prjct;
+	public CreateActivityView(Project project, Task task) {
+		this.project = project;
 		this.task = task; 
-		this.actViewList = new ArrayList<>();
+		this.activityViewList = new ArrayList<>();
 		currClass = this;
 		initialize();
 	}
 	
 	public JFrame getFrame(){
-		return this.createActFrame;
+		return this.createActivityFrame;
 	}
 	
 	public void setPlanHour(double pH) {
@@ -81,46 +81,46 @@ public class CreateActivityView {
 	private void initialize() {
 		
 
-		createActFrame = new JFrame();
-		createActFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
-		createActFrame.setBounds(0, 0, 1920, 1080);
-		createActFrame.getContentPane().setBackground(new Color(255, 255, 255));
-		createActFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		createActivityFrame = new JFrame();
+		createActivityFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+		createActivityFrame.setBounds(0, 0, 1920, 1080);
+		createActivityFrame.getContentPane().setBackground(new Color(255, 255, 255));
+		createActivityFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
-		btnAct = new JButton("+ Aktivit\u00E4t");
-        btnAct.setBounds(767, 13, 362, 57);
-		btnAct.setFont(new Font("Sitka Small", Font.PLAIN, 20));
-		btnAct.setBackground(SystemColor.LIGHT_GRAY);
+		buttonActivity = new JButton("+ Aktivit\u00E4t");
+        buttonActivity.setBounds(767, 13, 362, 57);
+		buttonActivity.setFont(new Font("Sitka Small", Font.PLAIN, 20));
+		buttonActivity.setBackground(SystemColor.LIGHT_GRAY);
 		
-		JLabel lblCurTime = new JLabel("IST ZEIT: ");
-		lblCurTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCurTime.setBackground(SystemColor.activeCaption);
-		lblCurTime.setBounds(1572, 954, 105, 35);
-		createActFrame.getContentPane().add(lblCurTime);
+		JLabel labelCurrTime = new JLabel("IST ZEIT: ");
+		labelCurrTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		labelCurrTime.setBackground(SystemColor.activeCaption);
+		labelCurrTime.setBounds(1572, 954, 105, 35);
+		createActivityFrame.getContentPane().add(labelCurrTime);
 	
 		
-		lblCurTimeNum = new JLabel("00:00");
-		lblCurTimeNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblCurTimeNum.setBackground(SystemColor.activeCaption);
-		lblCurTimeNum.setBounds(1675, 958, 76, 30);
-		createActFrame.getContentPane().add(lblCurTimeNum);
+		labelCurrTimeNum = new JLabel("00:00");
+		labelCurrTimeNum.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelCurrTimeNum.setBackground(SystemColor.activeCaption);
+		labelCurrTimeNum.setBounds(1675, 958, 76, 30);
+		createActivityFrame.getContentPane().add(labelCurrTimeNum);
 		
 		
-		createActFrame.getContentPane().setLayout(null);
-		createActFrame.getContentPane().add(btnAct);
+		createActivityFrame.getContentPane().setLayout(null);
+		createActivityFrame.getContentPane().add(buttonActivity);
 		
 		
-		JLabel lblDiff = new JLabel("Differenz: ");
-		lblDiff.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblDiff.setBounds(60, 959, 131, 35);
-		createActFrame.getContentPane().add(lblDiff);
+		JLabel labelDiff = new JLabel("Differenz: ");
+		labelDiff.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		labelDiff.setBounds(60, 959, 131, 35);
+		createActivityFrame.getContentPane().add(labelDiff);
 		
-		lblDiffNum = new JLabel("00:00");
-		lblDiffNum.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDiffNum.setBounds(172, 963, 76, 30);
+		labelDiffNum = new JLabel("00:00");
+		labelDiffNum.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		labelDiffNum.setBounds(172, 963, 76, 30);
 		
-		createActFrame.getContentPane().add(lblDiffNum);
-		createActFrame.repaint();
+		createActivityFrame.getContentPane().add(labelDiffNum);
+		createActivityFrame.repaint();
 		
 		
 		// loading data*********************************************************************
@@ -128,14 +128,14 @@ public class CreateActivityView {
 		
 		for(Activity a: task.getActivities()) {
 			
-			ActivityView actView = new ActivityView(createActFrame, a, yCoor, prjct, btnAct.hashCode(), currClass);
+			ActivityView activityView = new ActivityView(createActivityFrame, a, yCoor, project, buttonActivity.hashCode(), currClass);
 			if(yCoor <880){
 				yCoor += 60;
 			}
-			actView.setDescr(a.getDescrn());
-			actView.setStart(a.getStart().toString());
-			actView.setEnd(a.getEnd().toString());
-			actView.setlblPrs(a.getPerson());
+			activityView.setDescription(a.getDescription());
+			activityView.setStart(a.getStart().toString());
+			activityView.setEnd(a.getEnd().toString());
+			activityView.setlabelPerson(a.getPerson());
 			
 			int hours=0;
 			int minutes=0;
@@ -170,33 +170,33 @@ public class CreateActivityView {
 			String diffTimeString = (int)diffHours+":"+(int)diffMinutes;
 			
 			//Output difference
-			actView.setDiff(diffTimeString);
-			actView.setTimeNum(time);
+			activityView.setDiff(diffTimeString);
+			activityView.setTimeNum(time);
 		
-			actViewList.add(actView);
+			activityViewList.add(activityView);
 			updateTime();
-			createActFrame.repaint();
+			createActivityFrame.repaint();
 			
 		}// loading data *******************************************************************
 		
 		
 
-		btnAct.addActionListener(new ActionListener() {
+		buttonActivity.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Sound.playSound(".\\sounds\\open.wav");
-				Activity act = new Activity(new LoadActivity().newActivityId());
-				new SaveActivity().newActivity(act);
-				task.addActivity(act);
-				new SaveTask().taskActivity(task, act);
-				ActivityView actView = new ActivityView(createActFrame, act, yCoor,prjct, btnAct.hashCode(), currClass);
-				actViewList.add(actView);
+				Activity activity = new Activity(new LoadActivity().newActivityId());
+				new SaveActivity().newActivity(activity);
+				task.addActivity(activity);
+				new SaveTask().taskActivity(task, activity);
+				ActivityView activityView = new ActivityView(createActivityFrame, activity, yCoor,project, buttonActivity.hashCode(), currClass);
+				activityViewList.add(activityView);
 				
 				if(yCoor <880){
 					yCoor += 60;
 				}
 				
-				createActFrame.repaint();
+				createActivityFrame.repaint();
 				
 			}
 		});
@@ -210,8 +210,8 @@ public class CreateActivityView {
 	
 	public void updateTime() {
 		double sumCurrTime = 0;
-		for(ActivityView av : actViewList) {
-			if(av.getId() == btnAct.hashCode()) {
+		for(ActivityView av : activityViewList) {
+			if(av.getId() == buttonActivity.hashCode()) {
 				sumCurrTime = sumCurrTime + av.getTime();
 			}
 		}
@@ -247,10 +247,10 @@ public class CreateActivityView {
 		
 		//Output DiffTime & CurrTime
 		String currTimeString = (int)currTimeHours + "h " + (int)currTimeMinutes+"m";
-		lblCurTimeNum.setText(currTimeString);
+		labelCurrTimeNum.setText(currTimeString);
 		
 		String diffTimeString = (int)diffTimeHours + "h " + (int)diffTimeMinutes+"m";
-		lblDiffNum.setText(diffTimeString);
+		labelDiffNum.setText(diffTimeString);
 		
 	}
 }

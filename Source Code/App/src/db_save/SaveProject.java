@@ -14,9 +14,15 @@ public class SaveProject {
 
 	public void newProject(Project p) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = 0;
 
@@ -100,9 +106,15 @@ public class SaveProject {
 
 	public void projectName(Project p, String name) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = p.getId();
 
@@ -143,9 +155,15 @@ public class SaveProject {
 
 	public void projectDescription(Project p, String description) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = p.getId();
 
@@ -185,9 +203,15 @@ public class SaveProject {
 
 	public void projectTaskGroup(Project p, TaskGroup a) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int p_id = p.getId();
 		int a_id = a.getId();
@@ -227,9 +251,15 @@ public class SaveProject {
 
 	public void projectPerson(Project p, Person per) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = 0;
 		int project_id = p.getId();

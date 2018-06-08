@@ -14,9 +14,15 @@ public class LoadActivity {
 
 	public int newActivityId() {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = 0;
 
@@ -76,9 +82,15 @@ public class LoadActivity {
 
 	public Time activityStart(Activity a) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 		int hour = 0;
@@ -129,9 +141,15 @@ public class LoadActivity {
 	}
 
 	public Time activityEnd(Activity a) {
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 		int hour = 0;
@@ -182,9 +200,15 @@ public class LoadActivity {
 	}
 
 	public String activityDescription(Activity a) {
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 		String description = "";
@@ -229,9 +253,15 @@ public class LoadActivity {
 	}
 
 	public Person activityPerson(Activity a) {
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 		int person = 0;

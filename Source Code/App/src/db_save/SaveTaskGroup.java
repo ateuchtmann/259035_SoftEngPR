@@ -14,9 +14,15 @@ public class SaveTaskGroup {
 	
 	public void newTaskGroup(TaskGroup a) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 
@@ -98,9 +104,15 @@ public class SaveTaskGroup {
 
 	public void taskGroupName(TaskGroup a, String name) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 
@@ -139,9 +151,15 @@ public class SaveTaskGroup {
 	}
 
 	public void taskGroupTask(TaskGroup a, Task t) {
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int task_id = t.getId();
 		int tg_id = a.getId();
@@ -182,9 +200,15 @@ public class SaveTaskGroup {
 	}
 
 	public void taskGroupPerson(TaskGroup a, Person p) {
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = 0;
 		int person_id = p.getId();

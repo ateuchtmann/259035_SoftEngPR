@@ -14,9 +14,15 @@ import models.Time;
 public class SaveTask {
 	
 	public void newTask (Task t){
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = t.getId();
 
@@ -68,9 +74,15 @@ public class SaveTask {
 	}
 
 	public void taskName (Task t, String name){
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = t.getId();
 		PreparedStatement stmtUpdateDescription = null;
@@ -109,9 +121,15 @@ public class SaveTask {
 
 	public void taskPerson (Task t, Person p){
 		
-    	String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
+		/*
+		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = 0;
 		int person_id = p.getId();
@@ -170,9 +188,15 @@ public class SaveTask {
 
 	public void taskPlanTime (Task t, Time planTime){
 		
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = t.getId(); 
 		int planHour = planTime.getHour();
@@ -214,9 +238,15 @@ public class SaveTask {
 	}
 
 	public void taskActivity (Task t, Activity a){
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = t.getId();
 		int activity_id = a.getId();

@@ -3,14 +3,9 @@ package views;
 import java.awt.Font;
 import javax.swing.*;
 
-import db_load.LoadActivity;
-import db_load.LoadPerson;
 import db_load.LoadProject;
-import db_load.LoadTask;
-import db_load.LoadTaskGroup;
 import db_save.SaveProject;
 import models.*;
-
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,24 +38,24 @@ import java.awt.SystemColor;
 
 public class CreateProjectView {
 
-	private JFrame crePrjctFrame;
-	private static ProjectList prjctList;
-	private static List<ProjectView> prjctViewList;
-	private static List<Project> prjctListFiles;
+	private JFrame createProjectFrame;
+	private static ProjectList projectList;
+	private static List<ProjectView> projectViewList;
+	private static List<Project> projectListFiles;
 	int yCoor = 101;
 	int xCoor = 50;
 
 	// getter
 
 	public JFrame getFrame() {
-		return this.crePrjctFrame;
+		return this.createProjectFrame;
 	}
 
 	// create the application
 
 	public CreateProjectView() {
-		prjctViewList = new ArrayList<>();
-		prjctList = new ProjectList();
+		projectViewList = new ArrayList<>();
+		projectList = new ProjectList();
 		
 		initialize();
 	}
@@ -68,34 +63,34 @@ public class CreateProjectView {
 	// contents of the frame
 
 	private void initialize() {
-		crePrjctFrame = new JFrame();
-		crePrjctFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+		createProjectFrame = new JFrame();
+		createProjectFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
 
-		crePrjctFrame.setBounds(0, 0, 1920, 1080);
-		crePrjctFrame.getContentPane().setBackground(new Color(255, 255, 255));
-		crePrjctFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		createProjectFrame.setBounds(0, 0, 1920, 1080);
+		createProjectFrame.getContentPane().setBackground(new Color(255, 255, 255));
+		createProjectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Start-Button to make new Project
 
-		JButton btnCrePrjct = new JButton("Neues Projekt erstellen");
-		btnCrePrjct.setBounds(767, 13, 362, 57);
+		JButton buttonCreateProject = new JButton("Neues Projekt erstellen");
+		buttonCreateProject.setBounds(767, 13, 362, 57);
 
-		btnCrePrjct.setFont(new Font("Sitka Small", Font.PLAIN, 20));
-		btnCrePrjct.setBackground(SystemColor.LIGHT_GRAY);
+		buttonCreateProject.setFont(new Font("Sitka Small", Font.PLAIN, 20));
+		buttonCreateProject.setBackground(SystemColor.LIGHT_GRAY);
 
 		// loading
 		// data************************************************************
 		
-		prjctList = new LoadProject().everythingFromProjects(); 
+		projectList = new LoadProject().everythingFromProjects(); 
 		
 		// creating views for existing projects
 
-		prjctListFiles = prjctList.getProjectList(); 
+		projectListFiles = projectList.getProjectList(); 
 		
-		for (Project p : prjctListFiles) {
-			ProjectView pv = new ProjectView(crePrjctFrame, p, xCoor, yCoor);
+		for (Project p : projectListFiles) {
+			ProjectView pv = new ProjectView(createProjectFrame, p, xCoor, yCoor);
 			pv.setName(p.getName());
-			pv.setDescr(p.getDescr());
+			pv.setDescription(p.getDescription());
 
 			// calculating correct position of every project
 			if (yCoor < 661) {
@@ -109,16 +104,16 @@ public class CreateProjectView {
 
 		// Action after pressing create project button
 
-		btnCrePrjct.addActionListener(new ActionListener() {
+		buttonCreateProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				Sound.playSound(".\\sounds\\open.wav");
-				Project prjct = new Project(new LoadProject().newProjectId());
-				new SaveProject().newProject(prjct);
-				prjctList.addProject(prjct);
-				ProjectView projektView = new ProjectView(crePrjctFrame, prjct, xCoor, yCoor);
-				prjctViewList.add(projektView);
-				prjctListFiles.add(prjct);
+				Project project = new Project(new LoadProject().newProjectId());
+				new SaveProject().newProject(project);
+				projectList.addProject(project);
+				ProjectView projectView = new ProjectView(createProjectFrame, project, xCoor, yCoor);
+				projectViewList.add(projectView);
+				projectListFiles.add(project);
 
 				// calculating correct position of every project
 				if (yCoor < 661) {
@@ -132,8 +127,8 @@ public class CreateProjectView {
 		}); // createProjectButton (Listener - he has only one method: action
 			// performed (bzw. the above one))
 
-		crePrjctFrame.getContentPane().setLayout(null);
-		crePrjctFrame.getContentPane().add(btnCrePrjct);
+		createProjectFrame.getContentPane().setLayout(null);
+		createProjectFrame.getContentPane().add(buttonCreateProject);
 
 	}
 }

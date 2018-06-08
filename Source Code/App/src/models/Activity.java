@@ -44,7 +44,7 @@ public class Activity {
 		return this.end;
 	}
 
-	public String getDescrn() {
+	public String getDescription() {
 		return this.description;
 	}
 
@@ -64,7 +64,7 @@ public class Activity {
 		this.end = t; 
 	}
 
-	public void setDescr(String description) {
+	public void setDescription(String description) {
 		this.description = description; 
 	}
 

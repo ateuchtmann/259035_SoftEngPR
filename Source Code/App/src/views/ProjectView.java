@@ -46,14 +46,16 @@ import sounds.Sound;
 
 public class ProjectView {
 
-	private static JFrame prjctFrame;
-	private Project prjct;
-	private int colourCount = 0;
-	String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20";
+	private static JFrame projectFrame;
+	private Project project;
+	private int colorCount = 0;
+	/*
+	 String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20";
 	String username = "u48005db20";
 	String password = "prse2018";
-	private JLabel lblInputName;
-	private JTextArea fldInputDescr;
+	*/
+	private JLabel labelInputName;
+	private JTextArea fieldInputDescription;
 
 	/**
 	 * Launch the application.
@@ -62,7 +64,7 @@ public class ProjectView {
 	//coordinates for projects
 	    int yCoor = 101;   
 	    int xCoor = 50;
-	    int xPrsCoor = 88;
+	    int xPersonCoor = 88;
 	    final Random rColor = new Random();
 
 	/**
@@ -70,9 +72,9 @@ public class ProjectView {
 	 * @param yCoor 
 	 * @param xCoor 
 	 */
-	public ProjectView(JFrame frame, Project prjct, int xCoor, int yCoor) {
-		this.prjct = prjct;
-		ProjectView.prjctFrame = frame;
+	public ProjectView(JFrame frame, Project project, int xCoor, int yCoor) {
+		this.project = project;
+		ProjectView.projectFrame = frame;
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
 		initialize();
@@ -90,17 +92,17 @@ public class ProjectView {
 	// getter
 		
 		public static JFrame getFrame() {
-			return ProjectView.prjctFrame;
+			return ProjectView.projectFrame;
 		}
 		
 	// setter
 		
 		public void setName(String n) {
-			lblInputName.setText(n);
+			labelInputName.setText(n);
 		}
 		
-		public void setDescr(String d) {
-			fldInputDescr.setText(d);
+		public void setDescription(String d) {
+			fieldInputDescription.setText(d);
 		}
 
 	private void initialize() {
@@ -113,52 +115,52 @@ public class ProjectView {
 		}
 		*/
 		
-		createTaskGroupView = new CreateTaskGroupView(prjct);  
+		createTaskGroupView = new CreateTaskGroupView(project);  
 		
-		JPanel prjctPanel = new JPanel();           //panel for the project 
-		prjctPanel.setBackground(Color.LIGHT_GRAY);
-		prjctPanel.setBounds(xCoor, yCoor, 550, 286);
-		prjctFrame.getContentPane().add(prjctPanel);
-		prjctPanel.setLayout(null);
-		prjctPanel.setBorder(new MatteBorder(2, 2, 3, 2, (Color) Color.DARK_GRAY));
-		prjctFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
-		prjctFrame.repaint();	
+		JPanel projectPanel = new JPanel();           //panel for the project 
+		projectPanel.setBackground(Color.LIGHT_GRAY);
+		projectPanel.setBounds(xCoor, yCoor, 550, 286);
+		projectFrame.getContentPane().add(projectPanel);
+		projectPanel.setLayout(null);
+		projectPanel.setBorder(new MatteBorder(2, 2, 3, 2, (Color) Color.DARK_GRAY));
+		projectFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+		projectFrame.repaint();	
 		
-		creTaskGroupMap.put(prjctPanel.hashCode(), createTaskGroupView);  
+		creTaskGroupMap.put(projectPanel.hashCode(), createTaskGroupView);  
 		
-		JLabel lblName = new JLabel("Name:");   // adding indication of "name"
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblName.setBounds(15, 19, 69, 20);
-		prjctPanel.add(lblName);
+		JLabel labelName = new JLabel("Name:");   // adding indication of "name"
+		labelName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		labelName.setBounds(15, 19, 69, 20);
+		projectPanel.add(labelName);
 		
-		lblInputName = new JLabel("Projektname"); // adding space to hold the input name
-		lblInputName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblInputName.setBounds(110, 16, 166, 26);
-		prjctPanel.add(lblInputName);
+		labelInputName = new JLabel("Projektname"); // adding space to hold the input name
+		labelInputName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		labelInputName.setBounds(110, 16, 166, 26);
+		projectPanel.add(labelInputName);
 		
-		JLabel lblDecr = new JLabel("Beschreibung:");  //adding indication of "description"
-		lblDecr.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblDecr.setBounds(15, 65, 114, 20);
-		prjctPanel.add(lblDecr);
+		JLabel labelDescription = new JLabel("Beschreibung:");  //adding indication of "description"
+		labelDescription.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		labelDescription.setBounds(15, 65, 114, 20);
+		projectPanel.add(labelDescription);
 		
-		fldInputDescr = new JTextArea();  //adding area to input description of project
-		fldInputDescr.setBounds(110, 65, 403, 102);
-		fldInputDescr.setLineWrap(true);
-		fldInputDescr.setBorder(new BevelBorder(BevelBorder.LOWERED));
-		prjctPanel.add(fldInputDescr);
+		fieldInputDescription = new JTextArea();  //adding area to input description of project
+		fieldInputDescription.setBounds(110, 65, 403, 102);
+		fieldInputDescription.setLineWrap(true);
+		fieldInputDescription.setBorder(new BevelBorder(BevelBorder.LOWERED));
+		projectPanel.add(fieldInputDescription);
 		
-		JButton btnEdit = new JButton("Öffnen");  // button for editing the project (Tasks etc.)
-		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnEdit.setBounds(237, 244, 120, 29);
-		prjctPanel.add(btnEdit);
+		JButton buttonEdit = new JButton("Öffnen");  // button for editing the project (Tasks etc.)
+		buttonEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		buttonEdit.setBounds(237, 244, 120, 29);
+		projectPanel.add(buttonEdit);
 		
-		JButton btnEditName = new JButton("..."); //button for editing name of project
-		btnEditName.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnEditName.setBounds(280, 16, 40, 26);
+		JButton buttonEditName = new JButton("..."); //button for editing name of project
+		buttonEditName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		buttonEditName.setBounds(280, 16, 40, 26);
 		
 		// specifying the action after pressing the button for name edit
 		
-		btnEditName.addActionListener(new ActionListener() {
+		buttonEditName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Sound.playSound(".\\sounds\\open.wav");
@@ -173,32 +175,32 @@ public class ProjectView {
 				
 				//adding "set name:" next to input
 				
-				JLabel lblSetName = new JLabel("Name: ");
-				lblSetName.setFont(new Font("Verdana", Font.PLAIN, 15));
-				lblSetName.setBounds(31, 30, 113, 25);
-				inputNamePanel.add(lblSetName);
+				JLabel labelSetName = new JLabel("Name: ");
+				labelSetName.setFont(new Font("Verdana", Font.PLAIN, 15));
+				labelSetName.setBounds(31, 30, 113, 25);
+				inputNamePanel.add(labelSetName);
 				
 				//adding area to input the name
 				
-				JTextArea fldInputName = new JTextArea();
-				fldInputName.setBounds(114, 33, 150, 24);
-				fldInputName.setFont(new Font("Verdana", Font.PLAIN, 15));
-				inputNamePanel.add(fldInputName);
+				JTextArea fieldInputName = new JTextArea();
+				fieldInputName.setBounds(114, 33, 150, 24);
+				fieldInputName.setFont(new Font("Verdana", Font.PLAIN, 15));
+				inputNamePanel.add(fieldInputName);
 				
 				//creating button to save name and close second frame 
 	
-				JButton btnOk = new JButton("ok");
-				btnOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
-				btnOk.setBounds(271, 30, 57, 35);
-				inputNamePanel.add(btnOk);
-				btnOk.addActionListener(new ActionListener() {
+				JButton buttonOk = new JButton("ok");
+				buttonOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				buttonOk.setBounds(271, 30, 57, 35);
+				inputNamePanel.add(buttonOk);
+				buttonOk.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
 						Sound.playSound(".\\sounds\\open.wav");
-						String name = fldInputName.getText();
-						prjct.setName(name);
-						new SaveProject().projectName(prjct, name);
-						lblInputName.setText(name);
+						String name = fieldInputName.getText();
+						project.setName(name);
+						new SaveProject().projectName(project, name);
+						labelInputName.setText(name);
 						inptNameFrame.dispose();
 					}
 				});
@@ -216,133 +218,133 @@ public class ProjectView {
 			}
 		}); //buttonEditName
 		
-		prjctPanel.add(btnEditName); // adding the EDIT button to the panel of the project
+		projectPanel.add(buttonEditName); // adding the EDIT button to the panel of the project
 		
 		
 		// loading data ***************************************************************************
 		// creating buttons for existing persons 
 		
-		for(Person prs: prjct.getPersonList()) {
+		for(Person person: project.getPersonList()) {
 			
-			JButton btnPrsInfo = new JButton("X.X.\r\n");
-			personViewMap.put(btnPrsInfo, new PersonView(prs, btnPrsInfo, prjct));
+			JButton buttonPersonInfo = new JButton("X.X.\r\n");
+			personViewMap.put(buttonPersonInfo, new PersonView(person, buttonPersonInfo, project));
 			
-			switch(colourCount) {      //set right color
+			switch(colorCount) {      //set right color
 			case 0:
-				btnPrsInfo.setBackground(new Color(102,205,170));
+				buttonPersonInfo.setBackground(new Color(102,205,170));
 				break;
 			case 1:
-				btnPrsInfo.setBackground(new Color(255,182,193));
+				buttonPersonInfo.setBackground(new Color(255,182,193));
 				break;
 			case 2:
-				btnPrsInfo.setBackground(new Color(154,205,50));
+				buttonPersonInfo.setBackground(new Color(154,205,50));
 				break;
 			case 3:
-				btnPrsInfo.setBackground(new Color(255,255,102));
+				buttonPersonInfo.setBackground(new Color(255,255,102));
 				break;
 			case 4:
-				btnPrsInfo.setBackground(new Color(189,183,107));
+				buttonPersonInfo.setBackground(new Color(189,183,107));
 				break;
 			case 5:
-				btnPrsInfo.setBackground(new Color(152,251,152));
+				buttonPersonInfo.setBackground(new Color(152,251,152));
 				break;
 			case 6:
-				btnPrsInfo.setBackground(new Color(188,143,143));
+				buttonPersonInfo.setBackground(new Color(188,143,143));
 			}
 			
-			colourCount++;
-			btnPrsInfo.setForeground(new Color(0, 0, 0));
-			btnPrsInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			btnPrsInfo.setBounds(xPrsCoor, 180, 72, 51);
-			prjctPanel.add(btnPrsInfo);
-			prjctFrame.repaint();
-			xPrsCoor += 75;
+			colorCount++;
+			buttonPersonInfo.setForeground(new Color(0, 0, 0));
+			buttonPersonInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			buttonPersonInfo.setBounds(xPersonCoor, 180, 72, 51);
+			projectPanel.add(buttonPersonInfo);
+			projectFrame.repaint();
+			xPersonCoor += 75;
 			
 			//adding person info (opening person view)
-			btnPrsInfo.addActionListener(new ActionListener() {
+			buttonPersonInfo.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {		
 					
-					PersonView pView = personViewMap.get(btnPrsInfo);
-					JFrame prsViewFrame = pView.getFrame();
-					prsViewFrame.setVisible(true);
+					PersonView personView = personViewMap.get(buttonPersonInfo);
+					JFrame personViewFrame = personView.getFrame();
+					personViewFrame.setVisible(true);
 				}
 			});
 			
 			String firstInit = null;
 			String secondInit = null;
 		
-			if(prs.getFirstName() != null && !(prs.getFirstName().equals(""))) {
-			firstInit = prs.getFirstName().substring(0, 1);
-	        secondInit= prs.getLastName().substring(0,1);
+			if(person.getFirstName() != null && !(person.getFirstName().equals(""))) {
+			firstInit = person.getFirstName().substring(0, 1);
+	        secondInit= person.getLastName().substring(0,1);
 			}
 			
 			if(firstInit == null) {
-				btnPrsInfo.setText("X.X");
+				buttonPersonInfo.setText("X.X");
 			}else {
-			btnPrsInfo.setText(firstInit + "." + secondInit + ".");
+			buttonPersonInfo.setText(firstInit + "." + secondInit + ".");
 			}
 			
 		}// loading data *******************************************************************************
 		 
 		
 		// specifying the action after pressing the button + (add person)
-		JButton btnAddPerson = new JButton("+"); 
-		btnAddPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnAddPerson.addActionListener(new ActionListener() {
+		JButton buttonAddPerson = new JButton("+"); 
+		buttonAddPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		buttonAddPerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Sound.playSound(".\\sounds\\open.wav");
 				
-				if(xPrsCoor <= 463) {
+				if(xPersonCoor <= 463) {
 					
 				//create and add person
-				Person newPrs = new Person(new LoadPerson().newPersonId());
-				new SavePerson().newPerson(newPrs);
-				prjct.addPerson(newPrs);
-				newPrs.addProjekt(prjct);
-				new SaveProject().projectPerson(prjct, newPrs);
+				Person newPerson = new Person(new LoadPerson().newPersonId());
+				new SavePerson().newPerson(newPerson);
+				project.addPerson(newPerson);
+				newPerson.addProjekt(project);
+				new SaveProject().projectPerson(project, newPerson);
 				
-				JButton btnPrsInfo = new JButton("X.X.\r\n");
-				personViewMap.put(btnPrsInfo, new PersonView(newPrs, btnPrsInfo,prjct));
+				JButton buttonPersonInfo = new JButton("X.X.\r\n");
+				personViewMap.put(buttonPersonInfo, new PersonView(newPerson, buttonPersonInfo,project));
 				
 			
-				switch(colourCount) {      //set right color
+				switch(colorCount) {      //set right color
 				case 0:
-					btnPrsInfo.setBackground(new Color(102,205,170));
+					buttonPersonInfo.setBackground(new Color(102,205,170));
 					break;
 				case 1:
-					btnPrsInfo.setBackground(new Color(255,182,193));
+					buttonPersonInfo.setBackground(new Color(255,182,193));
 					break;
 				case 2:
-					btnPrsInfo.setBackground(new Color(154,205,50));
+					buttonPersonInfo.setBackground(new Color(154,205,50));
 					break;
 				case 3:
-					btnPrsInfo.setBackground(new Color(255,255,102));
+					buttonPersonInfo.setBackground(new Color(255,255,102));
 					break;
 				case 4:
-					btnPrsInfo.setBackground(new Color(189,183,107));
+					buttonPersonInfo.setBackground(new Color(189,183,107));
 					break;
 				case 5:
-					btnPrsInfo.setBackground(new Color(152,251,152));
+					buttonPersonInfo.setBackground(new Color(152,251,152));
 					break;
 				case 6:
-					btnPrsInfo.setBackground(new Color(188,143,143));
+					buttonPersonInfo.setBackground(new Color(188,143,143));
 				}
-				colourCount++;
-				btnPrsInfo.setForeground(new Color(0, 0, 0));
-				btnPrsInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-				btnPrsInfo.setBounds(xPrsCoor, 180, 72, 51);
-				prjctPanel.add(btnPrsInfo);
-				prjctFrame.repaint();
-				xPrsCoor += 75;
+				colorCount++;
+				buttonPersonInfo.setForeground(new Color(0, 0, 0));
+				buttonPersonInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				buttonPersonInfo.setBounds(xPersonCoor, 180, 72, 51);
+				projectPanel.add(buttonPersonInfo);
+				projectFrame.repaint();
+				xPersonCoor += 75;
 	
 				//adding person info (opening person view)
-				btnPrsInfo.addActionListener(new ActionListener() {
+				buttonPersonInfo.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {		
 						
-						PersonView pView = personViewMap.get(btnPrsInfo);
-						JFrame prsViewFrame = pView.getFrame();
-						prsViewFrame.setVisible(true);
+						PersonView personView = personViewMap.get(buttonPersonInfo);
+						JFrame personViewFrame = personView.getFrame();
+						personViewFrame.setVisible(true);
 					}
 					
 					
@@ -357,19 +359,19 @@ public class ProjectView {
 					
 					//adding "error message:" next to input
 					
-					JLabel lblErrorMessage = new JLabel("Maximum erreicht!");
-					lblErrorMessage.setFont(new Font("Verdana", Font.PLAIN, 15));
-					lblErrorMessage.setBounds(31, 30, 150, 25);
-					overMaxPanel.add(lblErrorMessage);
+					JLabel labelErrorMessage = new JLabel("Maximum erreicht!");
+					labelErrorMessage.setFont(new Font("Verdana", Font.PLAIN, 15));
+					labelErrorMessage.setBounds(31, 30, 150, 25);
+					overMaxPanel.add(labelErrorMessage);
 					
 					//adding area to input the name
 					
 					//creating button to close overMax frame 
 		
-					JButton btnOk = new JButton("ok");
-					btnOk.setBounds(220, 23, 57, 35);
-					overMaxPanel.add(btnOk);
-					btnOk.addActionListener(new ActionListener() {
+					JButton buttonOk = new JButton("ok");
+					buttonOk.setBounds(220, 23, 57, 35);
+					overMaxPanel.add(buttonOk);
+					buttonOk.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							Sound.playSound(".\\sounds\\open.wav");
 							overMaxFrame.dispose();
@@ -389,37 +391,37 @@ public class ProjectView {
 				
 			}//buttonAddPerson
 		});
-		btnAddPerson.setBounds(25, 224, 51, 26);
-		prjctPanel.add(btnAddPerson);
+		buttonAddPerson.setBounds(25, 224, 51, 26);
+		projectPanel.add(buttonAddPerson);
 		
-		JLabel lblPersonen = new JLabel("Personen:");
-		lblPersonen.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPersonen.setBounds(15, 199, 69, 16);
-		prjctPanel.add(lblPersonen);
+		JLabel labelPersonen = new JLabel("Personen:");
+		labelPersonen.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		labelPersonen.setBounds(15, 199, 69, 16);
+		projectPanel.add(labelPersonen);
 		
 		
 		//handling task areas of project 
-		btnEdit.addActionListener(new ActionListener() {  
+		buttonEdit.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Sound.playSound(".\\sounds\\open.wav");
 				
-				prjct.setDescr(fldInputDescr.getText());
-				new SaveProject().projectDescription(prjct, fldInputDescr.getText());
+				project.setDescription(fieldInputDescription.getText());
+				new SaveProject().projectDescription(project, fieldInputDescription.getText());
 				// specifying the editing of a project (tasks etc.)
 				
-				JFrame taskGroupFrame = creTaskGroupMap.get(prjctPanel.hashCode()).getFrame();
+				JFrame taskGroupFrame = creTaskGroupMap.get(projectPanel.hashCode()).getFrame();
 				taskGroupFrame.setVisible(true);
 				
 			}
 		});
 	
 		// save descr when closing window 
-		prjctFrame.addWindowListener(new WindowAdapter() {
+		projectFrame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				prjct.setDescr(fldInputDescr.getText());
-				new SaveProject().projectDescription(prjct, fldInputDescr.getText());
+				project.setDescription(fieldInputDescription.getText());
+				new SaveProject().projectDescription(project, fieldInputDescription.getText());
 			}
 		});
 	}//initialize

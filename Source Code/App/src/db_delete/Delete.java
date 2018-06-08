@@ -15,9 +15,15 @@ public class Delete {
 
 	public void deleteProject(Project p) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int project_id = p.getId();
 		int taskgroup_id = 0;
@@ -178,9 +184,15 @@ public class Delete {
 
 	public void deleteTaskGroup(TaskGroup a) {
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int taskgroup_id = a.getId();
 		int task_id = 0;
@@ -301,9 +313,15 @@ public class Delete {
 	}
 
 	public void deleteTask(Task a) {
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int task_id = a.getId();
 
@@ -373,9 +391,15 @@ public class Delete {
 	}
 
 	public void deleteActivity(Activity a) {
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int activity_id = a.getId(); 
 

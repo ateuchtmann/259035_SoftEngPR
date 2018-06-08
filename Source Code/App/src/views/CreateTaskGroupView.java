@@ -37,9 +37,9 @@ import sounds.Sound;
 
 public class CreateTaskGroupView {
 
-	private JFrame creTskGroupFrame;
+	private JFrame createTaskGroupFrame;
 	protected int xCoor = 20; // coordinate for moving taskgroup to the right
-	private Project prjct;
+	private Project project;
 	
 	/**
 	 * Launch the application.
@@ -47,7 +47,7 @@ public class CreateTaskGroupView {
 
 	
 	public JFrame getFrame() {
-		return creTskGroupFrame;
+		return createTaskGroupFrame;
 	}
 	
 	public int getX() {
@@ -56,10 +56,10 @@ public class CreateTaskGroupView {
 
 	/**
 	 * Create the application.
-	 * @param projekt2 
+	 * @param project2 
 	 */
-	public CreateTaskGroupView(Project prjct) {
-		this.prjct = prjct;
+	public CreateTaskGroupView(Project project) {
+		this.project = project;
 		initialize();
 	}
 
@@ -67,23 +67,23 @@ public class CreateTaskGroupView {
 s	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		creTskGroupFrame = new JFrame();
-		creTskGroupFrame.setBounds(0, 0, 1920, 1080);
-		creTskGroupFrame.getContentPane().setBackground(new Color(255, 255, 255));
-		creTskGroupFrame.getContentPane().setLayout(null);
-		creTskGroupFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		createTaskGroupFrame = new JFrame();
+		createTaskGroupFrame.setBounds(0, 0, 1920, 1080);
+		createTaskGroupFrame.getContentPane().setBackground(new Color(255, 255, 255));
+		createTaskGroupFrame.getContentPane().setLayout(null);
+		createTaskGroupFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
-		JButton btnCreTaskGroup = new JButton("Neuen Aufgabenbereich erstellen");
-		btnCreTaskGroup.setBounds(767, 13, 362, 57);
+		JButton buttonCreateTaskGroup = new JButton("Neuen Aufgabenbereich erstellen");
+		buttonCreateTaskGroup.setBounds(767, 13, 362, 57);
 		
-		btnCreTaskGroup.setFont(new Font("Sitka Small", Font.PLAIN, 20));
-		btnCreTaskGroup.setBackground(SystemColor.LIGHT_GRAY);
+		buttonCreateTaskGroup.setFont(new Font("Sitka Small", Font.PLAIN, 20));
+		buttonCreateTaskGroup.setBackground(SystemColor.LIGHT_GRAY);
 		
 		// loading data*********************************************************************
 				// creating views for existing taskGroups
 				
-				for(TaskGroup tg: prjct.getTaskGroups()) {
-					TaskGroupView taskGroupView = new TaskGroupView(creTskGroupFrame, tg, xCoor, prjct);
+				for(TaskGroup tg: project.getTaskGroups()) {
+					TaskGroupView taskGroupView = new TaskGroupView(createTaskGroupFrame, tg, xCoor, project);
 					taskGroupView.setName(tg.getName());
 					
 					// calculating correct position of every taskGroup
@@ -95,20 +95,20 @@ s	 * Initialize the contents of the frame.
 
 		// creating new taskGroup
 		
-		btnCreTaskGroup.addActionListener(new ActionListener() {
+		buttonCreateTaskGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				Sound.playSound(".\\sounds\\open.wav");
 				TaskGroup taskGroup = new TaskGroup(new LoadTaskGroup().newTaskGroupId());
 				new SaveTaskGroup().newTaskGroup(taskGroup);
-				prjct.addTaskGroup(taskGroup);
-				new SaveProject().projectTaskGroup(prjct, taskGroup);
+				project.addTaskGroup(taskGroup);
+				new SaveProject().projectTaskGroup(project, taskGroup);
 				@SuppressWarnings("unused")
-				TaskGroupView taskGroupView = new TaskGroupView(creTskGroupFrame, taskGroup, xCoor, prjct);
+				TaskGroupView taskGroupView = new TaskGroupView(createTaskGroupFrame, taskGroup, xCoor, project);
 				xCoor = xCoor + 385;
 			}
 		});
 		
-		creTskGroupFrame.getContentPane().add(btnCreTaskGroup);
+		createTaskGroupFrame.getContentPane().add(buttonCreateTaskGroup);
 		
 			
 	}//initialize

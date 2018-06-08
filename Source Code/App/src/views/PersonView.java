@@ -39,101 +39,101 @@ import java.awt.event.ActionEvent;
 
 public class PersonView {
 
-	private JFrame prsFrame;
-	private JTextField fldFirstName;
-	private JTextField fldSurName;
-	private Person prs;
-	private JButton btnPrsInfo;
-	static Project prjct;
+	private JFrame personFrame;
+	private JTextField fieldFirstName;
+	private JTextField fieldLastName;
+	private Person person;
+	private JButton buttonPersonInfo;
+	static Project project;
 
 	
 	public JFrame getFrame() {
-		return prsFrame;
+		return personFrame;
 	}
 
-	public PersonView(Person prs, JButton btnPrsInfo, Project prjct) {
-		this.prs = prs;
-		this.btnPrsInfo = btnPrsInfo;
-		PersonView.prjct = prjct;
+	public PersonView(Person person, JButton buttonPersonInfo, Project project) {
+		this.person = person;
+		this.buttonPersonInfo = buttonPersonInfo;
+		PersonView.project = project;
 		initialize();
 	}
 	
 	// setter
 	
 	public void setFirstName(String firstName) {
-		this.fldFirstName.setText(firstName);
+		this.fieldFirstName.setText(firstName);
 	}
 	
-	public void setSurName(String SurName) {
-		this.fldSurName.setText(SurName);
+	public void setLastName(String lastName) {
+		this.fieldLastName.setText(lastName);
 	}
 
 	private void initialize() {
 		
-		prsFrame = new JFrame();
-		prsFrame.setBounds(650, 200, 450, 300);
-		prsFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		JPanel prsInfoPanel = new JPanel();
-		prsInfoPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-		prsFrame.getContentPane().add(prsInfoPanel, BorderLayout.CENTER);
-		prsInfoPanel.setLayout(null);
+		personFrame = new JFrame();
+		personFrame.setBounds(650, 200, 450, 300);
+		personFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		JPanel personInfoPanel = new JPanel();
+		personInfoPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		personFrame.getContentPane().add(personInfoPanel, BorderLayout.CENTER);
+		personInfoPanel.setLayout(null);
 		
 		//label saying "first name"
-		JLabel lblfirstName = new JLabel("Vorname:");
-		lblfirstName.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblfirstName.setBounds(40, 17, 72, 16);
+		JLabel labelFirstName = new JLabel("Vorname:");
+		labelFirstName.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelFirstName.setBounds(40, 17, 72, 16);
 		
-		//label saying "surname"
-		JLabel lblSurName = new JLabel("Nachname:");
-		lblSurName.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblSurName.setBounds(31, 46, 81, 16);
+		//label saying "lastname"
+		JLabel labelLastName = new JLabel("Nachname:");
+		labelLastName.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		labelLastName.setBounds(31, 46, 81, 16);
 		
 		//textField for first name
-		fldFirstName = new JTextField();
-		fldFirstName.setBounds(114, 15, 167, 22);
-		fldFirstName.setColumns(10);
-		fldFirstName.setText(prs.getFirstName());
+		fieldFirstName = new JTextField();
+		fieldFirstName.setBounds(114, 15, 167, 22);
+		fieldFirstName.setColumns(10);
+		fieldFirstName.setText(person.getFirstName());
 		
-		//textField for surname
-		fldSurName = new JTextField();
-		fldSurName.setBounds(114, 44, 167, 22);
-		fldSurName.setColumns(10);
-		fldSurName.setText(prs.getLastName());
+		//textField for lastname
+		fieldLastName = new JTextField();
+		fieldLastName.setBounds(114, 44, 167, 22);
+		fieldLastName.setColumns(10);
+		fieldLastName.setText(person.getLastName());
 
-		JButton btnOk = new JButton("ok");
-		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnOk.addActionListener(new ActionListener() {
+		JButton buttonOk = new JButton("ok");
+		buttonOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		buttonOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		buttonOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Sound.playSound(".\\sounds\\open.wav");
 				String firstInit = null;
 				String secondInit = null;
 				try {
-					firstInit = fldFirstName.getText(0, 1);
-		            secondInit= fldSurName.getText(0,1);
+					firstInit = fieldFirstName.getText(0, 1);
+		            secondInit= fieldLastName.getText(0,1);
 				} catch (BadLocationException e1) {
 					e1.printStackTrace();
 				}
-				prs.setFirstName(fldFirstName.getText());
-				new SavePerson().personFirstname(prs, fldFirstName.getText());
-				prs.setLastname(fldSurName.getText());
-				new SavePerson().personLastname(prs,fldSurName.getText());
+				person.setFirstName(fieldFirstName.getText());
+				new SavePerson().personFirstname(person, fieldFirstName.getText());
+				person.setLastname(fieldLastName.getText());
+				new SavePerson().personLastname(person,fieldLastName.getText());
 				
-				//prjct.addPerson(prs);
-				btnPrsInfo.setText(firstInit + "." + secondInit + ".");
-				prsFrame.setVisible(false);
+				//project.addPerson(person);
+				buttonPersonInfo.setText(firstInit + "." + secondInit + ".");
+				personFrame.setVisible(false);
 			}
 		});
-		btnOk.setBounds(165, 215, 97, 25);
+		buttonOk.setBounds(165, 215, 97, 25);
 		
 		
 		//adding all components to panel
-		prsInfoPanel.add(lblfirstName);
-		prsInfoPanel.add(lblSurName);
-		prsInfoPanel.add(fldFirstName);
-		prsInfoPanel.add(fldSurName);
-		prsInfoPanel.add(btnOk);
+		personInfoPanel.add(labelFirstName);
+		personInfoPanel.add(labelLastName);
+		personInfoPanel.add(fieldFirstName);
+		personInfoPanel.add(fieldLastName);
+		personInfoPanel.add(buttonOk);
 	}
 	
 	

@@ -45,7 +45,7 @@ public class Project {
 		this.name = name;
 	}
 
-	public void setDescr(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -53,7 +53,7 @@ public class Project {
 		return this.name;
 	}
 
-	public String getDescr() {
+	public String getDescription() {
 		return this.description;
 	}
 
@@ -96,5 +96,5 @@ public class Project {
 		}
 		return taskList; 
 	}
-
+	
 }

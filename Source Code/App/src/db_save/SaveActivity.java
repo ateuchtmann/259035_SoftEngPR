@@ -12,9 +12,16 @@ import models.Time;
 public class SaveActivity {
 
 	public void newActivity (Activity a){
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
+		
 
 		int id = a.getId(); 
 
@@ -74,9 +81,15 @@ public class SaveActivity {
 	}
 
 	public void activityPerson (Activity a, Person p){
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = a.getId(); 
 		int person_id = p.getId();
@@ -115,9 +128,15 @@ public class SaveActivity {
 	}
 
 	public void activityStart (Activity a, Time t){
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = a.getId(); 
 		int startHour = t.getHour();
@@ -160,9 +179,15 @@ public class SaveActivity {
 
 	public void activityEnd (Activity a, Time t){
 
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		int id = a.getId(); 
 		int endHour = t.getHour();
@@ -207,9 +232,15 @@ public class SaveActivity {
 		
 		int id = a.getId(); 
 		
+		/*
 		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
 		String username = "u48005db20";
 		String password = "prse2018";
+		*/
+		
+		String url =db_connection.Database.getUrl();
+		String username = db_connection.Database.getUsername();
+		String password = db_connection.Database.getPassword();
 
 		PreparedStatement stmtUpdateDescription = null;
 		String queryUpdateDescription = "UPDATE activity SET description = '" + description + "' WHERE id = '" + id

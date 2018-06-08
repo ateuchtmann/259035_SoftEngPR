@@ -57,11 +57,11 @@ public class Person {
 		this.projectList.add(p);
 	}
 
-	public void addTskGroup(TaskGroup a) {
+	public void addTaskGroup(TaskGroup a) {
 		this.taskGroupList.add(a);
 	}
 
-	public void addTsk(Task a) {
+	public void addTask(Task a) {
 		this.taskList.add(a);
 	}
 
@@ -77,7 +77,7 @@ public class Person {
 		return this.projectList;
 	}
 
-	public List<TaskGroup> getTskGroups() {
+	public List<TaskGroup> getTaskGroups() {
 		return this.taskGroupList;
 	}
 
