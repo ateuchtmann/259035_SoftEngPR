@@ -33,9 +33,10 @@ public class TimeTrackerApp {
 			e.printStackTrace();
 		}
 				
-	    CreateProjectView createProjectView = new CreateProjectView();
-		createProjectView.getFrame().setVisible(true);
+	    CreateProjectView crePrjctView = new CreateProjectView();
+		crePrjctView.getFrame().setVisible(true);
 		Sound.playSound(".\\sounds\\start.wav");
-	}	
+	}
+	
 	
 }

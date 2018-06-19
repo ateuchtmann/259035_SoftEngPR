@@ -3,15 +3,19 @@ package views;
 import java.awt.Font;
 import javax.swing.*;
 
+import db_load.LoadActivity;
+import db_load.LoadPerson;
 import db_load.LoadProject;
+import db_load.LoadTask;
+import db_load.LoadTaskGroup;
 import db_save.SaveProject;
-import models.*;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-
+import models.*;
 import sounds.Sound;
 
 import java.awt.SystemColor;
@@ -38,24 +42,24 @@ import java.awt.SystemColor;
 
 public class CreateProjectView {
 
-	private JFrame createProjectFrame;
-	private static ProjectList projectList;
-	private static List<ProjectView> projectViewList;
-	private static List<Project> projectListFiles;
+	private JFrame crePrjctFrame;
+	private static ProjectList prjctList;
+	private static List<ProjectView> prjctViewList;
+	private static List<Project> prjctListFiles;
 	int yCoor = 101;
 	int xCoor = 50;
 
 	// getter
 
 	public JFrame getFrame() {
-		return this.createProjectFrame;
+		return this.crePrjctFrame;
 	}
 
 	// create the application
 
 	public CreateProjectView() {
-		projectViewList = new ArrayList<>();
-		projectList = new ProjectList();
+		prjctViewList = new ArrayList<>();
+		prjctList = new ProjectList();
 		
 		initialize();
 	}
@@ -63,34 +67,105 @@ public class CreateProjectView {
 	// contents of the frame
 
 	private void initialize() {
-		createProjectFrame = new JFrame();
-		createProjectFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+		crePrjctFrame = new JFrame();
+		crePrjctFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
 
-		createProjectFrame.setBounds(0, 0, 1920, 1080);
-		createProjectFrame.getContentPane().setBackground(new Color(255, 255, 255));
-		createProjectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		crePrjctFrame.setBounds(0, 0, 1920, 1080);
+		crePrjctFrame.getContentPane().setBackground(new Color(255, 255, 255));
+		crePrjctFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Start-Button to make new Project
 
-		JButton buttonCreateProject = new JButton("Neues Projekt erstellen");
-		buttonCreateProject.setBounds(767, 13, 362, 57);
+		JButton btnCrePrjct = new JButton("Neues Projekt erstellen");
+		btnCrePrjct.setBounds(767, 13, 362, 57);
 
-		buttonCreateProject.setFont(new Font("Sitka Small", Font.PLAIN, 20));
-		buttonCreateProject.setBackground(SystemColor.LIGHT_GRAY);
+		btnCrePrjct.setFont(new Font("Sitka Small", Font.PLAIN, 20));
+		btnCrePrjct.setBackground(SystemColor.LIGHT_GRAY);
 
 		// loading
 		// data************************************************************
 		
-		projectList = new LoadProject().everythingFromProjects(); 
-		
+		prjctListFiles = new LoadProject().allProjects();
+		for (Project p : prjctListFiles) {
+
+			p.setName(new LoadProject().projectName(p));
+			p.setDescription(new LoadProject().projectDescription(p));
+			prjctList.addProject(p);
+
+			List<Person> ProjectPersons = new LoadProject().projectPersons(p);
+
+			for (Person person : ProjectPersons) {
+				
+				person.setFirstName(new LoadPerson().personFirstname(person));
+				person.setLastname(new LoadPerson().personLastname(person));
+				
+				p.addPerson(person);
+			}
+
+			List<TaskGroup> taskGroupList = new LoadProject().projectTaskGroups(p);
+
+			for (TaskGroup tg : taskGroupList) {
+
+				tg.setName(new LoadTaskGroup().taskGroupName(tg));
+
+				List<Person> taskGroupPerson = new LoadTaskGroup().taskGroupPersons(tg);
+
+				for (Person person : taskGroupPerson) {
+					
+					person.setFirstName(new LoadPerson().personFirstname(person));
+					person.setLastname(new LoadPerson().personLastname(person));
+					
+					tg.addPerson(person);
+				}
+				p.addTaskGroup(tg);
+
+				List<Task> taskList = new LoadTaskGroup().taskGroupTasks(tg);
+
+				for (Task task : taskList) {
+
+					task.setName(new LoadTask().taskName(task));
+					task.setPlanTime(new LoadTask().taskPlanTime(task));
+
+					List<Person> taskPerson = new LoadTask().taskPersons(task);
+
+					for (Person person : taskPerson) {
+						
+						person.setFirstName(new LoadPerson().personFirstname(person));
+						person.setLastname(new LoadPerson().personLastname(person));
+						
+						task.addPerson(person);
+					}
+
+					tg.addTask(task);
+
+					List<Activity> activityList =  new LoadTask().taskActivities(task);
+					
+					for (Activity activity : activityList) {
+
+						activity.setDescription(new LoadActivity().activityDescription(activity));
+						activity.setStart(new LoadActivity().activityStart(activity));
+						activity.setEnd(new LoadActivity().activityEnd(activity));
+						
+						Person per = new LoadActivity().activityPerson(activity); 
+						per.setFirstName(new LoadPerson().personFirstname(per));
+						per.setLastname(new LoadPerson().personLastname(per));
+						
+						activity.addPerson(per);
+						
+						task.addActivity(activity);
+					}
+				}	
+			}
+		}
+
 		// creating views for existing projects
 
-		projectListFiles = projectList.getProjectList(); 
+		prjctListFiles = prjctList.getProjectList(); 
 		
-		for (Project p : projectListFiles) {
-			ProjectView pv = new ProjectView(createProjectFrame, p, xCoor, yCoor);
+		for (Project p : prjctListFiles) {
+			ProjectView pv = new ProjectView(crePrjctFrame, p, xCoor, yCoor);
 			pv.setName(p.getName());
-			pv.setDescription(p.getDescription());
+			pv.setDescr(p.getDescription());
 
 			// calculating correct position of every project
 			if (yCoor < 661) {
@@ -104,16 +179,16 @@ public class CreateProjectView {
 
 		// Action after pressing create project button
 
-		buttonCreateProject.addActionListener(new ActionListener() {
+		btnCrePrjct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				Sound.playSound(".\\sounds\\open.wav");
-				Project project = new Project(new LoadProject().newProjectId());
-				new SaveProject().newProject(project);
-				projectList.addProject(project);
-				ProjectView projectView = new ProjectView(createProjectFrame, project, xCoor, yCoor);
-				projectViewList.add(projectView);
-				projectListFiles.add(project);
+				Project prjct = new Project(new LoadProject().newProjectId());
+				new SaveProject().newProject(prjct);
+				prjctList.addProject(prjct);
+				ProjectView projektView = new ProjectView(crePrjctFrame, prjct, xCoor, yCoor);
+				prjctViewList.add(projektView);
+				prjctListFiles.add(prjct);
 
 				// calculating correct position of every project
 				if (yCoor < 661) {
@@ -127,8 +202,24 @@ public class CreateProjectView {
 		}); // createProjectButton (Listener - he has only one method: action
 			// performed (bzw. the above one))
 
-		createProjectFrame.getContentPane().setLayout(null);
-		createProjectFrame.getContentPane().add(buttonCreateProject);
+		crePrjctFrame.getContentPane().setLayout(null);
+		crePrjctFrame.getContentPane().add(btnCrePrjct);
+		
+		JButton btnPerson = new JButton("Neue Person anlegen");
+		btnPerson.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CreatePersonsView personsView = new CreatePersonsView();
+			}
+		});
+		btnPerson.setBounds(1163, 16, 362, 57);		
+		btnPerson.setFont(new Font("Sitka Small", Font.PLAIN, 20));
+		btnPerson.setBackground(SystemColor.LIGHT_GRAY);
+		
+		
+		crePrjctFrame.getContentPane().add(btnPerson);
+		
+		
+		
 
 	}
 }

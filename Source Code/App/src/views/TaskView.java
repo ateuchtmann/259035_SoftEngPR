@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -39,32 +40,32 @@ import sounds.Sound;
 
 public class TaskView {
 
-	private static JFrame taskFrame;
-	private JPanel taskGroupPanel;
-	private JTextField fieldPlanTime;
+	private static JFrame tskFrame;
+	private JPanel tskGroupPanel;
+	private JTextField fldPlanTime;
 	private static Map<Integer, Integer> yCoorList = new HashMap<>();
-	private Task task;
-	private Project project;
-	private JTextArea fieldTaskDescription;
-	private String description;
+	private Task tsk;
+	private Project prjct;
+	private JTextArea fldTaskDescr;
+	private String descr;
 	private Time planTime;
 	double planHour;
 	double planMin;
 	
-	private static CreateActivityView createActivityView;
+	private static CreateActivityView createActView;
 	
 	
 	/**
 	 * Create the application.
-	 * @param description 
-	 * @param project 
+	 * @param descr 
+	 * @param projekt 
 	 * @wbp.parser.constructor
 	 */
-	public TaskView(JFrame frame, JPanel taskGroupPanel, Map<Integer, Integer> list, Task task, Project project) {
-		TaskView.taskFrame = frame;
-		this.taskGroupPanel = taskGroupPanel;
-		this.task = task;
-		this.project = project;
+	public TaskView(JFrame frame, JPanel tskGroupPanel, Map<Integer, Integer> list, Task tsk, Project prjct) {
+		TaskView.tskFrame = frame;
+		this.tskGroupPanel = tskGroupPanel;
+		this.tsk = tsk;
+		this.prjct = prjct;
 		TaskView.yCoorList = list;
 		initialize();
 	}
@@ -75,12 +76,12 @@ public class TaskView {
 	 */
 	// constructor with description
 	
-	public TaskView(JFrame frame, JPanel taskGroupPanel, Map<Integer, Integer> list, Task task, Project project, String description, Time time) {
-		TaskView.taskFrame = frame;
-		this.taskGroupPanel = taskGroupPanel;
-		this.task = task;
-		this.project = project;
-		this.description = description;
+	public TaskView(JFrame frame, JPanel tskGroupPanel, Map<Integer, Integer> list, Task tsk, Project prjct, String descr, Time time) {
+		TaskView.tskFrame = frame;
+		this.tskGroupPanel = tskGroupPanel;
+		this.tsk = tsk;
+		this.prjct = prjct;
+		this.descr = descr;
 		this.planTime = time;
 		TaskView.yCoorList = list;
 		initialize();
@@ -95,12 +96,12 @@ public class TaskView {
 
 	// setter
 	
-	public void setPlanTime(Time time) {
-		this.fieldPlanTime.setText(time.toString());
+	public void setPlanTime(Time t) {
+		this.fldPlanTime.setText(t.toString());
 	}
 	
-	public void setDescription(String description) {
-		this.fieldTaskDescription.setText(description);
+	public void setDescr(String d) {
+		this.fldTaskDescr.setText(d);
 	}
 	
 	private void initialize() {
@@ -108,31 +109,35 @@ public class TaskView {
 		//adding panel behind input area (better look)
 		
 		JPanel taskPanel = new JPanel();
-		taskPanel.setBounds(12, yCoorList.get(taskGroupPanel.hashCode()), 331, 100);
+		taskPanel.setBounds(12, yCoorList.get(tskGroupPanel.hashCode()), 331, 120);
 		taskPanel.setLayout(null);
 		
 		
+	//adding planTime
+		
+		JLabel lblPlanTime = new JLabel("Sollzeit:");
+		lblPlanTime.setBounds(10, 81, 56, 16);
+		taskPanel.add(lblPlanTime);
+		
+		fldPlanTime = new JTextField("00.00");
+		fldPlanTime.setBounds(60, 78, 45, 22);
+		taskPanel.add(fldPlanTime);
+		fldPlanTime.setColumns(10);
+		
+		JProgressBar taskProgress = new JProgressBar();
+		taskProgress.setBounds(10, 105, 250, 15);
+		taskProgress.setValue(50); //(currTime/planTime) * 100 TO DO
+		taskPanel.add(taskProgress);
 		
 		//adding input area for task text
 		
-		fieldTaskDescription = new JTextArea();
-		fieldTaskDescription.setBounds(0, 0, 331, 74);
-		fieldTaskDescription.setText(description);
-		taskPanel.add(fieldTaskDescription);
-		
-		//adding planTime
-		
-		JLabel labelPlanTime = new JLabel("Sollzeit:");
-		labelPlanTime.setBounds(10, 81, 56, 16);
-		taskPanel.add(labelPlanTime);
-		
-		fieldPlanTime = new JTextField("00.00");
-		fieldPlanTime.setBounds(60, 78, 45, 22);
-		taskPanel.add(fieldPlanTime);
-		fieldPlanTime.setColumns(10);
-		
+		fldTaskDescr = new JTextArea();
+		fldTaskDescr.setBounds(0, 0, 331, 74);
+		fldTaskDescr.setText(descr);
+		taskPanel.add(fldTaskDescr);
 	
-		createActivityView = new CreateActivityView(project, task);
+	
+		createActView = new CreateActivityView(prjct, tsk);
 		
 		//adding button planTime
 		
@@ -140,33 +145,33 @@ public class TaskView {
 		manageActivities.setFont((new Font("Tahoma", Font.PLAIN, 14)));
 		manageActivities.setBounds(180, 77, 140, 21);
 		
-		createActivityViewMap.put(manageActivities, createActivityView);
-		
+		createActivityViewMap.put(manageActivities, createActView);
+		 
 		
 		manageActivities.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
 			
 				Sound.playSound(".\\sounds\\open.wav");
-				CreateActivityView newCreateActivityView =  createActivityViewMap.get(manageActivities);
+				CreateActivityView newCreateActView =  createActivityViewMap.get(manageActivities);
 				
 				//saving/parsing planedTime
-				String typedPlanHour = fieldPlanTime.getText().substring(0,2);
-				String typedPlanMin = fieldPlanTime.getText().substring(3,5);
+				String typedPlanHour = fldPlanTime.getText().substring(0,2);
+				String typedPlanMin = fldPlanTime.getText().substring(3,5);
 				planHour = Double.parseDouble(typedPlanHour);
 				planMin = Double.parseDouble(typedPlanMin);
 				
-				newCreateActivityView.setPlanHour(planHour);
-				newCreateActivityView.setPlanMin(planMin);
+				newCreateActView.setPlanHour(planHour);
+				newCreateActView.setPlanMin(planMin);
 				
 				planTime = new Time ((int)planHour, (int)planMin);
-				task.setPlanTime(planTime); 
-				new SaveTask().taskPlanTime(task, planTime);
+				tsk.setPlanTime(planTime); 
+				new SaveTask().taskPlanTime(tsk, planTime);
 			
-				newCreateActivityView.updateTime();
-				JFrame createActivityFrame = newCreateActivityView.getFrame();
-				createActivityFrame.setVisible(true);
-				task.setName(fieldTaskDescription.getText());
-				new SaveTask().taskName(task, fieldTaskDescription.getText());
+				newCreateActView.updateTime();
+				JFrame createActFrame = newCreateActView.getFrame();
+				createActFrame.setVisible(true);
+				tsk.setName(fldTaskDescr.getText());
+				new SaveTask().taskName(tsk, fldTaskDescr.getText());
 				
 			}
 		});
@@ -174,34 +179,34 @@ public class TaskView {
 		
 		taskPanel.add(manageActivities);
 		
-		taskGroupPanel.add(taskPanel);
-		taskFrame.repaint();
-		task.setName(fieldTaskDescription.getText());
+		tskGroupPanel.add(taskPanel);
+		tskFrame.repaint();
+		tsk.setName(fldTaskDescr.getText());
 
 		//adding to the y coordinate
-		yCoorList.put(taskGroupPanel.hashCode(), yCoorList.get(taskGroupPanel.hashCode()) + 110);
+		yCoorList.put(tskGroupPanel.hashCode(), yCoorList.get(tskGroupPanel.hashCode()) + 140);
 		
 		
 		// save when closing window 
-		taskFrame.addWindowListener(new WindowAdapter() {
+		tskFrame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				task.setName(fieldTaskDescription.getText());
-				new SaveTask().taskName(task, fieldTaskDescription.getText());
+				tsk.setName(fldTaskDescr.getText());
+				new SaveTask().taskName(tsk, fldTaskDescr.getText());
 				
 				//saving/parsing planedTime
-				CreateActivityView newCreateActivityView =  createActivityViewMap.get(manageActivities);
-				String typedPlanHour = fieldPlanTime.getText().substring(0,2);
-				String typedPlanMin = fieldPlanTime.getText().substring(3,5);
+				CreateActivityView newCreateActView =  createActivityViewMap.get(manageActivities);
+				String typedPlanHour = fldPlanTime.getText().substring(0,2);
+				String typedPlanMin = fldPlanTime.getText().substring(3,5);
 				planHour = Double.parseDouble(typedPlanHour);
 				planMin = Double.parseDouble(typedPlanMin);
 				
-				newCreateActivityView.setPlanHour(planHour);
-				newCreateActivityView.setPlanMin(planMin);
+				newCreateActView.setPlanHour(planHour);
+				newCreateActView.setPlanMin(planMin);
 				
 				planTime = new Time ((int)planHour, (int)planMin);
-				task.setPlanTime(planTime);
-				new SaveTask().taskPlanTime(task, planTime);
+				tsk.setPlanTime(planTime);
+				new SaveTask().taskPlanTime(tsk, planTime);
 			}
 		});
 		
