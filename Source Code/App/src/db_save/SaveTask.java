@@ -1,7 +1,6 @@
 package db_save;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,15 +13,6 @@ import models.Time;
 public class SaveTask {
 	
 	public void newTask (Task t){
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = t.getId();
 
@@ -35,7 +25,7 @@ public class SaveTask {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 
 			insertTask = connection.prepareStatement(queryInsertTask);
@@ -74,15 +64,6 @@ public class SaveTask {
 	}
 
 	public void taskName (Task t, String name){
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = t.getId();
 		PreparedStatement stmtUpdateDescription = null;
@@ -90,7 +71,7 @@ public class SaveTask {
 		Connection connection = null;
 
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateDescription = connection.prepareStatement(queryUpdateDescription);
 
 			stmtUpdateDescription.executeUpdate();
@@ -120,16 +101,7 @@ public class SaveTask {
 	}
 
 	public void taskPerson (Task t, Person p){
-		
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	
 
 		int id = 0;
 		int person_id = p.getId();
@@ -144,7 +116,7 @@ public class SaveTask {
 		String queryInsertUsertask = "INSERT INTO user_task (id, id_user, id_task) VALUES (?, ?, ?)";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 			rs = stmtID.executeQuery();
@@ -187,16 +159,6 @@ public class SaveTask {
 	}
 
 	public void taskPlanTime (Task t, Time planTime){
-		
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = t.getId(); 
 		int planHour = planTime.getHour();
@@ -208,7 +170,7 @@ public class SaveTask {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateStart = connection.prepareStatement(queryUpdateName);
 
 			stmtUpdateStart.executeUpdate();
@@ -238,15 +200,6 @@ public class SaveTask {
 	}
 
 	public void taskActivity (Task t, Activity a){
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = t.getId();
 		int activity_id = a.getId();
@@ -255,7 +208,7 @@ public class SaveTask {
 		String queryUpdateTask = "Update activity SET id_task = '" + id + "' WHERE id = '" + activity_id + "' ";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtUpdateTask = connection.prepareStatement(queryUpdateTask);
 			stmtUpdateTask.executeUpdate();

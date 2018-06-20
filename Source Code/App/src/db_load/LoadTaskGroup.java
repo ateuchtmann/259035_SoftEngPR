@@ -1,7 +1,6 @@
 package db_load;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,15 +14,6 @@ import models.TaskGroup;
 public class LoadTaskGroup {
 	
 	public int newTaskGroupId() {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = 0;
 
@@ -35,7 +25,7 @@ public class LoadTaskGroup {
 		Connection connection = null;
 
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 
@@ -83,16 +73,6 @@ public class LoadTaskGroup {
 
 	public String taskGroupName(TaskGroup a) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = a.getId();
 		String name = "";
 		PreparedStatement stmtSelectName = null;
@@ -102,7 +82,7 @@ public class LoadTaskGroup {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectName = connection.prepareStatement(querySelectName);
 			rs = stmtSelectName.executeQuery();
 
@@ -140,15 +120,6 @@ public class LoadTaskGroup {
 		List<Task> list = new ArrayList<>();
 
 		int id = a.getId();
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		PreparedStatement stmtSelectID = null;
 		String querySelectID = "SELECT id FROM tasks WHERE id_taskgroup = '" + id + "'";
@@ -157,7 +128,7 @@ public class LoadTaskGroup {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectID = connection.prepareStatement(querySelectID);
 			rs = stmtSelectID.executeQuery();
 
@@ -195,15 +166,6 @@ public class LoadTaskGroup {
 		List<Person> list = new ArrayList<>();
 
 		int id = a.getId();
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		PreparedStatement stmtSelectID = null;
 		String querySelectID = "SELECT id_user FROM user_taskgroup WHERE id_taskgroup = '" + id + "'";
@@ -212,7 +174,7 @@ public class LoadTaskGroup {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectID = connection.prepareStatement(querySelectID);
 			rs = stmtSelectID.executeQuery();
 

@@ -1,7 +1,6 @@
 package db_save;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,16 +15,6 @@ public class SavePerson {
 	
 	public void newPerson(Person p) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = p.getId();
 
 		String queryInsertUser = "INSERT INTO users (id, username, password, firstname, lastname) VALUES (?, ?, ?, ?, ?)";
@@ -38,7 +27,7 @@ public class SavePerson {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			insertUser = connection.prepareStatement(queryInsertUser);
 
@@ -76,16 +65,6 @@ public class SavePerson {
 
 	public void personFirstname(Person p, String firstname) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = p.getId();
 
 		PreparedStatement stmtUpdateFirstname = null;
@@ -93,7 +72,7 @@ public class SavePerson {
 		Connection connection = null;
 
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateFirstname = connection.prepareStatement(queryUpdateFirstname);
 
 			stmtUpdateFirstname.executeUpdate();
@@ -124,16 +103,6 @@ public class SavePerson {
 
 	public void personLastname(Person p, String lastname) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = p.getId();
 
 		PreparedStatement stmtUpdateLastname = null;
@@ -141,7 +110,7 @@ public class SavePerson {
 		Connection connection = null;
 
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateLastname = connection.prepareStatement(queryUpdateLastname);
 
 			stmtUpdateLastname.executeUpdate();
@@ -172,16 +141,6 @@ public class SavePerson {
 
 	public void personProject(Person p, Project pro) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = 0;
 		int person_id = p.getId();
 		int project_id = pro.getId();
@@ -194,7 +153,7 @@ public class SavePerson {
 		String queryInsertUserProject = "INSERT INTO user_project (id, id_user, id_project) VALUES (?, ?, ?)";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 			rs = stmtID.executeQuery();
@@ -238,16 +197,6 @@ public class SavePerson {
 
 	public void personTaskGroup(Person p, TaskGroup a) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = 0;
 		int person_id = p.getId();
 		int taskgroup_id = a.getId();
@@ -260,7 +209,7 @@ public class SavePerson {
 		String queryInsertUserProject = "INSERT INTO user_taskgroup (id, id_user, id_taskgroup) VALUES (?, ?, ?)";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 			rs = stmtID.executeQuery();
@@ -304,16 +253,6 @@ public class SavePerson {
 
 	public void personTask(Person p, Task a) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = 0;
 		int person_id = p.getId();
 		int task_id = a.getId();
@@ -326,8 +265,8 @@ public class SavePerson {
 		String queryInsertUserProject = "INSERT INTO user_task (id, id_user, id_task) VALUES (?, ?, ?)";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
-
+			connection = db_connection.Database.getConnection();
+			
 			stmtID = connection.prepareStatement(queryID);
 			rs = stmtID.executeQuery();
 
@@ -369,15 +308,6 @@ public class SavePerson {
 	}
 
 	public void personActivity(Person p, Activity a) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 		int person_id = p.getId();
@@ -386,7 +316,7 @@ public class SavePerson {
 		String queryInsertUsertask = "Update activity SET id_user = '" + person_id + "' WHERE id = '" + id + "' ";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtUpdateUser = connection.prepareStatement(queryInsertUsertask);
 			stmtUpdateUser.executeUpdate();

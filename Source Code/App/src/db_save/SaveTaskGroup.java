@@ -1,7 +1,6 @@
 package db_save;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,16 +12,6 @@ import models.TaskGroup;
 public class SaveTaskGroup {
 	
 	public void newTaskGroup(TaskGroup a) {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 
@@ -39,7 +28,7 @@ public class SaveTaskGroup {
 		Connection connection = null;
 
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 
@@ -104,16 +93,6 @@ public class SaveTaskGroup {
 
 	public void taskGroupName(TaskGroup a, String name) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = a.getId();
 
 		PreparedStatement stmtUpdateName = null;
@@ -121,7 +100,7 @@ public class SaveTaskGroup {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateName = connection.prepareStatement(queryUpdateName);
 
 			stmtUpdateName.executeUpdate();
@@ -151,15 +130,6 @@ public class SaveTaskGroup {
 	}
 
 	public void taskGroupTask(TaskGroup a, Task t) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int task_id = t.getId();
 		int tg_id = a.getId();
@@ -169,7 +139,7 @@ public class SaveTaskGroup {
 				+ "'";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtUpdateTaskgroupId = connection.prepareStatement(queryUpdateTaskgroupId);
 			stmtUpdateTaskgroupId.executeUpdate();
@@ -200,15 +170,6 @@ public class SaveTaskGroup {
 	}
 
 	public void taskGroupPerson(TaskGroup a, Person p) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = 0;
 		int person_id = p.getId();
@@ -222,7 +183,7 @@ public class SaveTaskGroup {
 		String queryInsertUserProject = "INSERT INTO user_taskgroup (id, id_user, id_taskgroup) VALUES (?, ?, ?)";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 			rs = stmtID.executeQuery();

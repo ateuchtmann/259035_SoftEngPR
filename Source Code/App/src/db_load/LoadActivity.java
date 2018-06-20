@@ -1,7 +1,6 @@
 package db_load;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,16 +13,6 @@ public class LoadActivity {
 
 	public int newActivityId() {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = 0;
 
 		PreparedStatement stmtID = null;
@@ -35,7 +24,7 @@ public class LoadActivity {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 
@@ -82,16 +71,6 @@ public class LoadActivity {
 
 	public Time activityStart(Activity a) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = a.getId();
 		int hour = 0;
 		int minute = 0;
@@ -105,7 +84,7 @@ public class LoadActivity {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtSelectStart = connection.prepareStatement(querySelectStart);
 			rs = stmtSelectStart.executeQuery();
@@ -141,15 +120,6 @@ public class LoadActivity {
 	}
 
 	public Time activityEnd(Activity a) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 		int hour = 0;
@@ -164,7 +134,7 @@ public class LoadActivity {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtSelectStart = connection.prepareStatement(querySelectStart);
 			rs = stmtSelectStart.executeQuery();
@@ -200,15 +170,6 @@ public class LoadActivity {
 	}
 
 	public String activityDescription(Activity a) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 		String description = "";
@@ -219,7 +180,7 @@ public class LoadActivity {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectDescription = connection.prepareStatement(querySelectDescription);
 			rs = stmtSelectDescription.executeQuery();
 
@@ -253,15 +214,6 @@ public class LoadActivity {
 	}
 
 	public Person activityPerson(Activity a) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = a.getId();
 		int person = 0;
@@ -273,7 +225,7 @@ public class LoadActivity {
 		String querySelectUser = "SELECT id_user FROM activity WHERE id = '" + id + "' ";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtSelectUser = connection.prepareStatement(querySelectUser);
 			rs = stmtSelectUser.executeQuery();

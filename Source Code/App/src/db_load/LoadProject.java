@@ -1,7 +1,6 @@
 package db_load;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -108,16 +107,6 @@ public class LoadProject {
 
 		List<Project> projectList = new ArrayList<>();
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int projectId;
 		PreparedStatement stmtSelectProjects = null;
 		String querySelectProjects = "SELECT id FROM projects";
@@ -126,7 +115,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectProjects = connection.prepareStatement(querySelectProjects);
 			rs = stmtSelectProjects.executeQuery();
 
@@ -165,16 +154,6 @@ public class LoadProject {
 
 	public int newProjectId() {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = 0;
 
 		PreparedStatement stmtID = null;
@@ -186,7 +165,7 @@ public class LoadProject {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 
@@ -235,15 +214,6 @@ public class LoadProject {
 	}
 
 	public String projectName(Project p) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = p.getId();
 
@@ -255,7 +225,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectName = connection.prepareStatement(querySelectName);
 			rs = stmtSelectName.executeQuery();
 
@@ -290,16 +260,6 @@ public class LoadProject {
 
 	public String projectDescription(Project p) {
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = p.getId();
 		String description = "";
 		PreparedStatement stmtSelectDescription = null;
@@ -309,7 +269,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectDescription = connection.prepareStatement(querySelectDescription);
 			rs = stmtSelectDescription.executeQuery();
 
@@ -347,15 +307,6 @@ public class LoadProject {
 		List<TaskGroup> list = new ArrayList<>();
 
 		int id = p.getId();
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		PreparedStatement stmtSelectID = null;
 		String querySelectID = "SELECT ID FROM taskgroup WHERE id_project = '" + id + "'";
@@ -364,7 +315,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectID = connection.prepareStatement(querySelectID);
 			rs = stmtSelectID.executeQuery();
 
@@ -400,16 +351,6 @@ public class LoadProject {
 	public List<Person> projectPersons(Project p) {
 		List<Person> list = new ArrayList<>();
 
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-
 		int id = p.getId();
 
 		PreparedStatement stmtSelectID = null;
@@ -419,7 +360,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectID = connection.prepareStatement(querySelectID);
 			rs = stmtSelectID.executeQuery();
 
