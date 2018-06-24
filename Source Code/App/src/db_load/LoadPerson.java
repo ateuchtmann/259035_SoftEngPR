@@ -9,12 +9,76 @@ import java.util.List;
 
 import models.Activity;
 import models.Person;
+import models.PersonList;
 import models.Project;
 import models.Task;
 import models.TaskGroup;
 
 public class LoadPerson {
 
+	public PersonList everythingFromPerson(){
+		
+		List<Person> personListFiles = new LoadPerson().allPersons();
+		PersonList personList = new PersonList(); 
+		
+		for (Person p : personListFiles) {
+
+			p.setFirstName(new LoadPerson().personFirstname(p));
+			p.setLastname(new LoadPerson().personLastname(p));
+			
+			personList.addPerson(p);
+			
+		}
+		
+		return personList; 
+	}
+
+	public List<Person> allPersons() {
+
+		List<Person> personList = new ArrayList<>();
+
+		int personId;
+		PreparedStatement stmtSelectPersons = null;
+		String querySelectPersons = "SELECT id FROM users";
+
+		ResultSet rs = null;
+
+		Connection connection = null;
+		try {
+			connection = db_connection.Database.getConnection();
+			stmtSelectPersons = connection.prepareStatement(querySelectPersons);
+			rs = stmtSelectPersons.executeQuery();
+
+			while (rs.next()) {
+				personId = rs.getInt(1);
+				personList.add(new Person(personId));
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					;
+				}
+				connection = null;
+			}
+			if (stmtSelectPersons != null) {
+				try {
+					stmtSelectPersons.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtSelectPersons = null;
+			}
+		}
+		return personList;
+	}
+	
 	public int newPersonId() {
 
 		int id = 0;
