@@ -1,4 +1,5 @@
 package views;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,6 +52,7 @@ public class TaskView {
 	private Time planTime;
 	double planHour;
 	double planMin;
+	JProgressBar taskProgress;
 	
 	private static CreateActivityView createActView;
 	
@@ -104,6 +106,18 @@ public class TaskView {
 		this.fldTaskDescr.setText(d);
 	}
 	
+	public void setTaskProgress(int i){
+		taskProgress.setValue(i);
+	}
+	
+	//getter
+	
+	public CreateActivityView getActView(){
+		return this.createActView;
+	}
+	
+	
+	
 	private void initialize() {
 
 		//adding panel behind input area (better look)
@@ -124,10 +138,10 @@ public class TaskView {
 		taskPanel.add(fldPlanTime);
 		fldPlanTime.setColumns(10);
 		
-		JProgressBar taskProgress = new JProgressBar();
-		taskProgress.setBounds(10, 105, 250, 15);
-		taskProgress.setValue(50); //(currTime/planTime) * 100 TO DO
-		taskPanel.add(taskProgress);
+		
+		createActView = new CreateActivityView(prjct, tsk);
+		
+	
 		
 		//adding input area for task text
 		
@@ -136,14 +150,28 @@ public class TaskView {
 		fldTaskDescr.setText(descr);
 		taskPanel.add(fldTaskDescr);
 	
-	
-		createActView = new CreateActivityView(prjct, tsk);
+		
+		
+		//adding progress bar
+		
+		taskProgress = new JProgressBar();
+		taskProgress.setBounds(10, 105, 250, 15);
+		taskPanel.add(taskProgress);
+		
+		
+		//adding button delete
+		
+		JButton btnDelete = new JButton("X");
+		btnDelete.setForeground(Color.RED);
+		btnDelete.setBounds(272, 77, 50, 25);
+		taskPanel.add(btnDelete);
+		
 		
 		//adding button planTime
 		
 		JButton manageActivities = new JButton("Zeiterfassung");
 		manageActivities.setFont((new Font("Tahoma", Font.PLAIN, 14)));
-		manageActivities.setBounds(180, 77, 140, 21);
+		manageActivities.setBounds(120, 77, 140, 21);
 		
 		createActivityViewMap.put(manageActivities, createActView);
 		 
@@ -172,6 +200,13 @@ public class TaskView {
 				createActFrame.setVisible(true);
 				tsk.setName(fldTaskDescr.getText());
 				new SaveTask().taskName(tsk, fldTaskDescr.getText());
+				
+				
+				//progress bar
+				double currTime1 = createActView.getTime();
+				double planTime1 = tsk.getPlanTime().getHour() + tsk.getPlanTime().getMin();
+				int diff = (int) ((currTime1 / planTime1) * 100);
+				taskProgress.setValue(diff); 
 				
 			}
 		});
@@ -207,9 +242,10 @@ public class TaskView {
 				planTime = new Time ((int)planHour, (int)planMin);
 				tsk.setPlanTime(planTime);
 				new SaveTask().taskPlanTime(tsk, planTime);
+				
 			}
-		});
-		
+			
+		});	
 	}//initialize
 
 }

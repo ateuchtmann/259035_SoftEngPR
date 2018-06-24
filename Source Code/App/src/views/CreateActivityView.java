@@ -53,6 +53,8 @@ public class CreateActivityView {
 	private JButton btnAct;
 	private CreateActivityView currClass;
 	private double time;
+	int currTimeHours = 0;
+	double currTimeMinutes = 0;
 	
 	
 	public CreateActivityView(Project prjct, Task task) {
@@ -74,7 +76,12 @@ public class CreateActivityView {
 	public void setPlanMin(double pM) {
 		this.planMin = pM;
 	}
-
+	
+	public double getTime(){
+		return currTimeMinutes + currTimeHours;
+	}
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -232,8 +239,7 @@ public class CreateActivityView {
 		//System.out.print("\nDifftime: " + diffTime + " DiffHour: " + diffTimeHours + " DiffMinutes: " + diffTimeMinutes);
 		
 		//Convert decimalTime to Time & Round CurrTime
-		int currTimeHours = 0;
-		double currTimeMinutes = 0;
+		
 		currTimeHours = (int) sumCurrTime;
 		currTimeMinutes = sumCurrTime-currTimeHours;
 		currTimeMinutes = currTimeMinutes*60;

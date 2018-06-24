@@ -155,38 +155,38 @@ public class ActivityView {
 		
 		JLabel lblStart = new JLabel("Start:");
 		lblStart.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblStart.setBounds(1412, 16, 50, 20);
+		lblStart.setBounds(1258, 16, 50, 20);
 		actPanel.add(lblStart);
 		
 		JLabel lblEnd = new JLabel("End:");
 		lblEnd.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblEnd.setBounds(1512, 16, 33, 20);
+		lblEnd.setBounds(1373, 16, 33, 20);
 		actPanel.add(lblEnd);
 		
 		fldStart = new JTextField("00.00");
-		fldStart.setBounds(1453, 13, 50, 26);
+		fldStart.setBounds(1308, 13, 50, 26);
 		actPanel.add(fldStart);
 		fldStart.setColumns(10);
 		
 		fldEnd = new JTextField("00.00");
-		fldEnd.setBounds(1549, 13, 50, 26);
+		fldEnd.setBounds(1410, 13, 50, 26);
 		actPanel.add(fldEnd);
 		fldEnd.setColumns(10);
 		
 		JLabel lblHour = new JLabel("Stunden:");
 		lblHour.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblHour.setBounds(1614, 16, 69, 20);
+		lblHour.setBounds(1475, 16, 69, 20);
 		actPanel.add(lblHour);
 		
 		fldTime = new JTextField("00.00");
-		fldTime.setBounds(1680, 13, 42, 26);
+		fldTime.setBounds(1535, 13, 50, 26);
 		actPanel.add(fldTime);
 		fldTime.setColumns(10);
 		
 		
 		JLabel lblh = new JLabel(" h");
 		lblh.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblh.setBounds(1720, 16, 21, 20);
+		lblh.setBounds(1593, 16, 21, 20);
 		actPanel.add(lblh);
 		
 		JButton btnPrs = new JButton("Person +");
@@ -313,8 +313,13 @@ public class ActivityView {
 				
 			}
 		});
-		btnOk.setBounds(1739, 12, 50, 29);
+		btnOk.setBounds(1628, 13, 50, 29);
 		actPanel.add(btnOk);	
+		
+		JButton btnDelete = new JButton("X");
+		btnDelete.setForeground(Color.RED);
+		btnDelete.setBounds(1692, 13, 50, 29);
+		actPanel.add(btnDelete);
 		
 		// save when closing window 
 				actFrame.addWindowListener(new WindowAdapter() {
