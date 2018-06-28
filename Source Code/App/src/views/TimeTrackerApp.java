@@ -38,5 +38,4 @@ public class TimeTrackerApp {
 		Sound.playSound(".\\sounds\\start.wav");
 	}
 	
-	
 }

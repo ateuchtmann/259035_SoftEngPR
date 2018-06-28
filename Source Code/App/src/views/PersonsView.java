@@ -98,5 +98,6 @@ public class PersonsView {
 	
 	public static void setName(String name){
 		lblSetName.setText(name);
-	}	
+	}
+	
 }

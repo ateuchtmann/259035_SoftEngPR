@@ -4,7 +4,11 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.JFrame;
 
+import db_load.LoadActivity;
 import db_load.LoadPerson;
+import db_load.LoadProject;
+import db_load.LoadTask;
+import db_load.LoadTaskGroup;
 import db_save.SavePerson;
 import models.*;
 
@@ -53,7 +57,9 @@ public class CreatePersonsView {
 	public static List getPrsListFiles(){
 		return prsListFiles;
 	}
+	
 
+	
 	
 	private void initialize() {
 		crePrsnsFrame = new JFrame();
@@ -89,6 +95,41 @@ public class CreatePersonsView {
 		btnPrsns.setBackground(SystemColor.LIGHT_GRAY);
 		
 		
-	}
+		
+		// loading
+		// data************************************************************
+				
+		prsListFiles = new LoadPerson().allPersons();
+		for (Person p : prsListFiles) {
 
+			p.setFirstName(new LoadPerson().personFirstname(p));
+			p.setLastname(new LoadPerson().personLastname(p));
+					
+			prsList.addPerson(p);
+		}//end for
+
+		// creating views for existing projects
+		
+		
+		prsListFiles = prsList.getPersonList(); 
+		
+		
+		// loading
+		// data************************************************************
+				
+		for (Person p : prsListFiles) {
+			PersonsView pv = new PersonsView(crePrsnsFrame, xCoor, yCoor, p);
+			pv.setName(p.getFirstName() + " " + p.getLastName());
+	
+			
+			// calculating correct position of every person
+			if(yCoor < 950){
+				yCoor = yCoor + 80;
+			}else{
+				yCoor = 101;
+				xCoor = xCoor + 400;
+			}	
+	}//end for
+
+}
 }
