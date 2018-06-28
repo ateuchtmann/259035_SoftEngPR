@@ -20,6 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
+import db_delete.Delete;
 import db_save.SaveActivity;
 import models.*;
 import sounds.Sound;
@@ -317,6 +318,15 @@ public class ActivityView {
 		actPanel.add(btnOk);	
 		
 		JButton btnDelete = new JButton("X");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Delete d = new Delete();
+				d.deleteActivity(act);
+				actFrame.revalidate();
+				actFrame.repaint();
+				
+			}
+		});
 		btnDelete.setForeground(Color.RED);
 		btnDelete.setBounds(1692, 13, 50, 29);
 		actPanel.add(btnDelete);

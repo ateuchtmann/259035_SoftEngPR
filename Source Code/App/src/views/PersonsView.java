@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
+import db_delete.Delete;
 import models.*;
 
 import javax.swing.JLabel;
@@ -89,6 +90,22 @@ public class PersonsView {
 		prsnFrame.getContentPane().add(prsnPanel);
 		
 		JButton btnDelete = new JButton("X");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Delete d = new Delete();
+				d.deletePerson(prs);
+				
+				prsnFrame.revalidate();
+				prsnFrame.repaint();
+				
+				prsnFrame.setVisible(false);
+				JFrame newFrame = new JFrame();
+				newFrame = prsnFrame;
+				newFrame.setVisible(true);
+					
+			
+			}
+		});
 		btnDelete.setForeground(Color.RED);
 		btnDelete.setBounds(315, 20, 47, 29);
 		prsnPanel.add(btnDelete);

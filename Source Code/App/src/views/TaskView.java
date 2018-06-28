@@ -15,6 +15,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import db_delete.Delete;
 import db_save.SaveTask;
 import models.*;
 import sounds.Sound;
@@ -162,6 +163,19 @@ public class TaskView {
 		//adding button delete
 		
 		JButton btnDelete = new JButton("X");
+		btnDelete.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Delete d = new Delete();
+				d.deleteTask(tsk);
+				tskFrame.revalidate();
+				tskFrame.repaint();
+				
+			}
+			
+			
+		});
 		btnDelete.setForeground(Color.RED);
 		btnDelete.setBounds(272, 77, 50, 25);
 		taskPanel.add(btnDelete);

@@ -24,6 +24,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import db_delete.Delete;
 import db_load.LoadPerson;
 import db_save.SavePerson;
 import db_save.SaveProject;
@@ -406,6 +407,10 @@ public class ProjectView {
 		JButton btnDelete = new JButton("X");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Delete d = new Delete();
+				d.deleteProject(prjct);
+				prjctFrame.revalidate();
+				prjctFrame.repaint();
 			}
 		});
 		btnDelete.setForeground(Color.RED);

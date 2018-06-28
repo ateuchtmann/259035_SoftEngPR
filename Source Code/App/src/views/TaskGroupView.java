@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import db_delete.Delete;
 import db_load.LoadTask;
 import db_save.SaveTask;
 import db_save.SaveTaskGroup;
@@ -103,6 +104,11 @@ public class TaskGroupView {
 		JButton btnDelete = new JButton("X");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Delete d = new Delete();
+				d.deleteTaskGroup(tskGroup);
+				tskGroupFrame.revalidate();
+				tskGroupFrame.repaint();
+
 			}
 		});
 		btnDelete.setForeground(Color.RED);

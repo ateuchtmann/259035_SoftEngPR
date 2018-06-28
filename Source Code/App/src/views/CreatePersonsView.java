@@ -46,7 +46,6 @@ public class CreatePersonsView {
 	private static List<Person> prsListFiles;
 	
 	
-	
 
 	public CreatePersonsView() {
 		prsList = new PersonList();
