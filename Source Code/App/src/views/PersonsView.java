@@ -12,6 +12,7 @@ import models.*;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 /* Classname: PersonsView
@@ -43,14 +44,16 @@ public class PersonsView {
 	 static JLabel lblSetName;
 	 static JLabel lblSetSurName;
 	 Person prs;
+	 WaitView wait;
 	
 
 	
-	public PersonsView(JFrame frame, int xCoor, int yCoor, Person newPrs) {
+	public PersonsView(JFrame frame, int xCoor, int yCoor, Person newPrs, WaitView wait) {
 		PersonsView.prsnFrame = frame;
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
 		this.prs = newPrs;
+		this.wait = wait;
 		initialize();
 	}
 	
@@ -88,6 +91,8 @@ public class PersonsView {
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		prsnFrame.getContentPane().add(prsnPanel);
+	
+		
 		
 		JButton btnDelete = new JButton("X");
 		btnDelete.addActionListener(new ActionListener() {
@@ -95,17 +100,20 @@ public class PersonsView {
 				Delete d = new Delete();
 				d.deletePerson(prs);
 				
-				prsnFrame.revalidate();
-				prsnFrame.repaint();
 				
+				wait.getFrame().setVisible(true);
 				prsnFrame.setVisible(false);
-				JFrame newFrame = new JFrame();
-				newFrame = prsnFrame;
-				newFrame.setVisible(true);
-					
+				CreatePersonsView cr = new CreatePersonsView();
+				
+				prsnFrame = cr.getFrame();
+				prsnFrame.setVisible(true);
 			
+				
+				
+				
 			}
 		});
+		
 		btnDelete.setForeground(Color.RED);
 		btnDelete.setBounds(315, 20, 47, 29);
 		prsnPanel.add(btnDelete);

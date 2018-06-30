@@ -66,6 +66,7 @@ public class ProjectView {
 	Map<Person, JCheckBox> chechkboxList = new HashMap<>();
 	Set<JButton> btnList = new LinkedHashSet<>();
 	List <Person>listFiles = new ArrayList<>();
+	WaitView wait;
 	
 	//coordinates for projects
 	    int yCoor = 101;   
@@ -74,11 +75,12 @@ public class ProjectView {
 	    final Random rColor = new Random();
 
 	
-	public ProjectView(JFrame frame, Project prjct, int xCoor, int yCoor) {
+	public ProjectView(JFrame frame, Project prjct, int xCoor, int yCoor, WaitView wait) {
 		this.prjct = prjct;
 		ProjectView.prjctFrame = frame;
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
+		this.wait = wait;
 		initialize();
 	}
 	
@@ -409,8 +411,14 @@ public class ProjectView {
 			public void actionPerformed(ActionEvent arg0) {
 				Delete d = new Delete();
 				d.deleteProject(prjct);
-				prjctFrame.revalidate();
-				prjctFrame.repaint();
+				
+				wait.getFrame().setVisible(true);
+				prjctFrame.setVisible(false);
+				CreateProjectView cr = new CreateProjectView();
+				
+				prjctFrame = cr.getFrame();
+				prjctFrame.setVisible(true);	
+				
 			}
 		});
 		btnDelete.setForeground(Color.RED);

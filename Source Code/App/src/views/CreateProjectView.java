@@ -11,6 +11,8 @@ import db_load.LoadTaskGroup;
 import db_save.SaveProject;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -48,6 +50,7 @@ public class CreateProjectView {
 	private static List<Project> prjctListFiles;
 	int yCoor = 101;
 	int xCoor = 50;
+	private static WaitView wait = new WaitView();
 
 	// getter
 
@@ -163,7 +166,7 @@ public class CreateProjectView {
 		prjctListFiles = prjctList.getProjectList(); 
 		
 		for (Project p : prjctListFiles) {
-			ProjectView pv = new ProjectView(crePrjctFrame, p, xCoor, yCoor);
+			ProjectView pv = new ProjectView(crePrjctFrame, p, xCoor, yCoor, wait);
 			pv.setName(p.getName());
 			pv.setDescr(p.getDescription());
 
@@ -186,9 +189,10 @@ public class CreateProjectView {
 				Project prjct = new Project(new LoadProject().newProjectId());
 				new SaveProject().newProject(prjct);
 				prjctList.addProject(prjct);
-				ProjectView projektView = new ProjectView(crePrjctFrame, prjct, xCoor, yCoor);
+				ProjectView projektView = new ProjectView(crePrjctFrame, prjct, xCoor, yCoor,wait);
 				prjctViewList.add(projektView);
 				prjctListFiles.add(prjct);
+				
 
 				// calculating correct position of every project
 				if (yCoor < 661) {
@@ -218,8 +222,14 @@ public class CreateProjectView {
 		
 		crePrjctFrame.getContentPane().add(btnPerson);
 		
-		
-		
+		crePrjctFrame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				wait.getFrame().setVisible(false);
+			}
+		});
 
 	}
+	
+	
 }

@@ -10,10 +10,13 @@ import db_load.LoadProject;
 import db_load.LoadTask;
 import db_load.LoadTaskGroup;
 import db_save.SavePerson;
+import db_save.SaveProject;
 import models.*;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -44,6 +47,7 @@ public class CreatePersonsView {
 	int xCoor = 50;
 	private static PersonList prsList;
 	private static List<Person> prsListFiles;
+	private static WaitView wait = new WaitView();
 	
 	
 
@@ -57,6 +61,9 @@ public class CreatePersonsView {
 		return prsListFiles;
 	}
 	
+	public JFrame getFrame(){
+		return crePrsnsFrame;
+	}
 
 	
 	
@@ -69,12 +76,13 @@ public class CreatePersonsView {
 		crePrsnsFrame.getContentPane().setBackground(new Color(255, 255, 255));
 		crePrsnsFrame.getContentPane().setLayout(null);
 		
+		
 		JButton btnPrsns = new JButton("Neue Person anlegen");
 		btnPrsns.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Person newPrs = new Person(new LoadPerson().newPersonId());
-				PersonsView prsnsView = new PersonsView(crePrsnsFrame, xCoor, yCoor, newPrs);
+				PersonsView prsnsView = new PersonsView(crePrsnsFrame, xCoor, yCoor, newPrs,wait);
 				prsListFiles.add(newPrs);
 				new SavePerson().newPerson(newPrs);
 			
@@ -117,7 +125,7 @@ public class CreatePersonsView {
 		// data************************************************************
 				
 		for (Person p : prsListFiles) {
-			PersonsView pv = new PersonsView(crePrsnsFrame, xCoor, yCoor, p);
+			PersonsView pv = new PersonsView(crePrsnsFrame, xCoor, yCoor, p,wait);
 			pv.setName(p.getFirstName() + " " + p.getLastName());
 	
 			
@@ -129,6 +137,12 @@ public class CreatePersonsView {
 				xCoor = xCoor + 400;
 			}	
 	}//end for
-
+		crePrsnsFrame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				wait.getFrame().setVisible(false);
+			}
+		});
 }
+	
 }
