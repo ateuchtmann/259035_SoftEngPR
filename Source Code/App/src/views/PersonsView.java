@@ -44,15 +44,17 @@ public class PersonsView {
 	 static JLabel lblSetSurName;
 	 Person prs;
 	 WaitView wait;
+	 private static PersonList personList; 
 	
 
 	
-	public PersonsView(JFrame frame, int xCoor, int yCoor, Person newPrs, WaitView wait) {
+	public PersonsView(JFrame frame, int xCoor, int yCoor, Person newPrs, WaitView wait, PersonList personList) {
 		PersonsView.prsnFrame = frame;
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
 		this.prs = newPrs;
 		this.wait = wait;
+		this.personList = personList; 
 		initialize();
 	}
 	
@@ -98,6 +100,7 @@ public class PersonsView {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				db_delete.Delete.deletePerson(prs);		
+				PersonsView.personList.deletePerson(prs);
 				
 				wait.getFrame().setVisible(true);
 				prsnFrame.setVisible(false);

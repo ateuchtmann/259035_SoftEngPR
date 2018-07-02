@@ -75,7 +75,7 @@ public class CreatePersonsView {
 			public void actionPerformed(ActionEvent e) {
 				
 				Person newPrs = new Person(db_load.LoadPerson.newPersonId());
-				PersonsView prsnsView = new PersonsView(crePrsnsFrame, xCoor, yCoor, newPrs,wait);
+				PersonsView prsnsView = new PersonsView(crePrsnsFrame, xCoor, yCoor, newPrs,wait, prsList);
 				prsListFiles.add(newPrs);
 				db_save.SavePerson.newPerson(newPrs);
 			
@@ -118,7 +118,7 @@ public class CreatePersonsView {
 		// data************************************************************
 				
 		for (Person p : prsListFiles) {
-			PersonsView pv = new PersonsView(crePrsnsFrame, xCoor, yCoor, p,wait);
+			PersonsView pv = new PersonsView(crePrsnsFrame, xCoor, yCoor, p,wait, prsList);
 			pv.setName(p.getFirstName() + " " + p.getLastName());
 	
 			

@@ -159,7 +159,7 @@ public class CreateProjectView {
 		prjctListFiles = prjctList.getProjectList(); 
 		
 		for (Project p : prjctListFiles) {
-			ProjectView pv = new ProjectView(crePrjctFrame, p, xCoor, yCoor, wait);
+			ProjectView pv = new ProjectView(crePrjctFrame, p, xCoor, yCoor, wait, prjctList);
 			pv.setName(p.getName());
 			pv.setDescr(p.getDescription());
 
@@ -182,7 +182,7 @@ public class CreateProjectView {
 				Project prjct = new Project(db_load.LoadProject.newProjectId());
 				db_save.SaveProject.newProject(prjct);
 				prjctList.addProject(prjct);
-				ProjectView projektView = new ProjectView(crePrjctFrame, prjct, xCoor, yCoor,wait);
+				ProjectView projektView = new ProjectView(crePrjctFrame, prjct, xCoor, yCoor,wait, prjctList);
 				prjctViewList.add(projektView);
 				prjctListFiles.add(prjct);
 				

@@ -24,15 +24,20 @@ import java.util.List;
 */
 
 public class PersonList {
-	
+
 	private List<Person> personList = new ArrayList<>();
-	
+
 	public void addPerson(Person p) {
 		this.personList.add(p);
 	}
-	
+
 	public List<Person> getPersonList() {
 		return this.personList;
 	}
-		
+
+	public void deletePerson(Person p) {
+
+		this.personList.remove(p);
+	}
+
 }

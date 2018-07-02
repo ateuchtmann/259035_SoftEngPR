@@ -43,7 +43,7 @@ public class TaskGroupView {
 	private static Map<Integer, Integer> yCoorList = new HashMap<>();
 	private TaskGroup tskGroup;
 	private int x;
-	private Project prjct;
+	private static Project prjct;
 	private JLabel lblTskName;
 	
 	public TaskGroupView(JFrame frame, TaskGroup tskGroup, int x, Project prjct) {
@@ -102,6 +102,8 @@ public class TaskGroupView {
 			public void actionPerformed(ActionEvent e) {
 				
 				db_delete.Delete.deleteTaskGroup(tskGroup);
+				TaskGroupView.prjct.deleteTaskGroup(tskGroup);
+				
 
 				tskGroupFrame.revalidate();
 				tskGroupFrame.repaint();
@@ -197,7 +199,7 @@ public class TaskGroupView {
 			   tskGroup.addTask(tsk);
 			   db_save.SaveTaskGroup.taskGroupTask(tskGroup, tsk);
 			   @SuppressWarnings("unused")
-			   TaskView tskView = new TaskView(tskGroupFrame, tskPanel, yCoorList, tsk, prjct);
+			   TaskView tskView = new TaskView(tskGroupFrame, tskPanel, yCoorList, tsk, prjct, tskGroup);
 			   
 			}
 		});

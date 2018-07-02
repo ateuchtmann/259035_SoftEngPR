@@ -52,6 +52,7 @@ public class TaskView {
 	double planHour;
 	double planMin;
 	JProgressBar taskProgress;
+	private static TaskGroup taskgroup; 
 	
 	private static CreateActivityView createActView;
 	
@@ -62,12 +63,13 @@ public class TaskView {
 	 * @param projekt 
 	 * @wbp.parser.constructor
 	 */
-	public TaskView(JFrame frame, JPanel tskGroupPanel, Map<Integer, Integer> list, Task tsk, Project prjct) {
+	public TaskView(JFrame frame, JPanel tskGroupPanel, Map<Integer, Integer> list, Task tsk, Project prjct, TaskGroup taskgroup) {
 		TaskView.tskFrame = frame;
 		this.tskGroupPanel = tskGroupPanel;
 		this.tsk = tsk;
 		this.prjct = prjct;
 		TaskView.yCoorList = list;
+		this.taskgroup = taskgroup; 
 		initialize();
 	}
 
@@ -166,6 +168,9 @@ public class TaskView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				db_delete.Delete.deleteTask(tsk);
+				TaskView.taskgroup.deleteTask(tsk);
+				
+				
 				tskFrame.revalidate();
 				tskFrame.repaint();
 				

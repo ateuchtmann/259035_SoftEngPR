@@ -63,6 +63,7 @@ public class ProjectView {
 	Set<JButton> btnList = new LinkedHashSet<>();
 	List <Person>listFiles = new ArrayList<>();
 	WaitView wait;
+	private static ProjectList prjctList; 
 	
 	//coordinates for projects
 	    int yCoor = 101;   
@@ -71,12 +72,13 @@ public class ProjectView {
 	    final Random rColor = new Random();
 
 	
-	public ProjectView(JFrame frame, Project prjct, int xCoor, int yCoor, WaitView wait) {
+	public ProjectView(JFrame frame, Project prjct, int xCoor, int yCoor, WaitView wait, ProjectList prjctList) {
 		this.prjct = prjct;
 		ProjectView.prjctFrame = frame;
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
 		this.wait = wait;
+		this.prjctList = prjctList; 
 		initialize();
 	}
 	
@@ -407,6 +409,7 @@ public class ProjectView {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				db_delete.Delete.deleteProject(prjct);
+				ProjectView.prjctList.deleteProject(prjct);
 				
 				wait.getFrame().setVisible(true);
 				prjctFrame.setVisible(false);

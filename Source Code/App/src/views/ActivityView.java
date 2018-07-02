@@ -62,15 +62,18 @@ public class ActivityView {
 	private ButtonGroup btnGroup;
 	private JLabel lblPrsInit;
 	private List<Person> listPrs;
+	private static Task task; 
 
-	public ActivityView(JFrame frame, Activity act, int y, Project prjct, int id, CreateActivityView cav) {
+	public ActivityView(JFrame frame, Activity act, int y, Project prjct, int id, CreateActivityView cav, Task task) {
 		ActivityView.actFrame = frame;
 		this.act = act; 
 		this.yCoor = y;
 		this.prjct = prjct;
 		this.btnId = id;
 		this.creActView = cav;
+		this.task = task; 
 		initialize();
+		
 	}
 	
 	// getter
@@ -318,7 +321,9 @@ public class ActivityView {
 		JButton btnDelete = new JButton("X");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				db_delete.Delete.deleteActivity(act);
+				ActivityView.task.deleteActivity(act);
 				actFrame.revalidate();
 				actFrame.repaint();
 				
