@@ -20,8 +20,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
-import db_delete.Delete;
-import db_save.SaveActivity;
 import models.*;
 import sounds.Sound;
 
@@ -237,7 +235,7 @@ public class ActivityView {
 							if(btnRadioPrsList.containsKey(p)){
 								if(btnRadioPrsList.get(p).isSelected()) {
 									act.addPerson(p);
-									new SaveActivity().activityPerson(act, p);
+									db_save.SaveActivity.activityPerson(act, p);
 									p.addActivity(act);
 									String firstInit = p.getFirstName().substring(0,1);
 									String scndInit = p.getLastName().substring(0,1);
@@ -272,7 +270,7 @@ public class ActivityView {
 				double sumEndTime=0;
 				
 				act.setDescription(fldDescr.getText());
-				new SaveActivity().activityDescription(act, fldDescr.getText());
+				db_save.SaveActivity.activityDescription(act, fldDescr.getText());
 				
 				// Read starttime
 				String hour = fldStart.getText().substring(0,2) ;
@@ -282,7 +280,7 @@ public class ActivityView {
 				minutes = Integer.parseInt(min);
 				start = new Time(hours, minutes);
 				act.setStart(start);
-				new SaveActivity().activityStart(act, start);
+				db_save.SaveActivity.activityStart(act, start);
 				sumStartTime=hours+(minutes/60.0);
 				
 				// Read endtime
@@ -293,7 +291,7 @@ public class ActivityView {
 				minutes = Integer.parseInt(m1);
 				end = new Time(hours, minutes);
 				act.setEnd(end);
-				new SaveActivity().activityEnd(act, end);
+				db_save.SaveActivity.activityEnd(act, end);
 				sumEndTime=hours+(minutes/60.0);
 
 				// Calc difference (end-start)
@@ -320,8 +318,7 @@ public class ActivityView {
 		JButton btnDelete = new JButton("X");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Delete d = new Delete();
-				d.deleteActivity(act);
+				db_delete.Delete.deleteActivity(act);
 				actFrame.revalidate();
 				actFrame.repaint();
 				
@@ -338,7 +335,7 @@ public class ActivityView {
 						
 						//save description
 						act.setDescription(fldDescr.getText());
-						new SaveActivity().activityDescription(act, fldDescr.getText());
+						db_save.SaveActivity.activityDescription(act, fldDescr.getText());
 					}
 				});
 		

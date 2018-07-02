@@ -13,7 +13,7 @@ import models.TaskGroup;
 
 public class LoadTaskGroup {
 	
-	public int newTaskGroupId() {
+	public static int newTaskGroupId() {
 
 		int id = 0;
 
@@ -71,7 +71,7 @@ public class LoadTaskGroup {
 		return id;
 	}
 
-	public String taskGroupName(TaskGroup a) {
+	public static String taskGroupName(TaskGroup a) {
 
 		int id = a.getId();
 		String name = "";
@@ -115,7 +115,7 @@ public class LoadTaskGroup {
 		return name;
 	}
 
-	public List<Task> taskGroupTasks(TaskGroup a) {
+	public static List<Task> taskGroupTasks(TaskGroup a) {
 
 		List<Task> list = new ArrayList<>();
 
@@ -161,7 +161,7 @@ public class LoadTaskGroup {
 		return list;
 	}
 
-	public List<Person> taskGroupPersons(TaskGroup a) {
+	public static List<Person> taskGroupPersons(TaskGroup a) {
 
 		List<Person> list = new ArrayList<>();
 

@@ -13,7 +13,7 @@ import models.TaskGroup;
 
 public class SavePerson {
 	
-	public void newPerson(Person p) {
+	public static void newPerson(Person p) {
 
 		int id = p.getId();
 
@@ -63,7 +63,7 @@ public class SavePerson {
 		}
 	}
 
-	public void personFirstname(Person p, String firstname) {
+	public static void personFirstname(Person p, String firstname) {
 
 		int id = p.getId();
 
@@ -101,7 +101,7 @@ public class SavePerson {
 		}
 	}
 
-	public void personLastname(Person p, String lastname) {
+	public static void personLastname(Person p, String lastname) {
 
 		int id = p.getId();
 
@@ -139,7 +139,7 @@ public class SavePerson {
 		}
 	}
 
-	public void personProject(Person p, Project pro) {
+	public static void personProject(Person p, Project pro) {
 
 		int id = 0;
 		int person_id = p.getId();
@@ -195,7 +195,7 @@ public class SavePerson {
 		}
 	}
 
-	public void personTaskGroup(Person p, TaskGroup a) {
+	public static void personTaskGroup(Person p, TaskGroup a) {
 
 		int id = 0;
 		int person_id = p.getId();
@@ -251,7 +251,7 @@ public class SavePerson {
 		}
 	}
 
-	public void personTask(Person p, Task a) {
+	public static void personTask(Person p, Task a) {
 
 		int id = 0;
 		int person_id = p.getId();
@@ -307,7 +307,7 @@ public class SavePerson {
 		}
 	}
 
-	public void personActivity(Person p, Activity a) {
+	public static void personActivity(Person p, Activity a) {
 
 		int id = a.getId();
 		int person_id = p.getId();

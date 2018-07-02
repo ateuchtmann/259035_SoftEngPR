@@ -11,7 +11,7 @@ import models.TaskGroup;
 
 public class SaveTaskGroup {
 	
-	public void newTaskGroup(TaskGroup a) {
+	public static void newTaskGroup(TaskGroup a) {
 
 		int id = a.getId();
 
@@ -91,7 +91,7 @@ public class SaveTaskGroup {
 		}
 	}
 
-	public void taskGroupName(TaskGroup a, String name) {
+	public static void taskGroupName(TaskGroup a, String name) {
 
 		int id = a.getId();
 
@@ -129,7 +129,7 @@ public class SaveTaskGroup {
 		}
 	}
 
-	public void taskGroupTask(TaskGroup a, Task t) {
+	public static void taskGroupTask(TaskGroup a, Task t) {
 
 		int task_id = t.getId();
 		int tg_id = a.getId();
@@ -169,7 +169,7 @@ public class SaveTaskGroup {
 
 	}
 
-	public void taskGroupPerson(TaskGroup a, Person p) {
+	public static void taskGroupPerson(TaskGroup a, Person p) {
 
 		int id = 0;
 		int person_id = p.getId();

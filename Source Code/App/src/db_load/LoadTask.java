@@ -14,7 +14,7 @@ import models.Time;
 
 public class LoadTask {
 
-	public int newTaskId() {
+	public static int newTaskId() {
 
 		int id = 0;
 
@@ -74,7 +74,7 @@ public class LoadTask {
 		return id;
 	}
 
-	public Time taskPlanTime(Task t) {
+	public static Time taskPlanTime(Task t) {
 
 		int id = t.getId();
 		int hour = 0;
@@ -124,7 +124,7 @@ public class LoadTask {
 		return plan;
 	}
 
-	public String taskName(Task t) {
+	public static String taskName(Task t) {
 
 		int id = t.getId();
 		String name = "";
@@ -169,7 +169,7 @@ public class LoadTask {
 		return name;
 	}
 
-	public List<Person> taskPersons(Task t) {
+	public static List<Person> taskPersons(Task t) {
 
 		List<Person> list = new ArrayList<>();
 
@@ -215,7 +215,7 @@ public class LoadTask {
 		return list;
 	}
 
-	public List<Activity> taskActivities(Task t) {
+	public static List<Activity> taskActivities(Task t) {
 		
 		List<Activity> list = new ArrayList<>();
 

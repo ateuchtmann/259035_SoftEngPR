@@ -13,7 +13,7 @@ import models.TaskGroup;
 
 public class Delete {
 
-	public void deleteProject(Project p) {
+	public static void deleteProject(Project p) {
 
 		int project_id = p.getId();
 		int taskgroup_id = 0;
@@ -172,7 +172,7 @@ public class Delete {
 		}
 	}
 
-	public void deleteTaskGroup(TaskGroup a) {
+	public static void deleteTaskGroup(TaskGroup a) {
 
 		int taskgroup_id = a.getId();
 		int task_id = 0;
@@ -292,7 +292,7 @@ public class Delete {
 		}
 	}
 
-	public void deleteTask(Task a) {
+	public static void deleteTask(Task a) {
 
 		int task_id = a.getId();
 
@@ -361,7 +361,7 @@ public class Delete {
 		}
 	}
 
-	public void deleteActivity(Activity a) {
+	public static void deleteActivity(Activity a) {
 
 		int activity_id = a.getId(); 
 
@@ -404,7 +404,7 @@ public class Delete {
 		}
 	}
 	
-	public void deletePerson(Person p) {
+	public static void deletePerson(Person p) {
 		
 		int person_id = p.getId(); 
 

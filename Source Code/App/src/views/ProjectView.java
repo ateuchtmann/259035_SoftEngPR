@@ -24,10 +24,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-import db_delete.Delete;
-import db_load.LoadPerson;
-import db_save.SavePerson;
-import db_save.SaveProject;
 import models.*;
 import sounds.Sound;
 
@@ -203,7 +199,7 @@ public class ProjectView {
 						Sound.playSound(".\\sounds\\open.wav");
 						String name = fldInputName.getText();
 						prjct.setName(name);
-						new SaveProject().projectName(prjct, name);
+						db_save.SaveProject.projectName(prjct, name);
 						lblInputName.setText(name);
 						inptNameFrame.dispose();
 					}
@@ -344,10 +340,10 @@ public class ProjectView {
 								if(chechkboxList.get(p).isSelected()) {
 									
 								
-									new SavePerson().newPerson(p);
+									db_save.SavePerson.newPerson(p);
 									prjct.addPerson(p);
 									p.addProjekt(prjct);
-									new SaveProject().projectPerson(prjct, p);
+									db_save.SaveProject.projectPerson(prjct, p);
 									
 								
 									String firstInit = p.getFirstName().substring(0,1);
@@ -409,8 +405,8 @@ public class ProjectView {
 		JButton btnDelete = new JButton("X");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Delete d = new Delete();
-				d.deleteProject(prjct);
+				
+				db_delete.Delete.deleteProject(prjct);
 				
 				wait.getFrame().setVisible(true);
 				prjctFrame.setVisible(false);
@@ -433,7 +429,7 @@ public class ProjectView {
 				Sound.playSound(".\\sounds\\open.wav");
 				
 				prjct.setDescription(fldInputDescr.getText());
-				new SaveProject().projectDescription(prjct, fldInputDescr.getText());
+				db_save.SaveProject.projectDescription(prjct, fldInputDescr.getText());
 				// specifying the editing of a project (tasks etc.)
 				
 				JFrame taskGroupFrame = creTaskGroupMap.get(prjctPanel.hashCode()).getFrame();
@@ -447,7 +443,7 @@ public class ProjectView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				prjct.setDescription(fldInputDescr.getText());
-				new SaveProject().projectDescription(prjct, fldInputDescr.getText());
+				db_save.SaveProject.projectDescription(prjct, fldInputDescr.getText());
 			}
 		});
 	}//initialize

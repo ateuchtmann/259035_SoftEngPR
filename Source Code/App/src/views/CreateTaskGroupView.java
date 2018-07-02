@@ -4,10 +4,6 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import db_load.LoadTaskGroup;
-import db_save.SaveProject;
-import db_save.SaveTaskGroup;
-
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -97,10 +93,10 @@ s	 * Initialize the contents of the frame.
 		btnCreTaskGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				Sound.playSound(".\\sounds\\open.wav");
-				TaskGroup taskGroup = new TaskGroup(new LoadTaskGroup().newTaskGroupId());
-				new SaveTaskGroup().newTaskGroup(taskGroup);
+				TaskGroup taskGroup = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
+				db_save.SaveTaskGroup.newTaskGroup(taskGroup);
 				prjct.addTaskGroup(taskGroup);
-				new SaveProject().projectTaskGroup(prjct, taskGroup);
+				db_save.SaveProject.projectTaskGroup(prjct, taskGroup);
 				@SuppressWarnings("unused")
 				TaskGroupView taskGroupView = new TaskGroupView(creTskGroupFrame, taskGroup, xCoor, prjct);
 				xCoor = xCoor + 385;

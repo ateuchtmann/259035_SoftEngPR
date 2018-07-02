@@ -5,7 +5,6 @@ import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 import javax.swing.text.BadLocationException;
 
-import db_save.SavePerson;
 import models.*;
 import sounds.Sound;
 
@@ -115,11 +114,11 @@ public class PersonProjectView {
 				Sound.playSound(".\\sounds\\open.wav");
 				String firstName = fldFirstName.getText();
 				prs.setFirstName(firstName);
-				new SavePerson().personFirstname(prs, fldFirstName.getText());
+				db_save.SavePerson.personFirstname(prs, fldFirstName.getText());
 				String surName = fldSurName.getText();
 				PersonsView.setName(firstName + " " + surName);
 				prs.setLastname(surName);
-				new SavePerson().personLastname(prs, surName);
+				db_save.SavePerson.personLastname(prs, surName);
 				
 			}
 		});

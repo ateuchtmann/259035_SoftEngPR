@@ -14,10 +14,6 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-import db_delete.Delete;
-import db_load.LoadTask;
-import db_save.SaveTask;
-import db_save.SaveTaskGroup;
 import models.*;
 import sounds.Sound;
 
@@ -104,8 +100,9 @@ public class TaskGroupView {
 		JButton btnDelete = new JButton("X");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Delete d = new Delete();
-				d.deleteTaskGroup(tskGroup);
+				
+				db_delete.Delete.deleteTaskGroup(tskGroup);
+
 				tskGroupFrame.revalidate();
 				tskGroupFrame.repaint();
 
@@ -155,7 +152,7 @@ public class TaskGroupView {
 							String str = fldInputName.getText();
 							lblTskName.setText(str); 
 							tskGroup.setName(fldInputName.getText());
-							new SaveTaskGroup().taskGroupName(tskGroup, fldInputName.getText());
+							db_save.SaveTaskGroup.taskGroupName(tskGroup, fldInputName.getText());
 							inptNameFrame.dispose();
 						}
 					});
@@ -195,10 +192,10 @@ public class TaskGroupView {
 			public void actionPerformed(ActionEvent e) {
 			
 			Sound.playSound(".\\sounds\\open.wav");
-			   Task tsk = new Task(new LoadTask().newTaskId());
-			   new SaveTask().newTask(tsk);
+			   Task tsk = new Task(db_load.LoadTask.newTaskId());
+			   db_save.SaveTask.newTask(tsk);
 			   tskGroup.addTask(tsk);
-			   new SaveTaskGroup().taskGroupTask(tskGroup, tsk);
+			   db_save.SaveTaskGroup.taskGroupTask(tskGroup, tsk);
 			   @SuppressWarnings("unused")
 			   TaskView tskView = new TaskView(tskGroupFrame, tskPanel, yCoorList, tsk, prjct);
 			   

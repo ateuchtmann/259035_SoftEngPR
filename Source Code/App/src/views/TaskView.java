@@ -15,8 +15,6 @@ import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import db_delete.Delete;
-import db_save.SaveTask;
 import models.*;
 import sounds.Sound;
 
@@ -167,8 +165,7 @@ public class TaskView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Delete d = new Delete();
-				d.deleteTask(tsk);
+				db_delete.Delete.deleteTask(tsk);
 				tskFrame.revalidate();
 				tskFrame.repaint();
 				
@@ -207,13 +204,13 @@ public class TaskView {
 				
 				planTime = new Time ((int)planHour, (int)planMin);
 				tsk.setPlanTime(planTime); 
-				new SaveTask().taskPlanTime(tsk, planTime);
+				db_save.SaveTask.taskPlanTime(tsk, planTime);
 			
 				newCreateActView.updateTime();
 				JFrame createActFrame = newCreateActView.getFrame();
 				createActFrame.setVisible(true);
 				tsk.setName(fldTaskDescr.getText());
-				new SaveTask().taskName(tsk, fldTaskDescr.getText());
+				db_save.SaveTask.taskName(tsk, fldTaskDescr.getText());
 				
 				
 				//progress bar
@@ -241,7 +238,7 @@ public class TaskView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				tsk.setName(fldTaskDescr.getText());
-				new SaveTask().taskName(tsk, fldTaskDescr.getText());
+				db_save.SaveTask.taskName(tsk, fldTaskDescr.getText());
 				
 				//saving/parsing planedTime
 				CreateActivityView newCreateActView =  createActivityViewMap.get(manageActivities);
@@ -255,7 +252,7 @@ public class TaskView {
 				
 				planTime = new Time ((int)planHour, (int)planMin);
 				tsk.setPlanTime(planTime);
-				new SaveTask().taskPlanTime(tsk, planTime);
+				db_save.SaveTask.taskPlanTime(tsk, planTime);
 				
 			}
 			

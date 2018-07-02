@@ -4,13 +4,6 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.JFrame;
 
-import db_load.LoadActivity;
-import db_load.LoadPerson;
-import db_load.LoadProject;
-import db_load.LoadTask;
-import db_load.LoadTaskGroup;
-import db_save.SavePerson;
-import db_save.SaveProject;
 import models.*;
 
 import javax.swing.JButton;
@@ -81,10 +74,10 @@ public class CreatePersonsView {
 		btnPrsns.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Person newPrs = new Person(new LoadPerson().newPersonId());
+				Person newPrs = new Person(db_load.LoadPerson.newPersonId());
 				PersonsView prsnsView = new PersonsView(crePrsnsFrame, xCoor, yCoor, newPrs,wait);
 				prsListFiles.add(newPrs);
-				new SavePerson().newPerson(newPrs);
+				db_save.SavePerson.newPerson(newPrs);
 			
 		
 				if(yCoor < 950){
@@ -106,11 +99,11 @@ public class CreatePersonsView {
 		// loading
 		// data************************************************************
 				
-		prsListFiles = new LoadPerson().allPersons();
+		prsListFiles = db_load.LoadPerson.allPersons();
 		for (Person p : prsListFiles) {
 
-			p.setFirstName(new LoadPerson().personFirstname(p));
-			p.setLastname(new LoadPerson().personLastname(p));
+			p.setFirstName(db_load.LoadPerson.personFirstname(p));
+			p.setLastname(db_load.LoadPerson.personLastname(p));
 					
 			prsList.addPerson(p);
 		}//end for

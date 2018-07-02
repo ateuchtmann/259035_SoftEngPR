@@ -18,76 +18,76 @@ public class LoadProject {
 	// ******************************************************************
 	// complete ProjectList
 	
-	public ProjectList everythingFromProjects(){
+	public static ProjectList everythingFromProjects(){
 		
-		List<Project> projectListFiles = new LoadProject().allProjects();
+		List<Project> projectListFiles = db_load.LoadProject.allProjects();
 		ProjectList projectList = new ProjectList(); 
 		
 		for (Project p : projectListFiles) {
 
-			p.setName(new LoadProject().projectName(p));
-			p.setDescription(new LoadProject().projectDescription(p));
+			p.setName(db_load.LoadProject.projectName(p));
+			p.setDescription(db_load.LoadProject.projectDescription(p));
 			
 			projectList.addProject(p);
 
-			List<Person> ProjectPersons = new LoadProject().projectPersons(p);
+			List<Person> ProjectPersons = db_load.LoadProject.projectPersons(p);
 
 			for (Person person : ProjectPersons) {
 				
-				person.setFirstName(new LoadPerson().personFirstname(person));
-				person.setLastname(new LoadPerson().personLastname(person));
+				person.setFirstName(db_load.LoadPerson.personFirstname(person));
+				person.setLastname(db_load.LoadPerson.personLastname(person));
 				
 				p.addPerson(person);
 			}
 
-			List<TaskGroup> taskGroupList = new LoadProject().projectTaskGroups(p);
+			List<TaskGroup> taskGroupList = db_load.LoadProject.projectTaskGroups(p);
 
 			for (TaskGroup tg : taskGroupList) {
 
-				tg.setName(new LoadTaskGroup().taskGroupName(tg));
+				tg.setName(db_load.LoadTaskGroup.taskGroupName(tg));
 
-				List<Person> taskGroupPerson = new LoadTaskGroup().taskGroupPersons(tg);
+				List<Person> taskGroupPerson = db_load.LoadTaskGroup.taskGroupPersons(tg);
 
 				for (Person person : taskGroupPerson) {
 					
-					person.setFirstName(new LoadPerson().personFirstname(person));
-					person.setLastname(new LoadPerson().personLastname(person));
+					person.setFirstName(db_load.LoadPerson.personFirstname(person));
+					person.setLastname(db_load.LoadPerson.personLastname(person));
 					
 					tg.addPerson(person);
 				}
 				p.addTaskGroup(tg);
 
-				List<Task> taskList = new LoadTaskGroup().taskGroupTasks(tg);
+				List<Task> taskList = db_load.LoadTaskGroup.taskGroupTasks(tg);
 
 				for (Task task : taskList) {
 
-					task.setName(new LoadTask().taskName(task));
-					task.setPlanTime(new LoadTask().taskPlanTime(task));
+					task.setName(db_load.LoadTask.taskName(task));
+					task.setPlanTime(db_load.LoadTask.taskPlanTime(task));
 
-					List<Person> taskPerson = new LoadTask().taskPersons(task);
+					List<Person> taskPerson = db_load.LoadTask.taskPersons(task);
 
 					for (Person person : taskPerson) {
 						
-						person.setFirstName(new LoadPerson().personFirstname(person));
-						person.setLastname(new LoadPerson().personLastname(person));
+						person.setFirstName(db_load.LoadPerson.personFirstname(person));
+						person.setLastname(db_load.LoadPerson.personLastname(person));
 						
 						task.addPerson(person);
 					}
 
 					tg.addTask(task);
 
-					List<Activity> activityList =  new LoadTask().taskActivities(task);
+					List<Activity> activityList =  db_load.LoadTask.taskActivities(task);
 					
 					for (Activity activity : activityList) {
 
-						activity.setDescription(new LoadActivity().activityDescription(activity));
+						activity.setDescription(db_load.LoadActivity.activityDescription(activity));
 			
-						activity.setStart(new LoadActivity().activityStart(activity));
-						activity.setEnd(new LoadActivity().activityEnd(activity));
+						activity.setStart(db_load.LoadActivity.activityStart(activity));
+						activity.setEnd(db_load.LoadActivity.activityEnd(activity));
 						
-						Person per = new LoadActivity().activityPerson(activity); 
-						per.setFirstName(new LoadPerson().personFirstname(per));
-						per.setLastname(new LoadPerson().personLastname(per));
+						Person per = db_load.LoadActivity.activityPerson(activity); 
+						per.setFirstName(db_load.LoadPerson.personFirstname(per));
+						per.setLastname(db_load.LoadPerson.personLastname(per));
 						
 						activity.addPerson(per);
 						
@@ -103,7 +103,7 @@ public class LoadProject {
 	// ******************************************************************
 	// ProjectList
 
-	public List<Project> allProjects() {
+	public static List<Project> allProjects() {
 
 		List<Project> projectList = new ArrayList<>();
 
@@ -152,7 +152,7 @@ public class LoadProject {
 	// ******************************************************************
 	// Project
 
-	public int newProjectId() {
+	public static int newProjectId() {
 
 		int id = 0;
 
@@ -213,7 +213,7 @@ public class LoadProject {
 		return id;
 	}
 
-	public String projectName(Project p) {
+	public static String projectName(Project p) {
 
 		int id = p.getId();
 
@@ -258,7 +258,7 @@ public class LoadProject {
 		return name;
 	}
 
-	public String projectDescription(Project p) {
+	public static String projectDescription(Project p) {
 
 		int id = p.getId();
 		String description = "";
@@ -302,7 +302,7 @@ public class LoadProject {
 		return description;
 	}
 
-	public List<TaskGroup> projectTaskGroups(Project p) {
+	public static List<TaskGroup> projectTaskGroups(Project p) {
 
 		List<TaskGroup> list = new ArrayList<>();
 
@@ -348,7 +348,7 @@ public class LoadProject {
 		return list;
 	}
 
-	public List<Person> projectPersons(Project p) {
+	public static List<Person> projectPersons(Project p) {
 		List<Person> list = new ArrayList<>();
 
 		int id = p.getId();

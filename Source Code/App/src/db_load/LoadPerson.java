@@ -16,15 +16,15 @@ import models.TaskGroup;
 
 public class LoadPerson {
 
-	public PersonList everythingFromPerson(){
+	public static PersonList everythingFromPerson(){
 		
-		List<Person> personListFiles = new LoadPerson().allPersons();
+		List<Person> personListFiles = db_load.LoadPerson.allPersons();
 		PersonList personList = new PersonList(); 
 		
 		for (Person p : personListFiles) {
 
-			p.setFirstName(new LoadPerson().personFirstname(p));
-			p.setLastname(new LoadPerson().personLastname(p));
+			p.setFirstName(db_load.LoadPerson.personFirstname(p));
+			p.setLastname(db_load.LoadPerson.personLastname(p));
 			
 			personList.addPerson(p);
 			
@@ -33,7 +33,7 @@ public class LoadPerson {
 		return personList; 
 	}
 
-	public List<Person> allPersons() {
+	public static List<Person> allPersons() {
 
 		List<Person> personList = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class LoadPerson {
 		return personList;
 	}
 	
-	public int newPersonId() {
+	public static int newPersonId() {
 
 		int id = 0;
 
@@ -136,7 +136,7 @@ public class LoadPerson {
 		return id;
 	}
 
-	public String personFirstname(Person p) {
+	public static String personFirstname(Person p) {
 
 		int id = p.getId();
 		String firstname = "";
@@ -182,7 +182,7 @@ public class LoadPerson {
 		return firstname;
 	}
 
-	public String personLastname(Person p) {
+	public static String personLastname(Person p) {
 
 		int id = p.getId();
 		String lastname = "";
@@ -227,7 +227,7 @@ public class LoadPerson {
 		return lastname;
 	}
 
-	public List<Project> personProjects(Person p) {
+	public static List<Project> personProjects(Person p) {
 
 		List<Project> list = new ArrayList<>();
 
@@ -273,7 +273,7 @@ public class LoadPerson {
 		return list;
 	}
 
-	public List<TaskGroup> personTaskGroups(Person p) {
+	public static List<TaskGroup> personTaskGroups(Person p) {
 
 		List<TaskGroup> list = new ArrayList<>();
 
@@ -319,7 +319,7 @@ public class LoadPerson {
 		return list;
 	}
 
-	public List<Task> personTasks(Person p) {
+	public static List<Task> personTasks(Person p) {
 		List<Task> list = new ArrayList<>();
 
 		int id = p.getId();
@@ -365,7 +365,7 @@ public class LoadPerson {
 
 	}
 
-	public List<Activity> personActivities(Person p) {
+	public static List<Activity> personActivities(Person p) {
 		List<Activity> list = new ArrayList<>();
 
 		int id = p.getId();

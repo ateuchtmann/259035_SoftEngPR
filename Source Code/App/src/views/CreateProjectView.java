@@ -3,13 +3,6 @@ package views;
 import java.awt.Font;
 import javax.swing.*;
 
-import db_load.LoadActivity;
-import db_load.LoadPerson;
-import db_load.LoadProject;
-import db_load.LoadTask;
-import db_load.LoadTaskGroup;
-import db_save.SaveProject;
-
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -88,70 +81,70 @@ public class CreateProjectView {
 		// loading
 		// data************************************************************
 		
-		prjctListFiles = new LoadProject().allProjects();
+		prjctListFiles = db_load.LoadProject.allProjects();
 		for (Project p : prjctListFiles) {
 
-			p.setName(new LoadProject().projectName(p));
-			p.setDescription(new LoadProject().projectDescription(p));
+			p.setName(db_load.LoadProject.projectName(p));
+			p.setDescription(db_load.LoadProject.projectDescription(p));
 			prjctList.addProject(p);
 
-			List<Person> ProjectPersons = new LoadProject().projectPersons(p);
+			List<Person> ProjectPersons = db_load.LoadProject.projectPersons(p);
 
 			for (Person person : ProjectPersons) {
 				
-				person.setFirstName(new LoadPerson().personFirstname(person));
-				person.setLastname(new LoadPerson().personLastname(person));
+				person.setFirstName(db_load.LoadPerson.personFirstname(person));
+				person.setLastname(db_load.LoadPerson.personLastname(person));
 				
 				p.addPerson(person);
 			}
 
-			List<TaskGroup> taskGroupList = new LoadProject().projectTaskGroups(p);
+			List<TaskGroup> taskGroupList = db_load.LoadProject.projectTaskGroups(p);
 
 			for (TaskGroup tg : taskGroupList) {
 
-				tg.setName(new LoadTaskGroup().taskGroupName(tg));
+				tg.setName(db_load.LoadTaskGroup.taskGroupName(tg));
 
-				List<Person> taskGroupPerson = new LoadTaskGroup().taskGroupPersons(tg);
+				List<Person> taskGroupPerson = db_load.LoadTaskGroup.taskGroupPersons(tg);
 
 				for (Person person : taskGroupPerson) {
 					
-					person.setFirstName(new LoadPerson().personFirstname(person));
-					person.setLastname(new LoadPerson().personLastname(person));
+					person.setFirstName(db_load.LoadPerson.personFirstname(person));
+					person.setLastname(db_load.LoadPerson.personLastname(person));
 					
 					tg.addPerson(person);
 				}
 				p.addTaskGroup(tg);
 
-				List<Task> taskList = new LoadTaskGroup().taskGroupTasks(tg);
+				List<Task> taskList = db_load.LoadTaskGroup.taskGroupTasks(tg);
 
 				for (Task task : taskList) {
 
-					task.setName(new LoadTask().taskName(task));
-					task.setPlanTime(new LoadTask().taskPlanTime(task));
+					task.setName(db_load.LoadTask.taskName(task));
+					task.setPlanTime(db_load.LoadTask.taskPlanTime(task));
 
-					List<Person> taskPerson = new LoadTask().taskPersons(task);
+					List<Person> taskPerson = db_load.LoadTask.taskPersons(task);
 
 					for (Person person : taskPerson) {
 						
-						person.setFirstName(new LoadPerson().personFirstname(person));
-						person.setLastname(new LoadPerson().personLastname(person));
+						person.setFirstName(db_load.LoadPerson.personFirstname(person));
+						person.setLastname(db_load.LoadPerson.personLastname(person));
 						
 						task.addPerson(person);
 					}
 
 					tg.addTask(task);
 
-					List<Activity> activityList =  new LoadTask().taskActivities(task);
+					List<Activity> activityList =  db_load.LoadTask.taskActivities(task);
 					
 					for (Activity activity : activityList) {
 
-						activity.setDescription(new LoadActivity().activityDescription(activity));
-						activity.setStart(new LoadActivity().activityStart(activity));
-						activity.setEnd(new LoadActivity().activityEnd(activity));
+						activity.setDescription(db_load.LoadActivity.activityDescription(activity));
+						activity.setStart(db_load.LoadActivity.activityStart(activity));
+						activity.setEnd(db_load.LoadActivity.activityEnd(activity));
 						
-						Person per = new LoadActivity().activityPerson(activity); 
-						per.setFirstName(new LoadPerson().personFirstname(per));
-						per.setLastname(new LoadPerson().personLastname(per));
+						Person per = db_load.LoadActivity.activityPerson(activity); 
+						per.setFirstName(db_load.LoadPerson.personFirstname(per));
+						per.setLastname(db_load.LoadPerson.personLastname(per));
 						
 						activity.addPerson(per);
 						
@@ -186,8 +179,8 @@ public class CreateProjectView {
 			public void actionPerformed(ActionEvent arg0) {
 
 				Sound.playSound(".\\sounds\\open.wav");
-				Project prjct = new Project(new LoadProject().newProjectId());
-				new SaveProject().newProject(prjct);
+				Project prjct = new Project(db_load.LoadProject.newProjectId());
+				db_save.SaveProject.newProject(prjct);
 				prjctList.addProject(prjct);
 				ProjectView projektView = new ProjectView(crePrjctFrame, prjct, xCoor, yCoor,wait);
 				prjctViewList.add(projektView);

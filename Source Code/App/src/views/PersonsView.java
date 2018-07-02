@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
-import db_delete.Delete;
 import models.*;
 
 import javax.swing.JLabel;
@@ -97,9 +96,8 @@ public class PersonsView {
 		JButton btnDelete = new JButton("X");
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Delete d = new Delete();
-				d.deletePerson(prs);
 				
+				db_delete.Delete.deletePerson(prs);		
 				
 				wait.getFrame().setVisible(true);
 				prsnFrame.setVisible(false);

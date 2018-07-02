@@ -10,7 +10,7 @@ import models.Time;
 
 public class SaveActivity {
 
-	public void newActivity (Activity a){
+	public static void newActivity (Activity a){
 
 		int id = a.getId(); 
 
@@ -69,7 +69,7 @@ public class SaveActivity {
 		}
 	}
 
-	public void activityPerson (Activity a, Person p){
+	public static void activityPerson (Activity a, Person p){
 
 		int id = a.getId(); 
 		int person_id = p.getId();
@@ -148,7 +148,7 @@ public class SaveActivity {
 		}
 	}
 
-	public void activityEnd (Activity a, Time t){
+	public static void activityEnd (Activity a, Time t){
 
 		int id = a.getId(); 
 		int endHour = t.getHour();
@@ -189,7 +189,7 @@ public class SaveActivity {
 		}
 	}
 	
-	public void activityDescription (Activity a, String description){
+	public static void activityDescription (Activity a, String description){
 		
 		int id = a.getId(); 
 

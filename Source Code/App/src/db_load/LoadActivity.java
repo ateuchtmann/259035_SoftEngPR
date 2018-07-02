@@ -11,7 +11,7 @@ import models.Time;
 
 public class LoadActivity {
 
-	public int newActivityId() {
+	public static int newActivityId() {
 
 		int id = 0;
 
@@ -69,7 +69,7 @@ public class LoadActivity {
 		return id;
 	}
 
-	public Time activityStart(Activity a) {
+	public static Time activityStart(Activity a) {
 
 		int id = a.getId();
 		int hour = 0;
@@ -119,7 +119,7 @@ public class LoadActivity {
 		return start;
 	}
 
-	public Time activityEnd(Activity a) {
+	public static Time activityEnd(Activity a) {
 
 		int id = a.getId();
 		int hour = 0;
@@ -169,7 +169,7 @@ public class LoadActivity {
 		return end;
 	}
 
-	public String activityDescription(Activity a) {
+	public static String activityDescription(Activity a) {
 
 		int id = a.getId();
 		String description = "";
@@ -213,7 +213,7 @@ public class LoadActivity {
 		return description;
 	}
 
-	public Person activityPerson(Activity a) {
+	public static Person activityPerson(Activity a) {
 
 		int id = a.getId();
 		int person = 0;

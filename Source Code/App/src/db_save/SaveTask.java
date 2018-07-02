@@ -12,7 +12,7 @@ import models.Time;
 
 public class SaveTask {
 	
-	public void newTask (Task t){
+	public static void newTask (Task t){
 
 		int id = t.getId();
 
@@ -63,7 +63,7 @@ public class SaveTask {
 		}
 	}
 
-	public void taskName (Task t, String name){
+	public static void taskName (Task t, String name){
 
 		int id = t.getId();
 		PreparedStatement stmtUpdateDescription = null;
@@ -100,7 +100,7 @@ public class SaveTask {
 		}
 	}
 
-	public void taskPerson (Task t, Person p){
+	public static void taskPerson (Task t, Person p){
 	
 
 		int id = 0;
@@ -158,7 +158,7 @@ public class SaveTask {
 		}
 	}
 
-	public void taskPlanTime (Task t, Time planTime){
+	public static void taskPlanTime (Task t, Time planTime){
 
 		int id = t.getId(); 
 		int planHour = planTime.getHour();
@@ -199,7 +199,7 @@ public class SaveTask {
 		}
 	}
 
-	public void taskActivity (Task t, Activity a){
+	public static void taskActivity (Task t, Activity a){
 
 		int id = t.getId();
 		int activity_id = a.getId();

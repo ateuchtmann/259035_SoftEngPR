@@ -10,10 +10,6 @@ import sounds.Sound;
 
 import javax.swing.JLabel;
 
-import db_load.LoadActivity;
-import db_save.SaveActivity;
-import db_save.SaveTask;
-
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -192,10 +188,10 @@ public class CreateActivityView {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Sound.playSound(".\\sounds\\open.wav");
-				Activity act = new Activity(new LoadActivity().newActivityId());
-				new SaveActivity().newActivity(act);
+				Activity act = new Activity(db_load.LoadActivity.newActivityId());
+				db_save.SaveActivity.newActivity(act);
 				task.addActivity(act);
-				new SaveTask().taskActivity(task, act);
+				db_save.SaveTask.taskActivity(task, act);
 				ActivityView actView = new ActivityView(createActFrame, act, yCoor,prjct, btnAct.hashCode(), currClass);
 				actViewList.add(actView);
 				

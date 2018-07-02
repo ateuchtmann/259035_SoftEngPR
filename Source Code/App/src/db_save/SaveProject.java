@@ -11,7 +11,7 @@ import models.TaskGroup;
 
 public class SaveProject {
 
-	public void newProject(Project p) {
+	public static void newProject(Project p) {
 
 		int id = 0;
 
@@ -93,7 +93,7 @@ public class SaveProject {
 
 	}
 
-	public void projectName(Project p, String name) {
+	public static void projectName(Project p, String name) {
 
 		int id = p.getId();
 
@@ -132,7 +132,7 @@ public class SaveProject {
 		}
 	}
 
-	public void projectDescription(Project p, String description) {
+	public static void projectDescription(Project p, String description) {
 
 		int id = p.getId();
 
@@ -170,7 +170,7 @@ public class SaveProject {
 		}
 	}
 
-	public void projectTaskGroup(Project p, TaskGroup a) {
+	public static void projectTaskGroup(Project p, TaskGroup a) {
 
 		int p_id = p.getId();
 		int a_id = a.getId();
@@ -208,7 +208,7 @@ public class SaveProject {
 		}
 	}
 
-	public void projectPerson(Project p, Person per) {
+	public static void projectPerson(Project p, Person per) {
 
 		int id = 0;
 		int project_id = p.getId();
