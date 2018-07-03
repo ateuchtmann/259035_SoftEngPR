@@ -73,7 +73,7 @@ public class CreateProjectView {
 		// Start-Button to make new Project
 
 		JButton btnCrePrjct = new JButton("Neues Projekt erstellen");
-		btnCrePrjct.setBounds(767, 13, 362, 57);
+		btnCrePrjct.setBounds(596, 16, 362, 30);
 
 		btnCrePrjct.setFont(new Font("Sitka Small", Font.PLAIN, 20));
 		btnCrePrjct.setBackground(SystemColor.LIGHT_GRAY);
@@ -208,12 +208,60 @@ public class CreateProjectView {
 				CreatePersonsView personsView = new CreatePersonsView();
 			}
 		});
-		btnPerson.setBounds(1163, 16, 362, 57);		
+		btnPerson.setBounds(1005, 16, 362, 30);		
 		btnPerson.setFont(new Font("Sitka Small", Font.PLAIN, 20));
 		btnPerson.setBackground(SystemColor.LIGHT_GRAY);
 		
 		
 		crePrjctFrame.getContentPane().add(btnPerson);
+		JButton btnPrjctReport = new JButton("Projektreport");
+		btnPrjctReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				CreateProjectReportView cv = new CreateProjectReportView();
+			
+			}
+		});
+		
+		btnPrjctReport.setBounds(1176, 62, 362, 30);
+		
+		btnPrjctReport.setFont(new Font("Sitka Small", Font.PLAIN, 20));
+		btnPrjctReport.setBackground(SystemColor.LIGHT_GRAY);
+		
+		crePrjctFrame.getContentPane().add(btnPrjctReport);
+		
+		JButton btnTaskGroupReport = new JButton("Aufgabenbereichsreport");
+		btnTaskGroupReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CreateTaskGroupReportView ct = new CreateTaskGroupReportView();
+				
+				
+			}
+		});
+		
+		btnTaskGroupReport.setFont(new Font("Sitka Small", Font.PLAIN, 20));
+		btnTaskGroupReport.setBackground(SystemColor.LIGHT_GRAY);
+		
+		btnTaskGroupReport.setBounds(361, 62, 362, 30);
+		crePrjctFrame.getContentPane().add(btnTaskGroupReport);
+		
+		JButton btnPersonReport = new JButton("PersonenReport");
+		btnPersonReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				CreatePersonenReportView cr = new CreatePersonenReportView();
+				
+				
+			}
+		});
+		btnPersonReport.setBounds(760, 62, 362, 30);
+		crePrjctFrame.getContentPane().add(btnPersonReport);
+		btnPersonReport.setFont(new Font("Sitka Small", Font.PLAIN, 20));
+		btnPersonReport.setBackground(SystemColor.LIGHT_GRAY);
+
+		
+		
+		
+		
 		
 		crePrjctFrame.addWindowListener(new WindowAdapter() {
 			@Override
