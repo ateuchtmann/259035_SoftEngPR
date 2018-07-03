@@ -35,12 +35,14 @@ public class TaskGroupTest {
 	@Test
 	public void T131CreateTaskGroup() {
 		TaskGroup testTaskGroup = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup);
 		taskGroupList.add(testTaskGroup); 
 	}
 
 	@Test
 	public void T132setTaskGroupName() {
 		TaskGroup testTaskGroup = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup);
 		taskGroupList.add(testTaskGroup); 
 		testTaskGroup.setName("TestAufgabenbereich");
 		db_save.SaveTaskGroup.taskGroupName(testTaskGroup, "TestAufgabenbereich");
@@ -49,6 +51,7 @@ public class TaskGroupTest {
 	@Test
 	public void T133renameTaskGroupName() {
 		TaskGroup testTaskGroup = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup);
 		taskGroupList.add(testTaskGroup); 
 		testTaskGroup.setName("TestAufgabenbereich");
 		db_save.SaveTaskGroup.taskGroupName(testTaskGroup, "TestAufgabenbereich");
@@ -61,6 +64,10 @@ public class TaskGroupTest {
 		TaskGroup testTaskGroup1 = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
 		TaskGroup testTaskGroup2 = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
 		TaskGroup testTaskGroup3 = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
+		
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup1);
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup2);
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup3);
 	
 		taskGroupList.add(testTaskGroup1);
 		taskGroupList.add(testTaskGroup2);
@@ -70,6 +77,7 @@ public class TaskGroupTest {
 	@Test
 	public void T141addTaskGroupToProject() {
 		TaskGroup testTaskGroup = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup);
 		taskGroupList.add(testTaskGroup); 
 
 		testProject.addTaskGroup(testTaskGroup);
@@ -80,6 +88,10 @@ public class TaskGroupTest {
 		TaskGroup testTaskGroup1 = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
 		TaskGroup testTaskGroup2 = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
 		TaskGroup testTaskGroup3 = new TaskGroup(db_load.LoadTaskGroup.newTaskGroupId());
+		
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup1);
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup2);
+		db_save.SaveTaskGroup.newTaskGroup(testTaskGroup3);
 		
 		taskGroupList.add(testTaskGroup1);
 		taskGroupList.add(testTaskGroup2);
