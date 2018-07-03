@@ -42,5 +42,66 @@ public class ProjectList {
 	public void deleteProject(Project p) {
 		this.projectList.remove(p);
 	}
+	
+	
+	public String getPerson(Person p){
+		String s = " ";
+		
+		for(Project project : projectList){
+			for(Person person : project.getPersonList()){
+				if(p.getLastName().equals(person.getLastName())){
+					s = s + project.getName();
+				}
+				
+			}
+		}
+		
+		return s;
+	}
+	
+	
+
+	public String getActivity(Person p){
+		String s = " ";
+		
+		for(Project project : projectList){
+			for(TaskGroup taskGroup : project.getTaskGroups()){
+				for(Task task : taskGroup.getTaskList()){
+					for(Activity act : task.getActivities()){
+						
+						if(p.getLastName().equals(act.getPerson().getLastName())){
+							s = s + act.getDescription();
+						}
+					}
+				}
+			}
+		}
+		return s;
+	}
+	
+	
+	public double getPersonTime(Person p){
+		double s = 0;
+		
+		for(Project project : projectList){
+			for(TaskGroup taskGroup : project.getTaskGroups()){
+				for(Task task : taskGroup.getTaskList()){
+					for(Activity act : task.getActivities()){
+						
+						if(p.getLastName().equals(act.getPerson().getLastName())){
+							s = s + act.getTimeHour();
+						}
+					}
+				}
+			}
+		}
+		return s;
+	}
+	
+	
+	
+	
+	
+	
 
 }

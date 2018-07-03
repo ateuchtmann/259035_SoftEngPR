@@ -67,5 +67,9 @@ public class TaskGroup {
 	public void deleteTask(Task a) {
 		this.taskList.remove(a);
 	}
+	
+	public void setTaskList(List<Task> t){
+		taskList = t;
+	}
 
 }
