@@ -14,9 +14,6 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
-import db_load.LoadTask;
-import db_save.SaveTask;
-import db_save.SaveTaskGroup;
 import models.*;
 import sounds.Sound;
 
@@ -30,7 +27,7 @@ import sounds.Sound;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -42,48 +39,46 @@ import sounds.Sound;
 
 public class TaskGroupView {
 
-	private static JFrame taskGroupFrame;
+	private static JFrame tskGroupFrame;
 	private static Map<Integer, Integer> yCoorList = new HashMap<>();
-	private TaskGroup taskGroup;
+	private TaskGroup tskGroup;
 	private int x;
-	private Project project;
-	private JLabel labelTaskName;
+	private static Project prjct;
+	private JLabel lblTskName;
 	
-	public TaskGroupView(JFrame frame, TaskGroup taskGroup, int x, Project project) {
-		TaskGroupView.taskGroupFrame = frame;
-		this.taskGroup = taskGroup; 
+	public TaskGroupView(JFrame frame, TaskGroup tskGroup, int x, Project prjct) {
+		TaskGroupView.tskGroupFrame = frame;
+		this.tskGroup = tskGroup; 
 		this.x = x;
-		this.project = project;
+		this.prjct = prjct;
 		initialize();
 	}
 	
 	// setter
 	
 	public void setName(String n) {
-		labelTaskName.setText(n);
+		lblTskName.setText(n);
 	}
 	
 	
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
 		
-		JPanel taskPanel = new JPanel();    
-		yCoorList.put(taskPanel.hashCode(), 100); 
+		JPanel tskPanel = new JPanel();    
+		yCoorList.put(tskPanel.hashCode(), 100); 
 		
-		taskPanel.setBackground(Color.LIGHT_GRAY);
-		taskPanel.setBounds(x, 120, 355, 780);
-		taskGroupFrame.getContentPane().add(taskPanel);
-		Border projectBorder = new MatteBorder(2,2,3,2,Color.BLACK);
-		taskPanel.setBorder(projectBorder);
-		taskPanel.setLayout(null);
+		tskPanel.setBackground(Color.LIGHT_GRAY);
+		tskPanel.setBounds(x, 120, 355, 780);
+		tskGroupFrame.getContentPane().add(tskPanel);
+		Border prjctBorder = new MatteBorder(2,2,3,2,Color.BLACK);
+		tskPanel.setBorder(prjctBorder);
+		tskPanel.setLayout(null);
 		
-		labelTaskName = new JLabel("Default Name");
-		labelTaskName.setBackground(new Color(255, 255, 255));
-		labelTaskName.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		labelTaskName.setBounds(12, 13, 294, 34);
-		taskPanel.add(labelTaskName);
+		lblTskName = new JLabel("Default Name");
+		lblTskName.setBackground(new Color(255, 255, 255));
+		lblTskName.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblTskName.setBounds(12, 13, 200, 34);
+		tskPanel.add(lblTskName);
 		
 		 // new panel behind name (for better view)
 		
@@ -94,102 +89,128 @@ public class TaskGroupView {
 		Border panelNameBorder = new MatteBorder(3,3,4,3,Color.DARK_GRAY);
 		namePanel.setBorder(panelNameBorder);
 		namePanel.setLayout(null);
+		tskPanel.add(namePanel);
 		
-		JButton buttonEditName = new JButton("..."); //button for editing name of project
-		buttonEditName.setBounds(318, 19, 25, 25);
-	
+		JButton btnEdditName = new JButton("...");
+		btnEdditName.setBounds(251, 22, 39, 25);
+		namePanel.add(btnEdditName);
 		
-		// specifying the action after pressing the button for name edit
-		
-		buttonEditName.addActionListener(new ActionListener() {
+		JButton btnDelete = new JButton("X");
+		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Sound.playSound(".\\sounds\\open.wav");
-				//creating second frame (window) to make input when editing name of project
-				
-				JFrame inputNameFrame = new JFrame(); 
-		
-				JPanel inputNamePanel = new JPanel();
-				inputNamePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-				inputNamePanel.setLayout(null);
-				
-				//adding "set name:" next to input
-				
-				JLabel labelSetName = new JLabel("Name: ");
-				labelSetName.setFont(new Font("Verdana", Font.PLAIN, 15));
-				labelSetName.setBounds(31, 30, 113, 25);
-				inputNamePanel.add(labelSetName);
-				
-				//adding area to input the name
-				
-				JTextArea fieldInputName = new JTextArea();
-				fieldInputName.setBounds(114, 30, 320, 25);
-				fieldInputName.setFont(new Font("Verdana", Font.PLAIN, 15));
-				inputNamePanel.add(fieldInputName);
-				
-				//creating button to save name and close second frame 
-	
-				JButton buttonOk = new JButton("ok");
-				buttonOk.setBounds(450, 30, 57, 35);
-				inputNamePanel.add(buttonOk);
-				buttonOk.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Sound.playSound(".\\sounds\\open.wav");
-						String str = fieldInputName.getText();
-						labelTaskName.setText(str); 
-						taskGroup.setName(fieldInputName.getText());
-						new SaveTaskGroup().taskGroupName(taskGroup, fieldInputName.getText());
-						inputNameFrame.dispose();
-					}
-				});
+				db_delete.Delete.deleteTaskGroup(tskGroup);
+				TaskGroupView.prjct.deleteTaskGroup(tskGroup);
 				
 				
-				// specifying second frame attributes
+
+				WaitView.waitFrame.setVisible(true);
+				tskGroupFrame.setVisible(false);
+				CreateTaskGroupView cr = new CreateTaskGroupView(prjct);
+				tskGroupFrame = cr.getFrame();
+				ProjectView.creTaskGroupMap.put(prjct.getId(), cr);
+				tskGroupFrame.setVisible(true);	
+
 				
-				inputNameFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
-				inputNameFrame.setBounds(700, 400, 550,169);
-				inputNameFrame.getContentPane().setBackground(new Color(102, 153, 204));
-				inputNameFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				inputNameFrame.getContentPane().add(inputNamePanel);
-				inputNameFrame.setVisible(true);
-		        
-				
+
 			}
-		}); //buttonEditName
+		});
+		btnDelete.setForeground(Color.RED);
+		btnDelete.setBounds(299, 21, 41, 26);
+		namePanel.add(btnDelete);
 		
-		taskPanel.add(buttonEditName);
-		taskPanel.add(namePanel);
+			
+			// specifying the action after pressing the button for name edit
+			
+			btnEdditName.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					Sound.playSound(".\\sounds\\open.wav");
+					//creating second frame (window) to make input when editing name of project
+					
+					JFrame inptNameFrame = new JFrame(); 
+			
+					JPanel inptNamePanel = new JPanel();
+					inptNamePanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+					inptNamePanel.setLayout(null);
+					
+					//adding "set name:" next to input
+					
+					JLabel lblSetName = new JLabel("Name: ");
+					lblSetName.setFont(new Font("Verdana", Font.PLAIN, 15));
+					lblSetName.setBounds(31, 30, 113, 25);
+					inptNamePanel.add(lblSetName);
+					
+					//adding area to input the name
+					
+					JTextArea fldInputName = new JTextArea();
+					fldInputName.setBounds(114, 30, 320, 25);
+					fldInputName.setFont(new Font("Verdana", Font.PLAIN, 15));
+					inptNamePanel.add(fldInputName);
+					
+					//creating button to save name and close second frame 
+		
+					JButton btnOk = new JButton("ok");
+					btnOk.setBounds(450, 30, 57, 35);
+					inptNamePanel.add(btnOk);
+					btnOk.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							Sound.playSound(".\\sounds\\open.wav");
+							String str = fldInputName.getText();
+							lblTskName.setText(str); 
+							tskGroup.setName(fldInputName.getText());
+							db_save.SaveTaskGroup.taskGroupName(tskGroup, fldInputName.getText());
+							inptNameFrame.dispose();
+						}
+					});
+					
+					
+					// specifying second frame attributes
+					
+					inptNameFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+					inptNameFrame.setBounds(700, 400, 550,169);
+					inptNameFrame.getContentPane().setBackground(new Color(102, 153, 204));
+					inptNameFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					inptNameFrame.getContentPane().add(inptNamePanel);
+					inptNameFrame.setVisible(true);
+			        
+					
+				}
+			});
 		
 		
 		// loading data*********************************************************************
 		// creating views for existing tasks
 		
 		
-		for(Task t: taskGroup.getTaskList()) {
-			TaskView taskView = new TaskView(taskGroupFrame, taskPanel, yCoorList, t , project, t.getName(), t.getPlanTime());
-			taskView.setPlanTime(t.getPlanTime());
+		for(Task t: tskGroup.getTaskList()) {
+			TaskView tskView = new TaskView(tskGroupFrame, tskPanel, yCoorList, t , prjct, t.getName(), t.getPlanTime());
+			tskView.setPlanTime(t.getPlanTime());
+			double currTime1 = tskView.getActView().getTime();
+			double planTime1 = t.getPlanTime().getHour() + t.getPlanTime().getMin();
+			int diff = (int) ((currTime1 / planTime1) * 100);
+			tskView.setTaskProgress(diff); 
 		}// loading data ************************************************************
 		
 		
-		JButton buttonTaskAdd = new JButton("Aufgabe Hinzuf\u00FCgen");
-		buttonTaskAdd.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		buttonTaskAdd.addActionListener(new ActionListener() {
+		JButton btnTaskAdd = new JButton("Aufgabe Hinzuf\u00FCgen");
+		btnTaskAdd.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnTaskAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
 			Sound.playSound(".\\sounds\\open.wav");
-			   Task task = new Task(new LoadTask().newTaskId());
-			   new SaveTask().newTask(task);
-			   taskGroup.addTask(task);
-			   new SaveTaskGroup().taskGroupTask(taskGroup, task);
+			   Task tsk = new Task(db_load.LoadTask.newTaskId());
+			   db_save.SaveTask.newTask(tsk);
+			   tskGroup.addTask(tsk);
+			   db_save.SaveTaskGroup.taskGroupTask(tskGroup, tsk);
 			   @SuppressWarnings("unused")
-			   TaskView taskView = new TaskView(taskGroupFrame, taskPanel, yCoorList, task, project);
+			   TaskView tskView = new TaskView(tskGroupFrame, tskPanel, yCoorList, tsk, prjct, tskGroup);
 			   
 			}
 		});
-		buttonTaskAdd.setBounds(105, 62, 155, 25);
-		taskPanel.add(buttonTaskAdd);
+		btnTaskAdd.setBounds(105, 62, 155, 25);
+		tskPanel.add(btnTaskAdd);
 	
 
 	}
-
 }

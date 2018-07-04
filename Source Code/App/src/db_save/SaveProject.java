@@ -1,7 +1,7 @@
 package db_save;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,19 +10,29 @@ import models.Person;
 import models.Project;
 import models.TaskGroup;
 
+/* Classname: SaveProject
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
+
 public class SaveProject {
 
-	public void newProject(Project p) {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void newProject(Project p) {
 
 		int id = 0;
 
@@ -41,7 +51,7 @@ public class SaveProject {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 
@@ -104,17 +114,7 @@ public class SaveProject {
 
 	}
 
-	public void projectName(Project p, String name) {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void projectName(Project p, String name) {
 
 		int id = p.getId();
 
@@ -124,7 +124,7 @@ public class SaveProject {
 		Connection connection = null;
 
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateName = connection.prepareStatement(queryUpdateName);
 
 			stmtUpdateName.executeUpdate();
@@ -153,17 +153,7 @@ public class SaveProject {
 		}
 	}
 
-	public void projectDescription(Project p, String description) {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void projectDescription(Project p, String description) {
 
 		int id = p.getId();
 
@@ -172,7 +162,7 @@ public class SaveProject {
 				+ "'";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateDescription = connection.prepareStatement(queryUpdateDescription);
 
 			stmtUpdateDescription.executeUpdate();
@@ -201,17 +191,7 @@ public class SaveProject {
 		}
 	}
 
-	public void projectTaskGroup(Project p, TaskGroup a) {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void projectTaskGroup(Project p, TaskGroup a) {
 
 		int p_id = p.getId();
 		int a_id = a.getId();
@@ -220,7 +200,7 @@ public class SaveProject {
 		String queryUpdateProjectId = "UPDATE taskgroup SET id_project = '" + p_id + "' WHERE id = '" + a_id + "'";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtUpdateProjectId = connection.prepareStatement(queryUpdateProjectId);
 			stmtUpdateProjectId.executeUpdate();
@@ -249,17 +229,7 @@ public class SaveProject {
 		}
 	}
 
-	public void projectPerson(Project p, Person per) {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void projectPerson(Project p, Person per) {
 
 		int id = 0;
 		int project_id = p.getId();
@@ -273,7 +243,7 @@ public class SaveProject {
 		String queryInsertUserProject = "INSERT INTO user_project (id, id_user, id_project) VALUES (?, ?, ?)";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 			rs = stmtID.executeQuery();

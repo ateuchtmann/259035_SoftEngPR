@@ -10,7 +10,7 @@ package models;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 22.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.20
 *
 * Copyright notice

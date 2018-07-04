@@ -1,7 +1,7 @@
 package db_load;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,80 +15,100 @@ import models.ProjectList;
 import models.Task;
 import models.TaskGroup;
 
+/* Classname: LoadProject
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
+
 public class LoadProject {
 	// ******************************************************************
 	// complete ProjectList
 	
-	public ProjectList everythingFromProjects(){
+	public static ProjectList everythingFromProjects(){
 		
-		List<Project> projectListFiles = new LoadProject().allProjects();
+		List<Project> projectListFiles = db_load.LoadProject.allProjects();
 		ProjectList projectList = new ProjectList(); 
 		
 		for (Project p : projectListFiles) {
 
-			p.setName(new LoadProject().projectName(p));
-			p.setDescription(new LoadProject().projectDescription(p));
+			p.setName(db_load.LoadProject.projectName(p));
+			p.setDescription(db_load.LoadProject.projectDescription(p));
 			
 			projectList.addProject(p);
 
-			List<Person> ProjectPersons = new LoadProject().projectPersons(p);
+			List<Person> ProjectPersons = db_load.LoadProject.projectPersons(p);
 
 			for (Person person : ProjectPersons) {
 				
-				person.setFirstName(new LoadPerson().personFirstname(person));
-				person.setLastname(new LoadPerson().personLastname(person));
+				person.setFirstName(db_load.LoadPerson.personFirstname(person));
+				person.setLastname(db_load.LoadPerson.personLastname(person));
 				
 				p.addPerson(person);
 			}
 
-			List<TaskGroup> taskGroupList = new LoadProject().projectTaskGroups(p);
+			List<TaskGroup> taskGroupList = db_load.LoadProject.projectTaskGroups(p);
 
 			for (TaskGroup tg : taskGroupList) {
 
-				tg.setName(new LoadTaskGroup().taskGroupName(tg));
+				tg.setName(db_load.LoadTaskGroup.taskGroupName(tg));
 
-				List<Person> taskGroupPerson = new LoadTaskGroup().taskGroupPersons(tg);
+				List<Person> taskGroupPerson = db_load.LoadTaskGroup.taskGroupPersons(tg);
 
 				for (Person person : taskGroupPerson) {
 					
-					person.setFirstName(new LoadPerson().personFirstname(person));
-					person.setLastname(new LoadPerson().personLastname(person));
+					person.setFirstName(db_load.LoadPerson.personFirstname(person));
+					person.setLastname(db_load.LoadPerson.personLastname(person));
 					
 					tg.addPerson(person);
 				}
 				p.addTaskGroup(tg);
 
-				List<Task> taskList = new LoadTaskGroup().taskGroupTasks(tg);
+				List<Task> taskList = db_load.LoadTaskGroup.taskGroupTasks(tg);
 
 				for (Task task : taskList) {
 
-					task.setName(new LoadTask().taskName(task));
-					task.setPlanTime(new LoadTask().taskPlanTime(task));
+					task.setName(db_load.LoadTask.taskName(task));
+					task.setPlanTime(db_load.LoadTask.taskPlanTime(task));
 
-					List<Person> taskPerson = new LoadTask().taskPersons(task);
+					List<Person> taskPerson = db_load.LoadTask.taskPersons(task);
 
 					for (Person person : taskPerson) {
 						
-						person.setFirstName(new LoadPerson().personFirstname(person));
-						person.setLastname(new LoadPerson().personLastname(person));
+						person.setFirstName(db_load.LoadPerson.personFirstname(person));
+						person.setLastname(db_load.LoadPerson.personLastname(person));
 						
 						task.addPerson(person);
 					}
 
 					tg.addTask(task);
 
-					List<Activity> activityList =  new LoadTask().taskActivities(task);
+					List<Activity> activityList =  db_load.LoadTask.taskActivities(task);
 					
 					for (Activity activity : activityList) {
 
-						activity.setDescription(new LoadActivity().activityDescription(activity));
+						activity.setDescription(db_load.LoadActivity.activityDescription(activity));
 			
-						activity.setStart(new LoadActivity().activityStart(activity));
-						activity.setEnd(new LoadActivity().activityEnd(activity));
+						activity.setStart(db_load.LoadActivity.activityStart(activity));
+						activity.setEnd(db_load.LoadActivity.activityEnd(activity));
 						
-						Person per = new LoadActivity().activityPerson(activity); 
-						per.setFirstName(new LoadPerson().personFirstname(per));
-						per.setLastname(new LoadPerson().personLastname(per));
+						Person per = db_load.LoadActivity.activityPerson(activity); 
+						per.setFirstName(db_load.LoadPerson.personFirstname(per));
+						per.setLastname(db_load.LoadPerson.personLastname(per));
 						
 						activity.addPerson(per);
 						
@@ -104,19 +124,9 @@ public class LoadProject {
 	// ******************************************************************
 	// ProjectList
 
-	public List<Project> allProjects() {
+	public static List<Project> allProjects() {
 
 		List<Project> projectList = new ArrayList<>();
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int projectId;
 		PreparedStatement stmtSelectProjects = null;
@@ -126,7 +136,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectProjects = connection.prepareStatement(querySelectProjects);
 			rs = stmtSelectProjects.executeQuery();
 
@@ -163,17 +173,7 @@ public class LoadProject {
 	// ******************************************************************
 	// Project
 
-	public int newProjectId() {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static int newProjectId() {
 
 		int id = 0;
 
@@ -186,7 +186,7 @@ public class LoadProject {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtID = connection.prepareStatement(queryID);
 
@@ -234,16 +234,7 @@ public class LoadProject {
 		return id;
 	}
 
-	public String projectName(Project p) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static String projectName(Project p) {
 
 		int id = p.getId();
 
@@ -255,7 +246,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectName = connection.prepareStatement(querySelectName);
 			rs = stmtSelectName.executeQuery();
 
@@ -288,17 +279,7 @@ public class LoadProject {
 		return name;
 	}
 
-	public String projectDescription(Project p) {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static String projectDescription(Project p) {
 
 		int id = p.getId();
 		String description = "";
@@ -309,7 +290,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectDescription = connection.prepareStatement(querySelectDescription);
 			rs = stmtSelectDescription.executeQuery();
 
@@ -342,20 +323,11 @@ public class LoadProject {
 		return description;
 	}
 
-	public List<TaskGroup> projectTaskGroups(Project p) {
+	public static List<TaskGroup> projectTaskGroups(Project p) {
 
 		List<TaskGroup> list = new ArrayList<>();
 
 		int id = p.getId();
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		PreparedStatement stmtSelectID = null;
 		String querySelectID = "SELECT ID FROM taskgroup WHERE id_project = '" + id + "'";
@@ -364,7 +336,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectID = connection.prepareStatement(querySelectID);
 			rs = stmtSelectID.executeQuery();
 
@@ -397,18 +369,8 @@ public class LoadProject {
 		return list;
 	}
 
-	public List<Person> projectPersons(Project p) {
+	public static List<Person> projectPersons(Project p) {
 		List<Person> list = new ArrayList<>();
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		int id = p.getId();
 
@@ -419,7 +381,7 @@ public class LoadProject {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtSelectID = connection.prepareStatement(querySelectID);
 			rs = stmtSelectID.executeQuery();
 

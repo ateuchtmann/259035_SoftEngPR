@@ -1,29 +1,40 @@
 package db_delete;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import models.Activity;
+import models.Person;
 import models.Project;
 import models.Task;
 import models.TaskGroup;
 
+/* Classname: Delete
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
+
 public class Delete {
 
-	public void deleteProject(Project p) {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void deleteProject(Project p) {
 
 		int project_id = p.getId();
 		int taskgroup_id = 0;
@@ -65,7 +76,7 @@ public class Delete {
 		
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtSelectTaskGroupIds = connection.prepareStatement(querySelectsTaskGroupIds);
 			rsTaskGroup = stmtSelectTaskGroupIds.executeQuery();
@@ -182,17 +193,7 @@ public class Delete {
 		}
 	}
 
-	public void deleteTaskGroup(TaskGroup a) {
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void deleteTaskGroup(TaskGroup a) {
 
 		int taskgroup_id = a.getId();
 		int task_id = 0;
@@ -223,7 +224,7 @@ public class Delete {
 		
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			querySelectTaskIds = "SELECT id FROM tasks WHERE id_taskgroup ='" + taskgroup_id + "'";
 			stmtSelectTaskIds = connection.prepareStatement(querySelectTaskIds);
@@ -312,16 +313,7 @@ public class Delete {
 		}
 	}
 
-	public void deleteTask(Task a) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void deleteTask(Task a) {
 
 		int task_id = a.getId();
 
@@ -339,7 +331,7 @@ public class Delete {
 		
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtDeleteFromActivities = connection.prepareStatement(queryDeleteFromActivities);
 			stmtDeleteFromActivities.executeUpdate();
@@ -390,16 +382,7 @@ public class Delete {
 		}
 	}
 
-	public void deleteActivity(Activity a) {
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void deleteActivity(Activity a) {
 
 		int activity_id = a.getId(); 
 
@@ -411,7 +394,7 @@ public class Delete {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtDeleteFromActivities = connection.prepareStatement(queryDeleteFromActivities);
 			stmtDeleteFromActivities.executeUpdate();
@@ -439,6 +422,107 @@ public class Delete {
 				}
 				stmtDeleteFromActivities = null;
 			}
+		}
+	}
+	
+	public static void deletePerson(Person p) {
+		
+		int person_id = p.getId(); 
+
+		Connection connection = null;
+
+		PreparedStatement stmtDeleteFromUsers = null;
+		String queryDeleteFromUsers = "DELETE FROM users WHERE id = '" + person_id + "'";
+
+		PreparedStatement stmtUpdateActivity = null;
+		String queryUpdateActivity = "UPDATE activity SET id_user = -1 WHERE id_user = '" + person_id + "'";
+
+		PreparedStatement stmtUpdateUserProject = null;
+		String queryUpdateUserProject = "UPDATE user_project SET id_user = -1 WHERE id_user = '" + person_id + "'";
+
+		PreparedStatement stmtUpdateUserTask = null;
+		String queryUpdateUserTask = "UPDATE user_task SET id_user = -1 WHERE id_user = '" + person_id + "'";
+		
+		PreparedStatement stmtUpdateUserTaskgroup = null;
+		String queryUpdateUserTaskgroup = "UPDATE user_taskgroup SET id_user = -1 WHERE id_user = '" + person_id + "'";
+		
+		try {
+
+			connection = db_connection.Database.getConnection();
+
+			stmtDeleteFromUsers = connection.prepareStatement(queryDeleteFromUsers);
+			stmtDeleteFromUsers.executeUpdate();
+			
+			stmtUpdateActivity = connection.prepareStatement(queryUpdateActivity);
+			stmtUpdateActivity.executeUpdate();
+			
+			stmtUpdateUserProject = connection.prepareStatement(queryUpdateUserProject);
+			stmtUpdateUserProject.executeUpdate();
+			
+			stmtUpdateUserTask = connection.prepareStatement(queryUpdateUserTask);
+			stmtUpdateUserTask.executeUpdate();
+			
+			stmtUpdateUserTaskgroup = connection.prepareStatement(queryUpdateUserTaskgroup);
+			stmtUpdateUserTaskgroup.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					;
+				}
+				connection = null;
+			}
+			
+			if (stmtDeleteFromUsers != null) {
+				try {
+					stmtDeleteFromUsers.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtDeleteFromUsers = null;
+			}
+			
+			if (stmtUpdateActivity != null) {
+				try {
+					stmtUpdateActivity.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtUpdateActivity = null;
+			}
+			
+			if (stmtUpdateUserProject != null) {
+				try {
+					stmtUpdateUserProject.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtUpdateUserProject = null;
+			}
+			
+			if (stmtUpdateUserTask != null) {
+				try {
+					stmtUpdateUserTask.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtUpdateUserTask = null;
+			}
+			
+			if (stmtUpdateUserTaskgroup != null) {
+				try {
+					stmtUpdateUserTaskgroup.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtUpdateUserTaskgroup = null;
+			}	
 		}
 	}
 

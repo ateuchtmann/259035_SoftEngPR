@@ -20,7 +20,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
-import db_save.SaveActivity;
 import models.*;
 import sounds.Sound;
 
@@ -34,7 +33,7 @@ import sounds.Sound;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -46,32 +45,35 @@ import sounds.Sound;
 
 public class ActivityView {
 
-	private static JFrame activityFrame;
-	private Project project;
-	private CreateActivityView createActivityView;
-	private Activity activity;
-	private JTextField fieldDescription;
-	private JTextField fieldStart;
-	private JTextField fieldEnd;
-	private JTextField fieldTime;
-	private int buttonId;
-	private int ybuttonRadioPersonCoor = 15;
+	private static JFrame actFrame;
+	private Project prjct;
+	private CreateActivityView creActView;
+	private Activity act;
+	private JTextField fldDescr;
+	private JTextField fldStart;
+	private JTextField fldEnd;
+	private JTextField fldTime;
+	private int btnId;
+	private int ybtnRadioPrsCoor = 15;
 	private int yCoor;
 	private Time start;
 	private Time end;
 	private double time;
-	private ButtonGroup buttonGroup;
-	private JLabel labelPersonInit;
-	private List<Person> listPerson;
+	private ButtonGroup btnGroup;
+	private JLabel lblPrsInit;
+	private List<Person> listPrs;
+	private static Task task; 
 
-	public ActivityView(JFrame frame, Activity activity, int y, Project project, int id, CreateActivityView cav) {
-		ActivityView.activityFrame = frame;
-		this.activity = activity; 
+	public ActivityView(JFrame frame, Activity act, int y, Project prjct, int id, CreateActivityView cav, Task task) {
+		ActivityView.actFrame = frame;
+		this.act = act; 
 		this.yCoor = y;
-		this.project = project;
-		this.buttonId = id;
-		this.createActivityView = cav;
+		this.prjct = prjct;
+		this.btnId = id;
+		this.creActView = cav;
+		this.task = task; 
 		initialize();
+		
 	}
 	
 	// getter
@@ -80,188 +82,188 @@ public class ActivityView {
 	}
 	
 	public int getId() {
-		return buttonId;
+		return btnId;
 	}
 	
 	// setter
 	
-	public void setDescription(String description) {
-		this.fieldDescription.setText(description);
+	public void setDescr(String d) {
+		this.fldDescr.setText(d);
 	}
 	
 	public void setStart(String s) {
-		this.fieldStart.setText(s);
+		this.fldStart.setText(s);
 	}
 	
 	public void setEnd(String e) {
-		this.fieldEnd.setText(e);
+		this.fldEnd.setText(e);
 	}
 	
 	public void setDiff(String d) {
-		this.fieldTime.setText(d);
+		this.fldTime.setText(d);
 	}
 	
 	public void setTimeNum(double t) {
 		this.time = t;
 	}
 	
-	public void setlabelPerson(Person person) {
+	public void setlblPrs(Person p) {
 		
 		String fInit = "";
 		String sInit = "";
-		if(!person.getFirstName().equals("") && !person.getLastName().equals("")){
-		fInit = person.getFirstName().substring(0, 1);
-		sInit = person.getLastName().substring(0, 1);
-		labelPersonInit.setText("  " + fInit + "." + sInit + ".");
+		if(!p.getFirstName().equals("") && !p.getLastName().equals("")){
+		fInit = p.getFirstName().substring(0, 1);
+		sInit = p.getLastName().substring(0, 1);
+		lblPrsInit.setText("  " + fInit + "." + sInit + ".");
 		}else {
-		labelPersonInit.setText("");
+		lblPrsInit.setText("");
 		}
 		
 		
 	}
 	
-	Map<Person, JRadioButton> buttonRadioPersonList = new HashMap<>();
-	Set<JLabel> labelList = new LinkedHashSet<>();
+	Map<Person, JRadioButton> btnRadioPrsList = new HashMap<>();
+	Set<JLabel> lblList = new LinkedHashSet<>();
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		
-		JPanel activityPanel = new JPanel();
-		activityPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.DARK_GRAY));
-		activityPanel.setBackground(SystemColor.LIGHT_GRAY);
+		JPanel actPanel = new JPanel();
+		actPanel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.DARK_GRAY));
+		actPanel.setBackground(SystemColor.LIGHT_GRAY);
 		
-		activityPanel.setBounds(40, yCoor, 1794, 51);
-		activityFrame.getContentPane().add(activityPanel);
-		activityPanel.setLayout(null);
+		actPanel.setBounds(40, yCoor, 1794, 51);
+		actFrame.getContentPane().add(actPanel);
+		actPanel.setLayout(null);
 		
-		labelPersonInit = new JLabel();
-		labelPersonInit.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		labelPersonInit.setForeground(SystemColor.windowText);
-		labelPersonInit.setBounds(998, 8, 57, 35);
-		labelPersonInit.setBorder(new MatteBorder(2,2,2,2,Color.BLACK));
-		activityPanel.add(labelPersonInit);
+		lblPrsInit = new JLabel();
+		lblPrsInit.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblPrsInit.setForeground(SystemColor.windowText);
+		lblPrsInit.setBounds(998, 8, 57, 35);
+		lblPrsInit.setBorder(new MatteBorder(2,2,2,2,Color.BLACK));
+		actPanel.add(lblPrsInit);
 		
-		fieldDescription = new JTextField();
-		fieldDescription.setBounds(133, 13, 733, 26);
-		activityPanel.add(fieldDescription);
-		fieldDescription.setColumns(10);
+		fldDescr = new JTextField();
+		fldDescr.setBounds(133, 13, 733, 26);
+		actPanel.add(fldDescr);
+		fldDescr.setColumns(10);
 		
-		JLabel labelDescription = new JLabel("Beschreibung:");
-		labelDescription.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		labelDescription.setBounds(15, 16, 146, 20);
-		activityPanel.add(labelDescription);
+		JLabel lblDescr = new JLabel("Beschreibung:");
+		lblDescr.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDescr.setBounds(15, 16, 146, 20);
+		actPanel.add(lblDescr);
 		
-		JLabel labelStart = new JLabel("Start:");
-		labelStart.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		labelStart.setBounds(1412, 16, 50, 20);
-		activityPanel.add(labelStart);
+		JLabel lblStart = new JLabel("Start:");
+		lblStart.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblStart.setBounds(1258, 16, 50, 20);
+		actPanel.add(lblStart);
 		
-		JLabel labelEnd = new JLabel("End:");
-		labelEnd.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		labelEnd.setBounds(1512, 16, 33, 20);
-		activityPanel.add(labelEnd);
+		JLabel lblEnd = new JLabel("End:");
+		lblEnd.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblEnd.setBounds(1373, 16, 33, 20);
+		actPanel.add(lblEnd);
 		
-		fieldStart = new JTextField("00.00");
-		fieldStart.setBounds(1453, 13, 50, 26);
-		activityPanel.add(fieldStart);
-		fieldStart.setColumns(10);
+		fldStart = new JTextField("00.00");
+		fldStart.setBounds(1308, 13, 50, 26);
+		actPanel.add(fldStart);
+		fldStart.setColumns(10);
 		
-		fieldEnd = new JTextField("00.00");
-		fieldEnd.setBounds(1549, 13, 50, 26);
-		activityPanel.add(fieldEnd);
-		fieldEnd.setColumns(10);
+		fldEnd = new JTextField("00.00");
+		fldEnd.setBounds(1410, 13, 50, 26);
+		actPanel.add(fldEnd);
+		fldEnd.setColumns(10);
 		
-		JLabel labelHour = new JLabel("Stunden:");
-		labelHour.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		labelHour.setBounds(1614, 16, 69, 20);
-		activityPanel.add(labelHour);
+		JLabel lblHour = new JLabel("Stunden:");
+		lblHour.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblHour.setBounds(1475, 16, 69, 20);
+		actPanel.add(lblHour);
 		
-		fieldTime = new JTextField("00.00");
-		fieldTime.setBounds(1680, 13, 42, 26);
-		activityPanel.add(fieldTime);
-		fieldTime.setColumns(10);
+		fldTime = new JTextField("00.00");
+		fldTime.setBounds(1535, 13, 50, 26);
+		actPanel.add(fldTime);
+		fldTime.setColumns(10);
 		
 		
-		JLabel labelH = new JLabel(" h");
-		labelH.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		labelH.setBounds(1720, 16, 21, 20);
-		activityPanel.add(labelH);
+		JLabel lblh = new JLabel(" h");
+		lblh.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblh.setBounds(1593, 16, 21, 20);
+		actPanel.add(lblh);
 		
-		JButton buttonPerson = new JButton("Person +");
-		buttonPerson.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		buttonPerson.addActionListener(new ActionListener() {
+		JButton btnPrs = new JButton("Person +");
+		btnPrs.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnPrs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Sound.playSound(".\\sounds\\open.wav");
-				listPerson = project.getPersonList();
-				buttonGroup = new ButtonGroup();
-				JFrame personFrame = new JFrame();
-				personFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				personFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
-				personFrame.setBounds(700, 400, 350,360);
-				personFrame.getContentPane().setBackground(Color.LIGHT_GRAY);
-				personFrame.getContentPane().setLayout(null);
-				personFrame.setVisible(true);
+				listPrs = prjct.getPersonList();
+				btnGroup = new ButtonGroup();
+				JFrame prsFrame = new JFrame();
+				prsFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				prsFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
+				prsFrame.setBounds(700, 400, 350,360);
+				prsFrame.getContentPane().setBackground(Color.LIGHT_GRAY);
+				prsFrame.getContentPane().setLayout(null);
+				prsFrame.setVisible(true);
 				
 				//adding radio buttons
-				for(Person person : listPerson){
+				for(Person p : listPrs){
 					
-					JRadioButton buttonRadioPerson = new JRadioButton(person.getLastName());
-					buttonRadioPerson.setBackground(Color.LIGHT_GRAY);
-					buttonRadioPerson.setFont(new Font("Verdana", Font.PLAIN, 18));
-					buttonRadioPerson.setBounds(11, ybuttonRadioPersonCoor, 139, 29);
-					buttonGroup.add(buttonRadioPerson);
-					personFrame.getContentPane().add(buttonRadioPerson);
-					buttonRadioPersonList.put(person, buttonRadioPerson);
-					ybuttonRadioPersonCoor += 40;	
+					JRadioButton btnRadioPrs = new JRadioButton(p.getLastName());
+					btnRadioPrs.setBackground(Color.LIGHT_GRAY);
+					btnRadioPrs.setFont(new Font("Verdana", Font.PLAIN, 18));
+					btnRadioPrs.setBounds(11, ybtnRadioPrsCoor, 139, 29);
+					btnGroup.add(btnRadioPrs);
+					prsFrame.getContentPane().add(btnRadioPrs);
+					btnRadioPrsList.put(p, btnRadioPrs);
+					ybtnRadioPrsCoor += 40;	
 				}
-				ybuttonRadioPersonCoor = 30;	
+				ybtnRadioPrsCoor = 30;	
 				
-				JButton buttonSave = new JButton("ok");
-				buttonSave.setFont(new Font("Tahoma", Font.PLAIN, 15));
-				buttonSave.addActionListener(new ActionListener(){
+				JButton btnSave = new JButton("ok");
+				btnSave.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				btnSave.addActionListener(new ActionListener(){
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						
 						Sound.playSound(".\\sounds\\open.wav");
 						//removing existing labels
-						for(JLabel j : labelList){
-							activityPanel.remove(j);
+						for(JLabel j : lblList){
+							actPanel.remove(j);
 						}
 						
 						//listing all persons and checking if selected
-						for(Person person: listPerson){
-							if(buttonRadioPersonList.containsKey(person)){
-								if(buttonRadioPersonList.get(person).isSelected()) {
-									activity.addPerson(person);
-									new SaveActivity().activityPerson(activity, person);
-									person.addActivity(activity);
-									String firstInit = person.getFirstName().substring(0,1);
-									String scndInit = person.getLastName().substring(0,1);
-									labelPersonInit.setText("  "+ firstInit + "." + scndInit + ".");
-									labelList.add(labelPersonInit);
-									activityPanel.add(labelPersonInit);
-									activityPanel.repaint();
+						for(Person p: listPrs){
+							if(btnRadioPrsList.containsKey(p)){
+								if(btnRadioPrsList.get(p).isSelected()) {
+									act.addPerson(p);
+									db_save.SaveActivity.activityPerson(act, p);
+									p.addActivity(act);
+									String firstInit = p.getFirstName().substring(0,1);
+									String scndInit = p.getLastName().substring(0,1);
+									lblPrsInit.setText("  "+ firstInit + "." + scndInit + ".");
+									lblList.add(lblPrsInit);
+									actPanel.add(lblPrsInit);
+									actPanel.repaint();
 								}			
 							}	
 						}//end for
-						personFrame.dispose();
+						prsFrame.dispose();
 					}		
 				});
 			
-				buttonSave.setBounds(141, 275, 59, 25);
-				personFrame.getContentPane().add(buttonSave);
+				btnSave.setBounds(141, 275, 59, 25);
+				prsFrame.getContentPane().add(btnSave);
 
 			}
 		});
-		buttonPerson.setBounds(881, 12, 105, 29);
-		activityPanel.add(buttonPerson);
+		btnPrs.setBounds(881, 12, 105, 29);
+		actPanel.add(btnPrs);
 		
-		JButton buttonOk = new JButton("ok");
-		buttonOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		buttonOk.addActionListener(new ActionListener() {
+		JButton btnOk = new JButton("ok");
+		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Sound.playSound(".\\sounds\\open.wav");
@@ -270,29 +272,29 @@ public class ActivityView {
 				double sumStartTime=0;
 				double sumEndTime=0;
 				
-				activity.setDescription(fieldDescription.getText());
-				new SaveActivity().activityDescription(activity, fieldDescription.getText());
+				act.setDescription(fldDescr.getText());
+				db_save.SaveActivity.activityDescription(act, fldDescr.getText());
 				
 				// Read starttime
-				String hour = fieldStart.getText().substring(0,2) ;
-				String min = fieldStart.getText().substring(3,5);
+				String hour = fldStart.getText().substring(0,2) ;
+				String min = fldStart.getText().substring(3,5);
 				
 				hours = Integer.parseInt(hour);
 				minutes = Integer.parseInt(min);
 				start = new Time(hours, minutes);
-				activity.setStart(start);
-				new SaveActivity().activityStart(activity, start);
+				act.setStart(start);
+				db_save.SaveActivity.activityStart(act, start);
 				sumStartTime=hours+(minutes/60.0);
 				
 				// Read endtime
-				String h1 = fieldEnd.getText().substring(0,2);
-				String m1 = fieldEnd.getText().substring(3,5);
+				String h1 = fldEnd.getText().substring(0,2);
+				String m1 = fldEnd.getText().substring(3,5);
 				
 				hours = Integer.parseInt(h1);
 				minutes = Integer.parseInt(m1);
 				end = new Time(hours, minutes);
-				activity.setEnd(end);
-				new SaveActivity().activityEnd(activity, end);
+				act.setEnd(end);
+				db_save.SaveActivity.activityEnd(act, end);
 				sumEndTime=hours+(minutes/60.0);
 
 				// Calc difference (end-start)
@@ -307,23 +309,25 @@ public class ActivityView {
 				String diffTimeString = (int)diffHours+":"+(int)diffMinutes;
 				
 				//Output difference
-				fieldTime.setText(diffTimeString);
+				fldTime.setText(diffTimeString);
 				
-				createActivityView.updateTime();				
+				creActView.updateTime();				
 				
 			}
 		});
-		buttonOk.setBounds(1739, 12, 50, 29);
-		activityPanel.add(buttonOk);	
+		btnOk.setBounds(1628, 13, 50, 29);
+		actPanel.add(btnOk);	
+		
+	
 		
 		// save when closing window 
-				activityFrame.addWindowListener(new WindowAdapter() {
+				actFrame.addWindowListener(new WindowAdapter() {
 					@Override
 					public void windowClosing(WindowEvent e) {
 						
 						//save description
-						activity.setDescription(fieldDescription.getText());
-						new SaveActivity().activityDescription(activity, fieldDescription.getText());
+						act.setDescription(fldDescr.getText());
+						db_save.SaveActivity.activityDescription(act, fldDescr.getText());
 					}
 				});
 		

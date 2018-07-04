@@ -67,7 +67,18 @@ public class Activity {
 	public void setDescription(String description) {
 		this.description = description; 
 	}
-
+	
+	public double getTimeHour(){
+		double time = 0;
+		double sumStartTime = start.getHour() + (start.getMin()/60);
+		double sumEndTime= end.getHour() + (end.getMin()/60);
+		time = sumEndTime - sumStartTime; 
+		return time;
+		
+	}
+	
+	
+	
 }
 
 	

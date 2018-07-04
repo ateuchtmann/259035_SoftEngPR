@@ -13,7 +13,7 @@ import java.util.List;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 22.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.20
 *
 * Copyright notice
@@ -96,5 +96,100 @@ public class Project {
 		}
 		return taskList; 
 	}
+	
+	public int getTaskGroupNr(){
+		int count = 0;
+		
+		for(TaskGroup g : this.taskGroupList){
+			count ++;
+		}
+		return count;
+	}
+	
+	public int getTaskNr(){
+		int count = 0;
+		
+		for(TaskGroup g : this.taskGroupList){
+			for(Task a: g.getTaskList()){
+				count ++;
+			}
+		}
+		return count;
+	}
+	
+	public int getPersonNr(){
+		int count = 0;
+		for(Person p : personList){
+			count ++;
+		}
+		return count;
+	}
+	
+	
+	public double getProjectTime(){
+		double time = 0;
+		
+		for(TaskGroup g : this.taskGroupList){
+			for(Task a: g.getTaskList()){
+				for(Activity act : a.getActivities()){
+					time = time + act.getTimeHour();
+				}
+			
+			}
+		}
+		return time;
+	}
+	
+	public double getTaskGroupTime(TaskGroup t){
+		double time = 0;
+		
+		
+			for(Task a: t.getTaskList()){
+				for(Activity act : a.getActivities()){
+					time = time + act.getTimeHour();
+				}
+			
+			}
+		
+		return time;
+	}
+	
+	
+	
+	
+	
+	
+	
+	public double getPlanTime(){
+		double time = 0;
+		double planTimeHour;
+		
+		for(TaskGroup g : this.taskGroupList){
+			for(Task a: g.getTaskList()){
+				planTimeHour = a.getPlanTime().getHour() + (a.getPlanTime().getMin()/60);
+				time = time + planTimeHour;
+			
+			}
+		}
+		return time;
+	}
+	
+	
+	public double getPlanTime(TaskGroup t){
+		double time = 0;
+		double planTimeHour;
+		
+			for(Task a: t.getTaskList()){
+				planTimeHour = a.getPlanTime().getHour() + (a.getPlanTime().getMin()/60);
+				time = time + planTimeHour;
+			
+			}
+		
+		return time;
+	}
+	
+	
+	
+	
 	
 }

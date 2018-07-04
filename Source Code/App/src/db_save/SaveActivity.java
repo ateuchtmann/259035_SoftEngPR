@@ -1,7 +1,7 @@
 package db_save;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -9,19 +9,29 @@ import models.Activity;
 import models.Person;
 import models.Time;
 
+/* Classname: SaveActivity
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
+
 public class SaveActivity {
 
-	public void newActivity (Activity a){
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
-		
+	public static void newActivity (Activity a){
 
 		int id = a.getId(); 
 
@@ -41,7 +51,7 @@ public class SaveActivity {
 
 		try {
 
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			insertActivity = connection.prepareStatement(queryInsertActivity);
 
@@ -80,16 +90,7 @@ public class SaveActivity {
 		}
 	}
 
-	public void activityPerson (Activity a, Person p){
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void activityPerson (Activity a, Person p){
 
 		int id = a.getId(); 
 		int person_id = p.getId();
@@ -98,7 +99,7 @@ public class SaveActivity {
 		String queryInsertUsertask = "Update activity SET id_user = '" + person_id + "' WHERE id = '" + id + "' ";
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 
 			stmtUpdateUser = connection.prepareStatement(queryInsertUsertask);
 			stmtUpdateUser.executeUpdate();
@@ -127,16 +128,7 @@ public class SaveActivity {
 		}
 	}
 
-	public void activityStart (Activity a, Time t){
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void activityStart (Activity a, Time t){
 
 		int id = a.getId(); 
 		int startHour = t.getHour();
@@ -148,7 +140,7 @@ public class SaveActivity {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateStart = connection.prepareStatement(queryUpdateName);
 
 			stmtUpdateStart.executeUpdate();
@@ -177,17 +169,7 @@ public class SaveActivity {
 		}
 	}
 
-	public void activityEnd (Activity a, Time t){
-
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
+	public static void activityEnd (Activity a, Time t){
 
 		int id = a.getId(); 
 		int endHour = t.getHour();
@@ -199,7 +181,7 @@ public class SaveActivity {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateStart = connection.prepareStatement(queryUpdateName);
 
 			stmtUpdateStart.executeUpdate();
@@ -228,19 +210,9 @@ public class SaveActivity {
 		}
 	}
 	
-	public void activityDescription (Activity a, String description){
+	public static void activityDescription (Activity a, String description){
 		
 		int id = a.getId(); 
-		
-		/*
-		String url = "jdbc:mysql://e42776-mysql.services.easyname.eu:3306/u48005db20?useSSL=false";
-		String username = "u48005db20";
-		String password = "prse2018";
-		*/
-		
-		String url =db_connection.Database.getUrl();
-		String username = db_connection.Database.getUsername();
-		String password = db_connection.Database.getPassword();
 
 		PreparedStatement stmtUpdateDescription = null;
 		String queryUpdateDescription = "UPDATE activity SET description = '" + description + "' WHERE id = '" + id
@@ -248,7 +220,7 @@ public class SaveActivity {
 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url, username, password);
+			connection = db_connection.Database.getConnection();
 			stmtUpdateDescription = connection.prepareStatement(queryUpdateDescription);
 
 			stmtUpdateDescription.executeUpdate();
