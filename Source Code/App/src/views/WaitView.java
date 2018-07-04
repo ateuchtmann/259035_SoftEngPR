@@ -1,15 +1,34 @@
 package views;
 
 import java.awt.Color;
+
 import java.awt.Font;
 
 import javax.swing.JFrame;
 
-import models.PersonList;
+/* Classname: CreatePersonenReportView
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
 
 public class WaitView {
 	
-	JFrame waitFrame;
+	static JFrame waitFrame;
 	
 	
 	public WaitView() {

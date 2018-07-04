@@ -1,6 +1,8 @@
 package views;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,6 +15,27 @@ import models.TaskGroup;
 
 import java.awt.Font;
 import java.util.List;
+
+
+/* Classname: CreateTaskGroupReportView
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
 
 public class CreateTaskGroupReportView {
 
@@ -34,6 +57,7 @@ public class CreateTaskGroupReportView {
 		creTaskGroupReportFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		creTaskGroupReportFrame.getContentPane().setLayout(null);
 		creTaskGroupReportFrame.setVisible(true);
+		creTaskGroupReportFrame.getContentPane().setBackground(new Color(255, 255, 255));
 		
 		JLabel lblTaskGroupReport = new JLabel("Aufgabenbereichsreport:");
 		lblTaskGroupReport.setFont(new Font("Tahoma", Font.BOLD, 25));
@@ -91,7 +115,7 @@ public class CreateTaskGroupReportView {
 				
 				// calculating correct position of every project
 							if (yCoor < 661) {
-								yCoor = yCoor + 350;
+								yCoor = yCoor + 315;
 							} else {
 								yCoor = 101;
 								xCoor = xCoor + 650;

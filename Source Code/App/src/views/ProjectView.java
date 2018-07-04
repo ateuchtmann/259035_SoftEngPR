@@ -37,7 +37,7 @@ import sounds.Sound;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -109,14 +109,6 @@ public class ProjectView {
 
 	private void initialize() {
 		
-		/*
-		try (Connection connection = DriverManager.getConnection(url, username, password)) {
-		    System.out.println("Database connected!");
-		} catch (SQLException e) {
-		    throw new IllegalStateException("Cannot connect the database!", e);
-		}
-		*/
-		
 		createTaskGroupView = new CreateTaskGroupView(prjct);  
 		
 		JPanel prjctPanel = new JPanel();           //panel for the project 
@@ -128,7 +120,7 @@ public class ProjectView {
 		prjctFrame.getContentPane().setFont(new Font("Verdana", Font.PLAIN, 21));
 		prjctFrame.repaint();	
 		
-		creTaskGroupMap.put(prjctPanel.hashCode(), createTaskGroupView);  
+		creTaskGroupMap.put(prjct.getId(), createTaskGroupView);  
 		
 		JLabel lblName = new JLabel("Name:");   // adding indication of "name"
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -435,7 +427,7 @@ public class ProjectView {
 				db_save.SaveProject.projectDescription(prjct, fldInputDescr.getText());
 				// specifying the editing of a project (tasks etc.)
 				
-				JFrame taskGroupFrame = creTaskGroupMap.get(prjctPanel.hashCode()).getFrame();
+				JFrame taskGroupFrame = creTaskGroupMap.get(prjct.getId()).getFrame();
 				taskGroupFrame.setVisible(true);
 				
 			}

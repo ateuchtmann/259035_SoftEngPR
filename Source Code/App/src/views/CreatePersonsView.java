@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 19.06.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -75,9 +75,10 @@ public class CreatePersonsView {
 			public void actionPerformed(ActionEvent e) {
 				
 				Person newPrs = new Person(db_load.LoadPerson.newPersonId());
-				PersonsView prsnsView = new PersonsView(crePrsnsFrame, xCoor, yCoor, newPrs,wait, prsList);
+				PersonsView prsnsView = new PersonsView(crePrsnsFrame, xCoor, yCoor, newPrs ,wait, prsList);
 				prsListFiles.add(newPrs);
 				db_save.SavePerson.newPerson(newPrs);
+				
 			
 		
 				if(yCoor < 950){
@@ -119,6 +120,7 @@ public class CreatePersonsView {
 				
 		for (Person p : prsListFiles) {
 			PersonsView pv = new PersonsView(crePrsnsFrame, xCoor, yCoor, p,wait, prsList);
+			
 			pv.setName(p.getFirstName() + " " + p.getLastName());
 	
 			

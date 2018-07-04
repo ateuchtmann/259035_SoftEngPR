@@ -1,15 +1,36 @@
 package views;
 
 import java.awt.Color;
-import java.awt.EventQueue;
+
+
 import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JTextPane;
+
 import javax.swing.border.MatteBorder;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+
+/* Classname: ProjectReportView
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
 
 public class ProjectReportView {
 
@@ -82,7 +103,7 @@ public class ProjectReportView {
 		prjctReportPanel.add(lblName);
 		
 		lblProjektname = new JLabel(" ");
-		lblProjektname.setBounds(99, 16, 112, 20);
+		lblProjektname.setBounds(99, 16, 179, 20);
 		prjctReportPanel.add(lblProjektname);
 		
 		JLabel lblTaskGroup = new JLabel("Aufgabenbereiche: ");
@@ -91,7 +112,7 @@ public class ProjectReportView {
 		prjctReportPanel.add(lblTaskGroup);
 		
 		lblTaskGroupNr = new JLabel(" ");
-		lblTaskGroupNr.setBounds(189, 52, 29, 20);
+		lblTaskGroupNr.setBounds(189, 52, 60, 20);
 		prjctReportPanel.add(lblTaskGroupNr);
 		
 		JLabel lblTask = new JLabel("Aufgabe: ");
@@ -100,7 +121,7 @@ public class ProjectReportView {
 		prjctReportPanel.add(lblTask);
 		
 		lblTaskNr = new JLabel(" ");
-		lblTaskNr.setBounds(125, 88, 69, 20);
+		lblTaskNr.setBounds(125, 88, 93, 20);
 		prjctReportPanel.add(lblTaskNr);
 		
 		JLabel lblPersons = new JLabel("beteiligte Personen:");
@@ -109,7 +130,7 @@ public class ProjectReportView {
 		prjctReportPanel.add(lblPersons);
 		
 		lblPrsnNr = new JLabel(" ");
-		lblPrsnNr.setBounds(180, 129, 69, 20);
+		lblPrsnNr.setBounds(180, 129, 134, 20);
 		prjctReportPanel.add(lblPrsnNr);
 		
 		JLabel label = new JLabel("--------------------------------------------------------------------");
@@ -118,20 +139,20 @@ public class ProjectReportView {
 		
 		JLabel lblCurrTime = new JLabel("Istzeit des Projekts");
 		lblCurrTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCurrTime.setBounds(15, 189, 150, 20);
+		lblCurrTime.setBounds(15, 189, 161, 20);
 		prjctReportPanel.add(lblCurrTime);
 		
 		lblCurrentTime = new JLabel(" ");
-		lblCurrentTime.setBounds(180, 189, 69, 20);
+		lblCurrentTime.setBounds(180, 189, 80, 20);
 		prjctReportPanel.add(lblCurrentTime);
 		
 		JLabel lblPlanT = new JLabel("Sollzeit des Projekts");
 		lblPlanT.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPlanT.setBounds(15, 225, 150, 20);
+		lblPlanT.setBounds(15, 225, 203, 20);
 		prjctReportPanel.add(lblPlanT);
 		
 		lblPlanTime = new JLabel(" ");
-		lblPlanTime.setBounds(180, 225, 69, 20);
+		lblPlanTime.setBounds(180, 225, 80, 20);
 		prjctReportPanel.add(lblPlanTime);
 		
 		

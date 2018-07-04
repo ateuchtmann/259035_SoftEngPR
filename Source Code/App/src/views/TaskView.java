@@ -28,7 +28,7 @@ import sounds.Sound;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -57,12 +57,7 @@ public class TaskView {
 	private static CreateActivityView createActView;
 	
 	
-	/**
-	 * Create the application.
-	 * @param descr 
-	 * @param projekt 
-	 * @wbp.parser.constructor
-	 */
+	
 	public TaskView(JFrame frame, JPanel tskGroupPanel, Map<Integer, Integer> list, Task tsk, Project prjct, TaskGroup taskgroup) {
 		TaskView.tskFrame = frame;
 		this.tskGroupPanel = tskGroupPanel;
@@ -74,9 +69,7 @@ public class TaskView {
 	}
 
 	
-	/**
-	 * @wbp.parser.constructor
-	 */
+	
 	// constructor with description
 	
 	public TaskView(JFrame frame, JPanel tskGroupPanel, Map<Integer, Integer> list, Task tsk, Project prjct, String descr, Time time) {
@@ -95,7 +88,7 @@ public class TaskView {
 	 */
 	
 
-	static Map<JButton, CreateActivityView> createActivityViewMap = new HashMap<>();
+	static Map<Integer, CreateActivityView> createActivityViewMap = new HashMap<>();
 
 	// setter
 	
@@ -140,7 +133,7 @@ public class TaskView {
 		fldPlanTime.setColumns(10);
 		
 		
-		createActView = new CreateActivityView(prjct, tsk);
+		createActView = new CreateActivityView(prjct, tsk, this);
 		
 	
 		
@@ -170,9 +163,15 @@ public class TaskView {
 				db_delete.Delete.deleteTask(tsk);
 				TaskView.taskgroup.deleteTask(tsk);
 				
+
+				WaitView.waitFrame.setVisible(true);
+				tskFrame.setVisible(false);
+				CreateTaskGroupView cr = new CreateTaskGroupView(prjct);
+				tskFrame = cr.getFrame();
 				
-				tskFrame.revalidate();
-				tskFrame.repaint();
+				ProjectView.creTaskGroupMap.put(prjct.getId(), cr);
+				tskFrame.setVisible(true);	
+					
 				
 			}
 			
@@ -189,14 +188,14 @@ public class TaskView {
 		manageActivities.setFont((new Font("Tahoma", Font.PLAIN, 14)));
 		manageActivities.setBounds(120, 77, 140, 21);
 		
-		createActivityViewMap.put(manageActivities, createActView);
+		createActivityViewMap.put(tsk.getId(), createActView);
 		 
 		
 		manageActivities.addActionListener(new ActionListener() {  
 			public void actionPerformed(ActionEvent arg0) {
 			
 				Sound.playSound(".\\sounds\\open.wav");
-				CreateActivityView newCreateActView =  createActivityViewMap.get(manageActivities);
+				CreateActivityView newCreateActView =  createActivityViewMap.get(tsk.getId());
 				
 				//saving/parsing planedTime
 				String typedPlanHour = fldPlanTime.getText().substring(0,2);
@@ -212,8 +211,10 @@ public class TaskView {
 				db_save.SaveTask.taskPlanTime(tsk, planTime);
 			
 				newCreateActView.updateTime();
+				
 				JFrame createActFrame = newCreateActView.getFrame();
 				createActFrame.setVisible(true);
+				
 				tsk.setName(fldTaskDescr.getText());
 				db_save.SaveTask.taskName(tsk, fldTaskDescr.getText());
 				
@@ -246,7 +247,7 @@ public class TaskView {
 				db_save.SaveTask.taskName(tsk, fldTaskDescr.getText());
 				
 				//saving/parsing planedTime
-				CreateActivityView newCreateActView =  createActivityViewMap.get(manageActivities);
+				CreateActivityView newCreateActView =  createActivityViewMap.get(tsk.getId());
 				String typedPlanHour = fldPlanTime.getText().substring(0,2);
 				String typedPlanMin = fldPlanTime.getText().substring(3,5);
 				planHour = Double.parseDouble(typedPlanHour);

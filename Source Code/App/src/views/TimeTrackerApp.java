@@ -13,7 +13,7 @@ import sounds.Sound;
  *  4.Andrea Aistleithner 
  *  5.Christopher Huber 
  * 
- *  Date: 27.05.2018
+ *  Date: 04.07.2018
  *  Version: 1.0.23
  *
  * Copyright notice

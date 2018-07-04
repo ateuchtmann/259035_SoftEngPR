@@ -33,7 +33,7 @@ import sounds.Sound;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -318,20 +318,7 @@ public class ActivityView {
 		btnOk.setBounds(1628, 13, 50, 29);
 		actPanel.add(btnOk);	
 		
-		JButton btnDelete = new JButton("X");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				db_delete.Delete.deleteActivity(act);
-				ActivityView.task.deleteActivity(act);
-				actFrame.revalidate();
-				actFrame.repaint();
-				
-			}
-		});
-		btnDelete.setForeground(Color.RED);
-		btnDelete.setBounds(1692, 13, 50, 29);
-		actPanel.add(btnDelete);
+	
 		
 		// save when closing window 
 				actFrame.addWindowListener(new WindowAdapter() {

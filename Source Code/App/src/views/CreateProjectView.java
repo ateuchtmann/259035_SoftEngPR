@@ -25,7 +25,7 @@ import java.awt.SystemColor;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -160,6 +160,7 @@ public class CreateProjectView {
 		
 		for (Project p : prjctListFiles) {
 			ProjectView pv = new ProjectView(crePrjctFrame, p, xCoor, yCoor, wait, prjctList);
+			
 			pv.setName(p.getName());
 			pv.setDescr(p.getDescription());
 
@@ -182,7 +183,9 @@ public class CreateProjectView {
 				Project prjct = new Project(db_load.LoadProject.newProjectId());
 				db_save.SaveProject.newProject(prjct);
 				prjctList.addProject(prjct);
+				
 				ProjectView projektView = new ProjectView(crePrjctFrame, prjct, xCoor, yCoor,wait, prjctList);
+				
 				prjctViewList.add(projektView);
 				prjctListFiles.add(prjct);
 				

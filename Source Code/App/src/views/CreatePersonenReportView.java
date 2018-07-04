@@ -1,6 +1,8 @@
 package views;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+
 import java.awt.Font;
 import java.util.List;
 
@@ -14,9 +16,30 @@ import models.PersonList;
 import models.Project;
 import models.ProjectList;
 
+/* Classname: CreatePersonenReportView
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
+
+
 public class CreatePersonenReportView {
 
-	private JFrame frame;
+	private JFrame crePersonReportFrame;
 	private List<Person> list;
 	private PersonList listPerson;
 	int yCoor = 100;
@@ -29,16 +52,17 @@ public class CreatePersonenReportView {
 
 	
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(0,0, 1920, 1080);
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		frame.setVisible(true);
+		crePersonReportFrame = new JFrame();
+		crePersonReportFrame.setBounds(0,0, 1920, 1080);
+		crePersonReportFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		crePersonReportFrame.getContentPane().setLayout(null);
+		crePersonReportFrame.setVisible(true);
+		crePersonReportFrame.getContentPane().setBackground(new Color(255, 255, 255));
 		
 		JLabel lblPersonReport = new JLabel("Personenrepors:");
 		lblPersonReport.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblPersonReport.setBounds(27, 28, 345, 31);
-		frame.getContentPane().add(lblPersonReport);
+		crePersonReportFrame.getContentPane().add(lblPersonReport);
 		
 		listPerson = db_load.LoadPerson.everythingFromPerson();
 		list = listPerson.getPersonList();
@@ -49,11 +73,8 @@ public class CreatePersonenReportView {
 		
 		for(Person p: list){
 			
-			PersonReportView pr = new PersonReportView(frame, xCoor, yCoor);
-			
-		
+			PersonReportView pr = new PersonReportView(crePersonReportFrame, xCoor, yCoor);
 			pr.setName(p.getFirstName() + " " + p.getLastName());
-			
 			String s = listProject.getPerson(p);
 			pr.setProjects(s);
 			
@@ -73,7 +94,7 @@ public class CreatePersonenReportView {
 			
 			// calculating correct position of every project
 			if (yCoor < 661) {
-				yCoor = yCoor + 350;
+				yCoor = yCoor + 315;
 			} else {
 				yCoor = 101;
 				xCoor = xCoor + 650;

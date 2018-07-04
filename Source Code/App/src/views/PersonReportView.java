@@ -1,13 +1,34 @@
 package views;
 
 import java.awt.Color;
-import java.awt.EventQueue;
+
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+/* Classname: PersonenReportView
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
 
 public class PersonReportView {
 
@@ -43,7 +64,7 @@ public class PersonReportView {
 		
 		lblPrnsName = new JLabel("Name ");
 		lblPrnsName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblPrnsName.setBounds(97, 34, 69, 20);
+		lblPrnsName.setBounds(97, 34, 180, 20);
 		personReportPanel.add(lblPrnsName);
 		
 		JLabel lblPrjcts = new JLabel("Projekte: ");
@@ -73,7 +94,7 @@ public class PersonReportView {
 		
 		lblCurrTime = new JLabel(" ");
 		lblCurrTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCurrTime.setBounds(176, 265, 69, 20);
+		lblCurrTime.setBounds(176, 265, 101, 20);
 		personReportPanel.add(lblCurrTime);
 		
 		

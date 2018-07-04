@@ -1,6 +1,8 @@
 package views;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -10,6 +12,27 @@ import models.Project;
 import models.ProjectList;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+/* Classname: CreateProjectReport
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
+
 
 public class CreateProjectReportView {
 
@@ -30,6 +53,7 @@ public class CreateProjectReportView {
 		creReportFrame.setBounds(0, 0, 1920, 1080);
 		creReportFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		creReportFrame.getContentPane().setLayout(null);
+		creReportFrame.getContentPane().setBackground(new Color(255, 255, 255));
 		
 		JLabel lblProjektreport = new JLabel("Projektreport : ");
 		lblProjektreport.setFont(new Font("Tahoma", Font.BOLD, 24));
@@ -78,9 +102,9 @@ public class CreateProjectReportView {
 			
 			// calculating correct position of every project
 			if (yCoor < 661) {
-				yCoor = yCoor + 295;
+				yCoor = yCoor + 315;
 			} else {
-				yCoor = 101;
+				yCoor = 100;
 				xCoor = xCoor + 650;
 			}
 			

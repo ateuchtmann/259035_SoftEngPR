@@ -1,12 +1,16 @@
 package views;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import models.*;
+import sounds.Sound;
 
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -24,7 +28,7 @@ import java.awt.event.ActionEvent;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 19.06.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -83,10 +87,12 @@ public class PersonsView {
 		JButton btnEdit = new JButton("...");
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PersonProjectView pView = new PersonProjectView(prs);
-
+				
+				PersonProjectView p = new PersonProjectView(prs);
+				
 			}
 		});
+		
 		btnEdit.setBounds(265, 20, 47, 29);
 		prsnPanel.add(btnEdit);
 		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 15));

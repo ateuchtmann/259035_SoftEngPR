@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 import models.*;
 import sounds.Sound;
@@ -20,7 +22,7 @@ import sounds.Sound;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -104,6 +106,15 @@ s	 * Initialize the contents of the frame.
 		});
 		
 		creTskGroupFrame.getContentPane().add(btnCreTaskGroup);
+		
+		
+		
+		creTskGroupFrame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				WaitView.waitFrame.setVisible(false);
+			}
+		});
 		
 			
 	}//initialize

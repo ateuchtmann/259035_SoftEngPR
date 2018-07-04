@@ -27,7 +27,7 @@ import sounds.Sound;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -61,9 +61,7 @@ public class TaskGroupView {
 	}
 	
 	
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize() {
 		
 		JPanel tskPanel = new JPanel();    
@@ -104,9 +102,16 @@ public class TaskGroupView {
 				db_delete.Delete.deleteTaskGroup(tskGroup);
 				TaskGroupView.prjct.deleteTaskGroup(tskGroup);
 				
+				
 
-				tskGroupFrame.revalidate();
-				tskGroupFrame.repaint();
+				WaitView.waitFrame.setVisible(true);
+				tskGroupFrame.setVisible(false);
+				CreateTaskGroupView cr = new CreateTaskGroupView(prjct);
+				tskGroupFrame = cr.getFrame();
+				ProjectView.creTaskGroupMap.put(prjct.getId(), cr);
+				tskGroupFrame.setVisible(true);	
+
+				
 
 			}
 		});

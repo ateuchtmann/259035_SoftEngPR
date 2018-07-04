@@ -11,6 +11,8 @@ import sounds.Sound;
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -25,7 +27,7 @@ import java.awt.event.ActionEvent;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -51,15 +53,21 @@ public class CreateActivityView {
 	private double time;
 	int currTimeHours = 0;
 	double currTimeMinutes = 0;
+	TaskView taskView;
 	
 	
-	public CreateActivityView(Project prjct, Task task) {
+	public CreateActivityView(Project prjct, Task task, TaskView taskView) {
 		this.prjct = prjct;
 		this.task = task; 
 		this.actViewList = new ArrayList<>();
 		currClass = this;
+		this.taskView = taskView;
 		initialize();
 	}
+	
+	
+
+	
 	
 	public JFrame getFrame(){
 		return this.createActFrame;
@@ -78,9 +86,6 @@ public class CreateActivityView {
 	}
 	
 	
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		
 
@@ -253,6 +258,22 @@ public class CreateActivityView {
 		
 		String diffTimeString = (int)diffTimeHours + "h " + (int)diffTimeMinutes+"m";
 		lblDiffNum.setText(diffTimeString);
+		
+		createActFrame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				WaitView.waitFrame.setVisible(false);
+				
+				//progress bar
+				double currTime1 = getTime();
+				double planTime1 = task.getPlanTime().getHour() + task.getPlanTime().getMin();
+				int diff = (int) ((currTime1 / planTime1) * 100);
+				taskView.setTaskProgress(diff);
+				
+				
+			}
+		});
+		
 		
 	}
 	

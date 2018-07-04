@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 *  4.Andrea Aistleithner 
 *  5.Christopher Huber 
 * 
-*  Date: 27.05.2018
+*  Date: 04.07.2018
 *  Version: 1.0.23
 *
 * Copyright notice
@@ -116,7 +116,9 @@ public class PersonProjectView {
 				prs.setFirstName(firstName);
 				db_save.SavePerson.personFirstname(prs, fldFirstName.getText());
 				String surName = fldSurName.getText();
+				
 				PersonsView.setName(firstName + " " + surName);
+				
 				prs.setLastname(surName);
 				db_save.SavePerson.personLastname(prs, surName);
 				

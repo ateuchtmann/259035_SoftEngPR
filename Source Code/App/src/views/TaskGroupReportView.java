@@ -1,7 +1,6 @@
 package views;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,6 +8,26 @@ import javax.swing.border.MatteBorder;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import java.awt.Font;
+
+/* Classname: TaskGroupReportView
+*
+* Programmers/Authors: 
+* 
+*  1.Milos Tomic
+*  2.Maja Dusanic 
+*  3.Alexander Teuchtmann 
+*  4.Andrea Aistleithner 
+*  5.Christopher Huber 
+* 
+*  Date: 04.07.2018
+*  Version: 1.0.23
+*
+* Copyright notice
+* - Programm is being build by the above mentioned programmers
+* 
+* Purpose of program: 
+* - Time scheduling of projects, tasks etc.
+*/
 
 public class TaskGroupReportView {
 
@@ -71,7 +90,7 @@ public class TaskGroupReportView {
 		
 		lblTaskGroupName = new JLabel(" ");
 		lblTaskGroupName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblTaskGroupName.setBounds(108, 35, 69, 20);
+		lblTaskGroupName.setBounds(108, 35, 243, 20);
 		tskGroupReportPanel.add(lblTaskGroupName);
 		
 		JLabel lblTaks = new JLabel("Aufgaben des Bereiches:");
