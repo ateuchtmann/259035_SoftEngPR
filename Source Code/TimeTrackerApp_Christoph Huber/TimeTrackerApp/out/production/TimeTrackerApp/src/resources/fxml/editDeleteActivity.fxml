@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controls.EditDeleteActivityControl">
+   <content>
+      <AnchorPane>
+         <children>
+            <VBox fx:id="vboxFirst" layoutX="-6.0">
+               <children>
+                  <Label fx:id="labelAddActivity" alignment="CENTER" style="&#10;" text="Edit or Delete Activity" textAlignment="CENTER" wrapText="false">
+                     <textFill>
+                        <Color blue="0.624" green="0.624" red="0.624" fx:id="x22111" />
+                     </textFill>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <VBox>
+                     <children>
+                        <Label fx:id="labelActivityName" alignment="CENTER" style="&#10;" text="Acivityname" textAlignment="CENTER" textFill="#383838" wrapText="false" />
+                        <TextField fx:id="textFieldActivityName" prefHeight="20.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label fx:id="labelStartDate" alignment="CENTER" style="&#10;" text="Startdate" textAlignment="CENTER" textFill="#383838" wrapText="false" />
+                              <DatePicker fx:id="datePickerStartDate" prefHeight="20.0" prefWidth="150.0" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="20.0">
+                           <children>
+                              <Label fx:id="labelStartTime" alignment="CENTER" style="&#10;" text="Starttime" textAlignment="CENTER" textFill="#383838" wrapText="false" />
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="textFieldStartTimeHours" prefHeight="20.0" prefWidth="50.0" />
+                                    <Label fx:id="labelPlannedTime11" alignment="CENTER" style="&#10;" text="hours" textAlignment="CENTER" textFill="#383838" wrapText="false">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="textFieldStartTimeMinutes" prefHeight="20.0" prefWidth="50.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Label alignment="CENTER" style="&#10;" text="minutes" textAlignment="CENTER" textFill="#383838" wrapText="false">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label fx:id="labelEndDate" alignment="CENTER" style="&#10;" text="Enddate" textAlignment="CENTER" textFill="#383838" wrapText="false" />
+                              <DatePicker fx:id="datePickerEndDate" prefHeight="20.0" prefWidth="150.0" />
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding>
+                        </VBox>
+                        <VBox layoutX="10.0" layoutY="20.0">
+                           <children>
+                              <Label fx:id="labelEndTime" alignment="CENTER" style="&#10;" text="Endtime" textAlignment="CENTER" textFill="#383838" wrapText="false" />
+                              <HBox>
+                                 <children>
+                                    <TextField fx:id="textFieldEndTimeHours" prefHeight="20.0" prefWidth="50.0" />
+                                    <Label alignment="CENTER" style="&#10;" text="hours" textAlignment="CENTER" textFill="#383838" wrapText="false">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField fx:id="textFieldEndTimeMinutes" prefHeight="20.0" prefWidth="50.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Label fx:id="labelPlannedTime1112" alignment="CENTER" style="&#10;" text="minutes" textAlignment="CENTER" textFill="#383838" wrapText="false">
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox>
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label fx:id="labelPlannedTime1" alignment="CENTER" style="&#10;" text="Duration" textAlignment="CENTER" textFill="#383838" wrapText="false" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <Label fx:id="labelPlannedTime12" alignment="CENTER" style="&#10;" text="Activity Owner" textAlignment="CENTER" textFill="#383838" wrapText="false" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <TextField fx:id="textFieldActivityDuration" editable="false" prefHeight="20.0" prefWidth="150.0" />
+                              <Pane HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="choiceBoxActivityOwner" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="150.0">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </ChoiceBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fillWidth="false">
+                     <children>
+                        <Label fx:id="labelDescription" alignment="CENTER" style="&#10;" text="Description" textAlignment="CENTER" textFill="#383838" wrapText="false" />
+                        <TextArea fx:id="textAreaDescription" prefHeight="100.0" prefWidth="380.0" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <HBox>
+                     <children>
+                        <VBox prefWidth="150.0">
+                           <children>
+                              <RadioButton fx:id="radioButtonDeleteActivity" mnemonicParsing="false" text="DELETE ACTIVITY?">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets top="17.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </RadioButton>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="49.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox layoutX="20.0" layoutY="102.0">
+                     <padding>
+                        <Insets bottom="10.0" top="50.0" />
+                     </padding>
+                     <children>
+                        <Button fx:id="buttonSubmit" mnemonicParsing="false" prefHeight="30.0" prefWidth="190.0" text="Submit" />
+                        <Button fx:id="buttonCancel" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="190.0" text="Cancel" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

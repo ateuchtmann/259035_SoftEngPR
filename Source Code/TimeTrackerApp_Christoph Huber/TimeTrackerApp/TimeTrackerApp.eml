@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" jdk="1.8" jdk_type="JavaSDK">
+	<output-test url="file://$MODULE_DIR$/../out/test/TimeTrackerApp"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="antlr-2.7.7.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/antlr-2.7.7.jar!/"/>
+	</lib>
+	<lib name="dom4j-1.6.1.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/dom4j-1.6.1.jar!/"/>
+	</lib>
+	<lib name="classmate-1.3.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/classmate-1.3.0.jar!/"/>
+	</lib>
+	<lib name="database-commons-annotations-5.0.1.Final.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/database-commons-annotations-5.0.1.Final.jar!/"/>
+	</lib>
+	<lib name="database-core-5.2.17.Final.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/database-core-5.2.17.Final.jar!/"/>
+	</lib>
+	<lib name="database-jpa-2.1-api-1.0.0.Final.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/database-jpa-2.1-api-1.0.0.Final.jar!/"/>
+	</lib>
+	<lib name="jandex-2.0.3.Final.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/jandex-2.0.3.Final.jar!/"/>
+	</lib>
+	<lib name="javassist-3.22.0-GA.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/javassist-3.22.0-GA.jar!/"/>
+	</lib>
+	<lib name="jboss-logging-3.3.1.Final.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/jboss-logging-3.3.1.Final.jar!/"/>
+	</lib>
+	<lib name="jboss-transaction-api_1.2_spec-1.0.1.Final.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/jboss-transaction-api_1.2_spec-1.0.1.Final.jar!/"/>
+	</lib>
+	<lib name="mysql-connector-java-8.0.11.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/TimeTrackerApp/lib/mysql-connector-java-8.0.11.jar!/"/>
+	</lib>
+</component>
