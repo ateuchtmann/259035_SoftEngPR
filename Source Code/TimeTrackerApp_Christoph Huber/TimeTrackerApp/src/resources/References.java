@@ -12,7 +12,7 @@ public class References {
     //LabelContents
     private String windowPageTitle ="TimeTrackerApp";
     private String labelLeftStatus="TimeTrackerApp \u00a9 SE_PR Team 3";
-    private String labelRightStatus="Version 0.0.1";
+    private String labelRightStatus="Version 1.0.0 RC1";
 
     //Hibernate
     private String hibernateConfigPath = "resources/hibernate.cfg.xml";

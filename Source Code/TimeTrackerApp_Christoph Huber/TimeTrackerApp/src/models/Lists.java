@@ -492,9 +492,26 @@ public class Lists {
             if (activityList.get(listIterator.nextIndex()).getUserID()==userID) {
                 currentTaskListIndex=Lists.getInstance().getTaskListIndex(activityList.get(listIterator.nextIndex()).getTaskID());
                 if(Lists.getInstance().getTaskList().get(currentTaskListIndex).getProjectID()==projectID)
-                loggedTimeDuration+=activityList.get(listIterator.nextIndex()).getDuration();
+                    loggedTimeDuration+=activityList.get(listIterator.nextIndex()).getDuration();
             }
             listIterator.next();
+        }
+        return loggedTimeDuration;
+    }
+
+    public long getLoggedUserPeriodActivityTimes(int userID, LocalDateTime beginnTime, LocalDateTime endTime) {
+        ListIterator<Activity> listIterator = activityList.listIterator();
+        long loggedTimeDuration=0;
+
+        while(listIterator.hasNext()){
+            Activity currentActivity = listIterator.next();
+            if(currentActivity.getUserID() == userID) {
+                if(currentActivity.getStartDateTime().isAfter(beginnTime)){
+                    if(currentActivity.getEndDateTime().isBefore(endTime)){
+                        loggedTimeDuration+=currentActivity.getDuration();
+                    }
+                }
+            }
         }
         return loggedTimeDuration;
     }

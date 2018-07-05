@@ -6,7 +6,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 
-import javax.persistence.Transient;
 import java.time.LocalDateTime;
 import java.util.ListIterator;
 
@@ -360,8 +359,9 @@ public class ViewLists {
         ListIterator<Project> listIterator = olIncompleteProjects.listIterator();
 
         while(listIterator.hasNext()) {
-            clIncompleteProjects.getData().add(new XYChart.Data<>(olIncompleteProjects.get(listIterator.nextIndex()).getProjectName(),olIncompleteProjects.get(listIterator.nextIndex()).getProgressState()));
-            listIterator.next();
+            Project currentProject = listIterator.next();
+            String currentProjectString = currentProject.getProjectName() + " [" + currentProject.getProgressState() + "%]";
+            clIncompleteProjects.getData().add(new XYChart.Data<>(currentProjectString,currentProject.getProgressState()));
         }
         return clIncompleteProjects;
     }
@@ -480,23 +480,27 @@ public class ViewLists {
     public BarChart.Series<String, Integer> getClLineChartTaskActivities(int currentTaskID){
         ObservableList<Activity> olTaskActivities = FXCollections.observableArrayList();
         olTaskActivities=getOlTaskActivities(currentTaskID);
-
         BarChart.Series<String, Integer> clRecentTaskActivities = new XYChart.Series<>();
-        LocalDateTime currentDateTime = LocalDateTime.of(LocalDateTime.now().getYear(),1,1,0,0);
+
+        //Start 11 Months ago, to show exactly the last 12 Months
+        LocalDateTime currentDateTime = LocalDateTime.of(LocalDateTime.now().getYear(),LocalDateTime.now().getMonth(),1,0,0).minusMonths(11);
 
         String currentMonthString="";
-        int currentMonth=1;
+        int i=0;
 
-        while (currentMonth<=12) {
+        while (i<12) {
             ListIterator<Activity> listIterator = olTaskActivities.listIterator();
             long currentDuration=0;
 
             while(listIterator.hasNext()) {
                 Activity currentActivity = listIterator.next();
-                if(currentActivity.getStartDateTime().getYear() == currentDateTime.getYear()) {
-                    if(currentActivity.getStartDateTime().getMonthValue() == currentMonth) {
-                        currentDuration+=currentActivity.getDuration();
+                if(currentActivity.getStartDateTime().isAfter(currentDateTime)) {
+                    if(currentActivity.getEndDateTime().isBefore(LocalDateTime.now())){
+                        if(currentActivity.getStartDateTime().getMonthValue() == currentDateTime.getMonthValue()) {
+                            currentDuration+=currentActivity.getDuration();
+                        }
                     }
+
                 }
             }
             currentDuration=currentDuration/60;
@@ -504,8 +508,9 @@ public class ViewLists {
             clRecentTaskActivities.getData().add(new XYChart.Data<>(currentMonthString,(int)currentDuration));
 
             currentDateTime=currentDateTime.plusMonths(1);
-            currentMonth++;
+            i++;
         }
+
         return clRecentTaskActivities;
     }
 
@@ -521,6 +526,27 @@ public class ViewLists {
             listIndex++;
         }
         return olUsers;
+    }
+
+    public BarChart.Series<String, Integer> getClBarChartUserStatisticsLastMonths(int numberOfMonths){
+        ObservableList<User> olUserStatisticsLastMonths = FXCollections.observableArrayList();
+        olUserStatisticsLastMonths=getOlUsers();
+        BarChart.Series<String, Integer> clUserStatisticsLastMonths = new XYChart.Series<>();
+
+        LocalDateTime beginnTime = LocalDateTime.now().minusMonths(numberOfMonths);
+
+        ListIterator<User> listIterator = olUserStatisticsLastMonths.listIterator();
+
+        while(listIterator.hasNext()) {
+            User currentUser = listIterator.next();
+            long currentUserActivityDuration=Lists.getInstance().getLoggedUserPeriodActivityTimes(currentUser.getUserID(),beginnTime,LocalDateTime.now());
+            if(currentUserActivityDuration !=0) {
+                currentUserActivityDuration=currentUserActivityDuration/60;
+                String currentUserNameString = currentUser.getUserNameString() + " [" +currentUserActivityDuration + "h]";
+                clUserStatisticsLastMonths.getData().add(new XYChart.Data<>(currentUserNameString,(int)currentUserActivityDuration));
+            }
+        }
+        return clUserStatisticsLastMonths;
     }
 
     //Getter

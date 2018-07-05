@@ -1,5 +1,8 @@
 package controls;
 
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,6 +34,7 @@ public class UserManagementControl implements Initializable {
     @FXML private Button buttonAddUser;
     @FXML private Button buttonEditDeleteUser;
     @FXML private Button buttonUpdateDatabase;
+    @FXML private Label labelUserStatistics;
         //Table
     @FXML private TableView<User> tableUserList;
     @FXML private TableColumn<User, Integer> tableUserListC1;
@@ -38,6 +42,10 @@ public class UserManagementControl implements Initializable {
     @FXML private TableColumn <User, String> tableUserListC3;
     @FXML private TableColumn <User, String> tableUserListC4;
     @FXML private TableColumn <User, String> tableUserListC5;
+        //ChartBar
+    @FXML private BarChart<String, Integer> chartBarUserStatistics;
+    @FXML private NumberAxis chartBarUserStatisticsY;
+    @FXML private CategoryAxis chartBarUserStatisticsX;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -73,8 +81,14 @@ public class UserManagementControl implements Initializable {
                 AlertBox.display("Errormessage", "No User selected!");
             }
         });
+        labelUserStatistics.setText("User Statistics (last 4 Months)");
 
+
+        //Load Elements
         initializeTableUsers();
+            //Initialize BarChartProjectStates
+        chartBarUserStatistics.getData().add(ViewLists.getInstance().getClBarChartUserStatisticsLastMonths(4));
+        chartBarUserStatisticsY.setLabel("spent time [h]");
     }
 
     @FXML

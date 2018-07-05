@@ -82,6 +82,6 @@ public class AddTaskGroupControl implements Initializable {
         clearScene();
         CurrentSession.getInstance().setMemoryNumber(2); //2 --> opens Tab TaskGroupSetting --> EditDeleteProjectScene
         PopupWindowSecond.getPopupWindow().close();
-        PopupWindowFirst.getPopupWindow().setScene(LoadDependences.getInstance().openFirstPopupScene("editDeleteProject"));
+        PopupWindowFirst.getPopupWindow().setScene(LoadDependences.getInstance().loadScene("editDeleteProject"));
     }
 }

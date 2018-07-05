@@ -17,7 +17,7 @@ public class PopupWindowSecond {
         //popupWindow.setWidth(450);
         //popupWindow.setHeight(250);
 
-        popupWindow.setScene(LoadDependences.getInstance().openSecondPopupScene(sceneName));
+        popupWindow.setScene(LoadDependences.getInstance().loadScene(sceneName));
         popupWindow.sizeToScene();
         popupWindow.setResizable(false);
         popupWindow.showAndWait();

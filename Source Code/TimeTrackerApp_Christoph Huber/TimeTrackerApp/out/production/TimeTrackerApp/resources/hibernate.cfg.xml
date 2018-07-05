@@ -11,11 +11,9 @@
         <!--Deprecated!: <property name="connection.driver_class">com.mysql.jdbc.Driver</property>-->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <!-- LOCAL MEDIASHARE DB PATH: -->
-        <!-- -->
         <property name="connection.url">jdbc:mysql://mediashare:3307/TimeTrackerAppDB?useLegacyDatetimeCode=false</property>
         <!-- LOCAL XAMPP DB Path:
-        <property name="connection.url">jdbc:mysql://localhost:3306/TimeTrackerAppDB?useLegacyDatetimeCode=false</property>
-        -->
+        <property name="connection.url">jdbc:mysql://localhost:3306/TimeTrackerAppDB?useLegacyDatetimeCode=false</property> -->
         <property name="connection.username">user</property>
         <property name="connection.password">pw4us3r</property>
 

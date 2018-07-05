@@ -136,13 +136,13 @@
                                           <VBox HBox.hgrow="ALWAYS">
                                              <children>
                                                 <Label fx:id="labelProjectname" alignment="CENTER" style="&#10;" text="Projectname" textAlignment="CENTER" textFill="#383838" wrapText="false" />
-                                                <TextField fx:id="textFieldProjectName" editable="false" VBox.vgrow="ALWAYS" />
+                                                <TextField fx:id="textFieldProjectName" editable="false" />
                                              </children>
                                              <padding>
                                                 <Insets right="20.0" />
                                              </padding>
                                           </VBox>
-                                          <VBox>
+                                          <VBox HBox.hgrow="ALWAYS">
                                              <children>
                                                 <Label fx:id="labelOwner" alignment="CENTER" style="&#10;" text="Project Manager" textAlignment="CENTER" textFill="#383838" wrapText="false" />
                                                 <TextField fx:id="textFieldProjectManager" editable="false" />
@@ -161,7 +161,7 @@
                                           <VBox HBox.hgrow="ALWAYS">
                                              <children>
                                                 <Label fx:id="labelPlannedTime" alignment="CENTER" style="&#10;" text="Planned Time" textAlignment="CENTER" textFill="#383838" wrapText="false" />
-                                                <TextField fx:id="textFieldPlannedTime" editable="false" VBox.vgrow="ALWAYS" />
+                                                <TextField fx:id="textFieldPlannedTime" editable="false" />
                                              </children>
                                              <padding>
                                                 <Insets right="20.0" />
@@ -170,7 +170,7 @@
                                           <VBox HBox.hgrow="ALWAYS">
                                              <children>
                                                 <Label fx:id="labelActualTime" alignment="CENTER" style="&#10;" text="Logged Time" textAlignment="CENTER" textFill="#383838" wrapText="false" />
-                                                <TextField fx:id="textFieldLoggedTime" editable="false" VBox.vgrow="ALWAYS" />
+                                                <TextField fx:id="textFieldLoggedTime" editable="false" />
                                              </children>
                                              <padding>
                                                 <Insets left="20.0" />
@@ -181,12 +181,12 @@
                                           <Insets top="10.0" />
                                        </padding>
                                     </HBox>
-                                    <HBox>
+                                    <HBox alignment="CENTER">
                                        <children>
-                                          <VBox HBox.hgrow="ALWAYS">
+                                          <VBox>
                                              <children>
                                                 <Label fx:id="labelState" alignment="CENTER" style="&#10;" text="Difference" textAlignment="CENTER" textFill="#383838" wrapText="false" VBox.vgrow="ALWAYS" />
-                                                <TextField fx:id="textFieldTimeDifference" editable="false" VBox.vgrow="ALWAYS" />
+                                                <TextField fx:id="textFieldTimeDifference" editable="false" prefWidth="209.0" />
                                              </children>
                                              <padding>
                                                 <Insets right="20.0" />
@@ -194,7 +194,7 @@
                                           </VBox>
                                           <VBox>
                                              <children>
-                                                <HBox>
+                                                <HBox alignment="TOP_RIGHT">
                                                    <children>
                                                       <Label fx:id="labelActualTime1" alignment="CENTER" style="&#10;" text="Project Progress State" textAlignment="CENTER" textFill="#383838" wrapText="false" />
                                                       <Pane HBox.hgrow="ALWAYS" />
@@ -214,7 +214,7 @@
                                     </HBox>
                                     <HBox VBox.vgrow="ALWAYS">
                                        <children>
-                                          <VBox fillWidth="false">
+                                          <VBox HBox.hgrow="ALWAYS">
                                              <children>
                                                 <Label fx:id="labelDescription" alignment="CENTER" style="&#10;" text="Description" textAlignment="CENTER" textFill="#383838" wrapText="false" />
                                                 <TextArea fx:id="textAreaDescription" editable="false" VBox.vgrow="ALWAYS" />
@@ -252,7 +252,7 @@
                                              <content>
                                                 <VBox>
                                                    <children>
-                                                      <PieChart fx:id="chartPieUsersSpentTime" labelLineLength="5.0" legendVisible="false" VBox.vgrow="ALWAYS" />
+                                                      <PieChart fx:id="chartPieUsersSpentTime" labelLineLength="5.0" legendVisible="false" titleSide="RIGHT" VBox.vgrow="ALWAYS" />
                                                    </children>
                                                 </VBox>
                                              </content>
@@ -261,7 +261,7 @@
                                              <content>
                                                 <VBox>
                                                    <children>
-                                                      <PieChart fx:id="chartPieTaskTimes" labelLineLength="5.0" legendVisible="false" VBox.vgrow="ALWAYS" />
+                                                      <PieChart fx:id="chartPieTaskTimes" labelLineLength="5.0" legendVisible="false" titleSide="RIGHT" VBox.vgrow="ALWAYS" />
                                                    </children>
                                                 </VBox>
                                              </content>

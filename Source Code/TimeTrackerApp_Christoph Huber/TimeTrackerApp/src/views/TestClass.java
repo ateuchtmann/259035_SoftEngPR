@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.XYChart;
 import models.*;
+import org.hibernate.Session;
 import resources.LoadDependences;
 
 import java.time.*;
@@ -34,14 +35,23 @@ public class TestClass {
         System.out.println(erg);
 
 */
-        //LoadDependences.getInstance().startRoutine();
+        LocalDateTime currentStartDateTime = LocalDateTime.of(LocalDateTime.now().getYear(),LocalDateTime.now().getMonth(),1,0,0).minusMonths(11); //Start 11 Months ago, to show exactly the last 12 Months
+        String currentMonthString="";
+        int startMonth=currentStartDateTime.getMonthValue();
+        int endMonth=startMonth+12;
 
-        long x = 3542;
-        System.out.println(x);
-        x=x/60;
-        System.out.println(x);
+        //currentStartDateTime = currentStartDateTime.minusMonths(11);
+
+        System.out.println(currentStartDateTime.toString());
+        System.out.println(startMonth);
+        System.out.println(endMonth);
+
+
 
         /*
+
+
+        LoadDependences.getInstance().startRoutine();
         Lists.getInstance().getBusinessRoleList().clear();
         BusinessRole supervisor = new BusinessRole(1, "Supervisor");
         BusinessRole employee = new BusinessRole(2, "Employee");
@@ -85,7 +95,7 @@ public class TestClass {
 
         }
         Connection.closeConnection();
-       /*
+       ///*
 */
 
        /*

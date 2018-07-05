@@ -99,78 +99,10 @@ public class LoadDependences {
         return currentScene;
     }
 
+
     //Open and Switch MainScens
     public void openMainScene(String sceneName) {
-        switch (sceneName) {
-            case "login":
-                Main.getWindow().setScene(loadScene(sceneName));
-                break;
-
-            case "dashboard":
-                Main.getWindow().setScene(loadScene(sceneName));
-                break;
-
-            case "userManagement":
-                Main.getWindow().setScene(loadScene(sceneName));
-                break;
-
-            case "projects":
-                Main.getWindow().setScene(loadScene(sceneName));
-                break;
-
-            case "projectDashboard":
-                Main.getWindow().setScene(loadScene(sceneName));
-                break;
-
-            case "taskDashboard":
-                Main.getWindow().setScene(loadScene(sceneName));
-                break;
-        }
-    }
-
-    //Open and Switch First PopUpScene
-    public Scene openFirstPopupScene(String sceneName) {
-
-        switch (sceneName) {
-            case "addProject":
-                return loadScene(sceneName);
-
-            case "addUser":
-                return loadScene(sceneName);
-
-            case "addTask":
-                return loadScene(sceneName);
-
-            case "editDeleteProject":
-                return loadScene(sceneName);
-
-            case "editDeleteUser":
-                return loadScene(sceneName);
-
-            case "editDeleteTask":
-                return loadScene(sceneName);
-
-            case "editDeleteActivity":
-                return loadScene(sceneName);
-
-            case "addActivity":
-                return loadScene(sceneName);
-        }
-        return null;
-    }
-
-    //Open and Switch Second PopupScene
-    public Scene openSecondPopupScene(String sceneName) {
-
-        switch (sceneName) {
-
-            case "addTaskGroup":
-                return loadScene(sceneName);
-
-            case "editDeleteTaskGroup":
-                return loadScene(sceneName);
-        }
-        return null;
+        Main.getWindow().setScene(loadScene(sceneName));
     }
 
     //Getter

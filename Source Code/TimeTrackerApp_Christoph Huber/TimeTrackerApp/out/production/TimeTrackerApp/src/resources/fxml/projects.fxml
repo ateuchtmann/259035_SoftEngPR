@@ -95,7 +95,7 @@
                               <Insets left="14.0" top="14.0" />
                            </padding>
                         </Label>
-                        <VBox prefHeight="350.0" prefWidth="780.0" VBox.vgrow="ALWAYS">
+                        <VBox VBox.vgrow="ALWAYS">
                            <children>
                               <Label fx:id="labelProjectStates" alignment="CENTER" style="&#10;" text="Status of Projects" textAlignment="CENTER" wrapText="false">
                                  <textFill>
@@ -110,7 +110,7 @@
                                     <CategoryAxis fx:id="chartBarProjectStatesX" side="BOTTOM" />
                                  </xAxis>
                                  <yAxis>
-                                    <NumberAxis fx:id="chartBarProjectStatesY" side="LEFT" />
+                                    <NumberAxis fx:id="chartBarProjectStatesY" side="TOP" />
                                  </yAxis>
                               </BarChart>
                            </children>
