@@ -416,6 +416,19 @@ public class ProjectView {
 		btnDelete.setBounds(475, 244, 60, 29);
 		prjctPanel.add(btnDelete);
 		
+		JButton btnPiechart = new JButton("Projektreport");
+		btnPiechart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				ProjectPieChart pc = new ProjectPieChart(prjct, prjct.getName(),"Projektreport je Person");
+				pc.pack();
+				pc.setBounds(500, 200, 900, 600);
+				pc.setVisible(true);
+			}
+		});
+		btnPiechart.setBounds(441, 18, 97, 25);
+		prjctPanel.add(btnPiechart);
+		
 		
 		//handling task areas of project 
 		btnEdit.addActionListener(new ActionListener() {  

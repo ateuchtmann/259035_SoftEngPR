@@ -119,7 +119,6 @@ public class TaskGroupView {
 		btnDelete.setBounds(299, 21, 41, 26);
 		namePanel.add(btnDelete);
 		
-			
 			// specifying the action after pressing the button for name edit
 			
 			btnEdditName.addActionListener(new ActionListener() {
@@ -210,7 +209,6 @@ public class TaskGroupView {
 		});
 		btnTaskAdd.setBounds(105, 62, 155, 25);
 		tskPanel.add(btnTaskAdd);
-	
 
 	}
 }

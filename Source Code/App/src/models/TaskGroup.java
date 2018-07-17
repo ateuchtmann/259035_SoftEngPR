@@ -71,5 +71,17 @@ public class TaskGroup {
 	public void setTaskList(List<Task> t){
 		taskList = t;
 	}
+	
+	public double getPlanTime(){
+		double time = 0;
+		double planTimeHour;
+		
+		for(Task a: getTaskList()){
+				planTimeHour = a.getPlanTime().getHour() + (a.getPlanTime().getMin()/60);
+				time = time + planTimeHour;
+			
+			}
+		return time;
+	}
 
 }
