@@ -155,11 +155,6 @@ public class Project {
 	}
 	
 	
-	
-	
-	
-	
-	
 	public double getPlanTime(){
 		double time = 0;
 		double planTimeHour;
@@ -187,9 +182,5 @@ public class Project {
 		
 		return time;
 	}
-	
-	
-	
-	
 	
 }

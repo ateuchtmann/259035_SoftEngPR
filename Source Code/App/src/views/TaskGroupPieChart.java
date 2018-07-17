@@ -13,16 +13,19 @@ import org.jfree.util.Rotation;
 import models.Activity;
 import models.Person;
 import models.TaskGroup;
+import models.Project;
 import models.Time;
 
 public class TaskGroupPieChart extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	private TaskGroup tskgrp;
+	private Project prjct;
 
-    public TaskGroupPieChart(TaskGroup tskgrp, String applicationTitle, String chartTitle) {
+    public TaskGroupPieChart(Project prjct, TaskGroup tskgrp, String applicationTitle, String chartTitle) {
         super(applicationTitle);
         this.tskgrp = tskgrp;
+        this.prjct = prjct;
         // This will create the dataset
         PieDataset dataset = createDataset();
         // based on the dataset we create the chart
@@ -39,7 +42,7 @@ public class TaskGroupPieChart extends JFrame{
         private  PieDataset createDataset() {
             DefaultPieDataset result = new DefaultPieDataset();
             
-            double leftTime = tskgrp.getPlanTime();
+            double leftTime = prjct.getPlanTime(tskgrp);
             
             for(Person p : tskgrp.getPersonList()) {
             	
@@ -64,12 +67,12 @@ public class TaskGroupPieChart extends JFrame{
             	leftTime -= investTime;
             	
         
-            	result.setValue(p.getLastName() + " " + (investTime/tskgrp.getPlanTime()*100)+"%", 
-            			       (investTime/tskgrp.getPlanTime()*100));
+            	result.setValue(p.getLastName() + " " + (investTime/prjct.getPlanTime(tskgrp)*100)+"%", 
+            			       (investTime/prjct.getPlanTime(tskgrp)*100));
             }//forPerson
            
-            if(leftTime > 0) result.setValue("Noch Offen = " + (leftTime/tskgrp.getPlanTime()*100) + "%",
-            		           (leftTime/tskgrp.getPlanTime()*100));
+            if(leftTime > 0) result.setValue("Noch Offen = " + (leftTime/prjct.getPlanTime(tskgrp)*100) + "%",
+            		           (leftTime/prjct.getPlanTime(tskgrp)*100));
             
     
             return result;

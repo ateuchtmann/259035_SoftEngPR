@@ -207,8 +207,21 @@ public class TaskGroupView {
 			   
 			}
 		});
-		btnTaskAdd.setBounds(105, 62, 155, 25);
+		btnTaskAdd.setBounds(10, 60, 153, 25);
 		tskPanel.add(btnTaskAdd);
+		
+		JButton taskReport = new JButton("Aufgabenbereichsreport");
+		taskReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TaskGroupPieChart tc = new TaskGroupPieChart(prjct, tskGroup, tskGroup.getName(),"Aufgabenbereichsreport je Person");
+				tc.pack();
+				tc.setBounds(500, 200, 900, 600);
+				tc.setVisible(true);
+			}
+		});
+		taskReport.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		taskReport.setBounds(175, 60, 165, 25);
+		tskPanel.add(taskReport);
 
 	}
 }
