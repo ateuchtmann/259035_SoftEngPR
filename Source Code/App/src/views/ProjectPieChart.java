@@ -64,9 +64,11 @@ public class ProjectPieChart extends JFrame{
             	
             	leftTime -= investTime;
             	
-        
-            	result.setValue(p.getLastName() + " " + (investTime/prjct.getPlanTime()*100)+"%", 
+            	if (investTime != 0){
+            		result.setValue(p.getLastName() + " " + (investTime/prjct.getPlanTime()*100)+"%", 
             			       (investTime/prjct.getPlanTime()*100));
+            	}
+            		
             }//forPerson
            
             if(leftTime > 0) result.setValue("Noch Offen = " + (leftTime/prjct.getPlanTime()*100) + "%",

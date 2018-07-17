@@ -35,7 +35,7 @@ public class SaveActivity {
 
 		int id = a.getId(); 
 
-		String queryInsertActivity = "INSERT INTO activity (id, id_user, id_task, description, startHour, startMinute, endHour, endMinute) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String queryInsertActivity = "INSERT INTO activity (id, id_user, id_task, description, startHour, startMinute, endHour, endMinute, day, month) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement insertActivity = null;
 
 		Connection connection = null;
@@ -44,6 +44,8 @@ public class SaveActivity {
 		int startMinute = 0;
 		int endHour = 0;
 		int endMinute = 0;
+		int day = 0;
+		int year = 0;
 
 		String description = "";
 		int id_user = 0;
@@ -63,6 +65,8 @@ public class SaveActivity {
 			insertActivity.setInt(6, startMinute);
 			insertActivity.setInt(7, endHour);
 			insertActivity.setInt(8, endMinute);
+			insertActivity.setInt(9, day);
+			insertActivity.setInt(10, year);			
 
 			insertActivity.executeUpdate();
 

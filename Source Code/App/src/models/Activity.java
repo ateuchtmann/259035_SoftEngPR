@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Date;
+
 /* Classname: Activity
 *
 * Programmers/Authors: 
@@ -27,6 +29,7 @@ public class Activity {
 	private Time end;
 	private String description;
 	private Person person;
+	Date actDate = new Date();
 
 	public Activity(int id) {
 		this.id = id;
@@ -51,7 +54,17 @@ public class Activity {
 	public Person getPerson() {
 		return this.person; 
 	}
+	
+	@SuppressWarnings("deprecation")
+	public int getDay() {
+		return actDate.getDay();
+	}
 
+	@SuppressWarnings("deprecation")
+	public int getMonth() {
+		return actDate.getMonth();
+	}
+	
 	public void addPerson(Person p) {
 		this.person = p; 
 	}
@@ -76,8 +89,6 @@ public class Activity {
 		return time;
 		
 	}
-	
-	
 	
 }
 

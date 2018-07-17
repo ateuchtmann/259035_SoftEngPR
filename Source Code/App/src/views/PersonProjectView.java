@@ -133,7 +133,7 @@ public class PersonProjectView {
 		prsInfoPanel.add(fldFirstName);
 		prsInfoPanel.add(fldSurName);
 		prsInfoPanel.add(btnOk);
-		prsFrame.setVisible(true);
+
 	}
 	
 	
