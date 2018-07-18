@@ -370,4 +370,47 @@ public class LoadActivity {
 		return month;
 	}
 	
+	public static int activityYear(Activity a){
+		
+		int id = a.getId();
+		int year = 0;
+		PreparedStatement stmtSelectYear = null;
+		String querySelectYear = "SELECT year FROM activity WHERE id = '" + id + "'";
+
+		ResultSet rs = null;
+
+		Connection connection = null;
+		try {
+			connection = db_connection.Database.getConnection();
+			stmtSelectYear = connection.prepareStatement(querySelectYear);
+			rs = stmtSelectYear.executeQuery();
+
+			while (rs.next()) {
+				year = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					;
+				}
+				connection = null;
+			}
+			if (stmtSelectYear != null) {
+				try {
+					stmtSelectYear.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtSelectYear = null;
+			}
+		}
+		return year;
+	}
 }

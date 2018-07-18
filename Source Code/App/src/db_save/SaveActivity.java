@@ -35,7 +35,7 @@ public class SaveActivity {
 
 		int id = a.getId(); 
 
-		String queryInsertActivity = "INSERT INTO activity (id, id_user, id_task, description, startHour, startMinute, endHour, endMinute, day, month) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String queryInsertActivity = "INSERT INTO activity (id, id_user, id_task, description, startHour, startMinute, endHour, endMinute, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		PreparedStatement insertActivity = null;
 
 		Connection connection = null;
@@ -46,6 +46,7 @@ public class SaveActivity {
 		int endMinute = 0;
 		int day = 0;
 		int month = 0;
+		int year = 0;
 
 		String description = "";
 		int id_user = 0;
@@ -66,7 +67,8 @@ public class SaveActivity {
 			insertActivity.setInt(7, endHour);
 			insertActivity.setInt(8, endMinute);
 			insertActivity.setInt(9, day);
-			insertActivity.setInt(10, month);			
+			insertActivity.setInt(10, month);
+			insertActivity.setInt(11, year);	
 
 			insertActivity.executeUpdate();
 
@@ -329,6 +331,46 @@ public class SaveActivity {
 				stmtUpdateMonth = null;
 			}
 		}
+	}
+	
+	public static void activityYear(Activity a, int year){
+		
+		int id = a.getId(); 
+
+		PreparedStatement stmtUpdateYear = null;
+		String queryUpdateYear = "UPDATE activity SET year = '" + year + "' WHERE id = '" + id
+				+ "'";
+
+		Connection connection = null;
+		try {
+			connection = db_connection.Database.getConnection();
+			stmtUpdateYear = connection.prepareStatement(queryUpdateYear);
+
+			stmtUpdateYear.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					;
+				}
+				connection = null;
+			}
+			if (stmtUpdateYear != null) {
+				try {
+					stmtUpdateYear.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtUpdateYear = null;
+			}
+		}
+		
 	}
 	
 }

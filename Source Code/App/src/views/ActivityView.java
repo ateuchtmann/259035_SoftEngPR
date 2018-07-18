@@ -284,6 +284,9 @@ public class ActivityView {
 				start = new Time(hours, minutes);
 				act.setStart(start);
 				db_save.SaveActivity.activityStart(act, start);
+				db_save.SaveActivity.activityDay(act, act.getDay());
+				db_save.SaveActivity.activityMonth(act, act.getMonth());
+				db_save.SaveActivity.activityYear(act, act.getYear()); 
 				sumStartTime=hours+(minutes/60.0);
 				
 				// Read endtime

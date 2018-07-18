@@ -31,7 +31,8 @@ public class Activity {
 	private Person person;
 	private int day;
 	private int month;
-	Date actDate = new Date();
+	private int year; 
+	
 
 	public Activity(int id) {
 		this.id = id;
@@ -59,20 +60,29 @@ public class Activity {
 	
 	@SuppressWarnings("deprecation")
 	public int getDay() {
-		return actDate.getDay();
+		return this.day;
 	}
 	
-	public void setDay(Date d) {
-		this.day = ;
+	@SuppressWarnings("deprecation")
+	public void setDay(int day) {	
+		this.day = day; 
 	}
 
 	@SuppressWarnings("deprecation")
 	public int getMonth() {
-		return actDate.getMonth();
+		return this.month;
+	}
+	@SuppressWarnings("deprecation")
+	public void setMonth(int month) {
+		this.month = month; 
 	}
 	
-	public void setMonth() {
-		this.month = ;
+	public int getYear() {
+		return this.year;
+	}
+	@SuppressWarnings("deprecation")
+	public void setYear(int year) {
+		this.year = year; 
 	}
 	
 	public void addPerson(Person p) {
@@ -80,7 +90,14 @@ public class Activity {
 	}
 
 	public void setStart(Time t) {
+		
 		this.start = t; 
+		
+		//to save the current sysdate when the activity is created
+		Date actDate = new Date(); 
+		this.setDay(actDate.getDate());
+		this.setMonth(actDate.getMonth() + 1);
+		this.setYear(actDate.getYear() + 1900);
 	}
 
 	public void setEnd(Time t) {

@@ -141,6 +141,9 @@ public class CreateProjectView {
 						activity.setDescription(db_load.LoadActivity.activityDescription(activity));
 						activity.setStart(db_load.LoadActivity.activityStart(activity));
 						activity.setEnd(db_load.LoadActivity.activityEnd(activity));
+						activity.setDay(db_load.LoadActivity.activityDay(activity));
+						activity.setMonth(db_load.LoadActivity.activityMonth(activity));
+						activity.setYear(db_load.LoadActivity.activityYear(activity));
 						
 						Person per = db_load.LoadActivity.activityPerson(activity); 
 						per.setFirstName(db_load.LoadPerson.personFirstname(per));
