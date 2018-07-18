@@ -45,7 +45,7 @@ public class SaveActivity {
 		int endHour = 0;
 		int endMinute = 0;
 		int day = 0;
-		int year = 0;
+		int month = 0;
 
 		String description = "";
 		int id_user = 0;
@@ -66,7 +66,7 @@ public class SaveActivity {
 			insertActivity.setInt(7, endHour);
 			insertActivity.setInt(8, endMinute);
 			insertActivity.setInt(9, day);
-			insertActivity.setInt(10, year);			
+			insertActivity.setInt(10, month);			
 
 			insertActivity.executeUpdate();
 
@@ -249,6 +249,84 @@ public class SaveActivity {
 					;
 				}
 				stmtUpdateDescription = null;
+			}
+		}
+	}
+	
+	public static void activityDay (Activity a, int day){
+		
+		int id = a.getId(); 
+
+		PreparedStatement stmtUpdateDay = null;
+		String queryUpdateDay = "UPDATE activity SET day = '" + day + "' WHERE id = '" + id
+				+ "'";
+
+		Connection connection = null;
+		try {
+			connection = db_connection.Database.getConnection();
+			stmtUpdateDay = connection.prepareStatement(queryUpdateDay);
+
+			stmtUpdateDay.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					;
+				}
+				connection = null;
+			}
+			if (stmtUpdateDay != null) {
+				try {
+					stmtUpdateDay.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtUpdateDay = null;
+			}
+		}
+	}
+	
+	public static void activityMonth (Activity a, int month){
+		
+		int id = a.getId(); 
+
+		PreparedStatement stmtUpdateMonth = null;
+		String queryUpdateMonth = "UPDATE activity SET month = '" + month + "' WHERE id = '" + id
+				+ "'";
+
+		Connection connection = null;
+		try {
+			connection = db_connection.Database.getConnection();
+			stmtUpdateMonth = connection.prepareStatement(queryUpdateMonth);
+
+			stmtUpdateMonth.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					;
+				}
+				connection = null;
+			}
+			if (stmtUpdateMonth != null) {
+				try {
+					stmtUpdateMonth.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtUpdateMonth = null;
 			}
 		}
 	}

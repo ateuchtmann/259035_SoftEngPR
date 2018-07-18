@@ -29,6 +29,8 @@ public class Activity {
 	private Time end;
 	private String description;
 	private Person person;
+	private int day;
+	private int month;
 	Date actDate = new Date();
 
 	public Activity(int id) {
@@ -59,10 +61,18 @@ public class Activity {
 	public int getDay() {
 		return actDate.getDay();
 	}
+	
+	public void setDay(Date d) {
+		this.day = ;
+	}
 
 	@SuppressWarnings("deprecation")
 	public int getMonth() {
 		return actDate.getMonth();
+	}
+	
+	public void setMonth() {
+		this.month = ;
 	}
 	
 	public void addPerson(Person p) {

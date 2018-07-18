@@ -281,4 +281,93 @@ public class LoadActivity {
 		}
 		return user;
 	}
+	
+	public static int activityDay(Activity a) {
+
+		int id = a.getId();
+		int day = 0;
+		PreparedStatement stmtSelectDay = null;
+		String querySelectDay = "SELECT day FROM activity WHERE id = '" + id + "'";
+
+		ResultSet rs = null;
+
+		Connection connection = null;
+		try {
+			connection = db_connection.Database.getConnection();
+			stmtSelectDay = connection.prepareStatement(querySelectDay);
+			rs = stmtSelectDay.executeQuery();
+
+			while (rs.next()) {
+				day = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					;
+				}
+				connection = null;
+			}
+			if (stmtSelectDay != null) {
+				try {
+					stmtSelectDay.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtSelectDay = null;
+			}
+		}
+		return day;
+	}
+	
+	public static int activityMonth(Activity a) {
+
+		int id = a.getId();
+		int month = 0;
+		PreparedStatement stmtSelectMonth = null;
+		String querySelectMonth = "SELECT month FROM activity WHERE id = '" + id + "'";
+
+		ResultSet rs = null;
+
+		Connection connection = null;
+		try {
+			connection = db_connection.Database.getConnection();
+			stmtSelectMonth = connection.prepareStatement(querySelectMonth);
+			rs = stmtSelectMonth.executeQuery();
+
+			while (rs.next()) {
+				month = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+			e.printStackTrace();
+
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					;
+				}
+				connection = null;
+			}
+			if (stmtSelectMonth != null) {
+				try {
+					stmtSelectMonth.close();
+				} catch (SQLException e) {
+					;
+				}
+				stmtSelectMonth = null;
+			}
+		}
+		return month;
+	}
+	
 }
