@@ -2,9 +2,11 @@ package views;
 
 import java.awt.Color;
 
-
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import javax.swing.border.MatteBorder;
@@ -162,6 +164,33 @@ public class ProjectReportView {
 		progressBar.setForeground(new Color(50, 205, 50));
 		progressBar.setBounds(38, 261, 441, 24);
 		prjctReportPanel.add(progressBar);
+		
+		/*
+		JButton btnMonthReport = new JButton("Monatsreport");
+		btnMonthReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProjectBarChart pb = new ProjectBarChart(prjct, prjct.getName(),"Monatsreport des Projekts");
+				pb.pack();
+				pb.setBounds(500, 200, 900, 600);
+				pb.setVisible(true);
+			}
+		});
+		btnMonthReport.setBounds(421, 16, 122, 25);
+		prjctReportPanel.add(btnMonthReport);
+		
+		JButton btnWeekReport = new JButton("Wochenreport");
+		btnWeekReport.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProjectBarChart pb = new ProjectBarChart(prjct, prjct.getName(),"Wochenreport des Projekts");
+				pb.pack();
+				pb.setBounds(500, 200, 900, 600);
+				pb.setVisible(true);
+			}
+		});
+		btnWeekReport.setBounds(421, 52, 122, 25);
+		prjctReportPanel.add(btnWeekReport);
+		
+		*/
 		
 	}
 	

@@ -136,7 +136,7 @@ public class CreateActivityView {
 		
 		for(Activity a: task.getActivities()) {
 			
-			ActivityView actView = new ActivityView(createActFrame, a, yCoor, prjct, btnAct.hashCode(), currClass, task);
+			ActivityView actView = new ActivityView(createActFrame, a, yCoor, prjct, btnAct.hashCode(), currClass, task, taskView);
 			if(yCoor <880){
 				yCoor += 60;
 			}
@@ -197,7 +197,7 @@ public class CreateActivityView {
 				db_save.SaveActivity.newActivity(act);
 				task.addActivity(act);
 				db_save.SaveTask.taskActivity(task, act);
-				ActivityView actView = new ActivityView(createActFrame, act, yCoor,prjct, btnAct.hashCode(), currClass, task);
+				ActivityView actView = new ActivityView(createActFrame, act, yCoor,prjct, btnAct.hashCode(), currClass, task, taskView);
 				actViewList.add(actView);
 				
 				if(yCoor <880){

@@ -63,8 +63,9 @@ public class ActivityView {
 	private JLabel lblPrsInit;
 	private List<Person> listPrs;
 	private static Task task; 
+	private static TaskView taskView; 
 
-	public ActivityView(JFrame frame, Activity act, int y, Project prjct, int id, CreateActivityView cav, Task task) {
+	public ActivityView(JFrame frame, Activity act, int y, Project prjct, int id, CreateActivityView cav, Task task, TaskView taskView) {
 		ActivityView.actFrame = frame;
 		this.act = act; 
 		this.yCoor = y;
@@ -72,6 +73,7 @@ public class ActivityView {
 		this.btnId = id;
 		this.creActView = cav;
 		this.task = task; 
+		this.taskView = taskView; 
 		initialize();
 		
 	}
@@ -321,7 +323,32 @@ public class ActivityView {
 		btnOk.setBounds(1628, 13, 50, 29);
 		actPanel.add(btnOk);	
 		
-	
+		JButton btnDelete = new JButton("X");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Sound.playSound(".\\sounds\\open.wav");
+				
+				ActivityView.task.deleteActivity(act);
+				db_delete.Delete.deleteActivity(act);
+			
+				WaitView.waitFrame.setVisible(true);
+				actFrame.setVisible(false);
+				CreateActivityView cr = new CreateActivityView(prjct, task, taskView);
+				actFrame = cr.getFrame();
+					
+				//ProjectView.creTaskGroupMap.put(prjct.getId(), cr);
+				actFrame.setVisible(true);
+				
+				//actFrame.revalidate();
+				actFrame.repaint();
+				
+				
+			}
+		});
+		btnDelete.setForeground(Color.RED);
+		btnDelete.setBounds(1692, 13, 50, 29);
+		actPanel.add(btnDelete);	
 		
 		// save when closing window 
 				actFrame.addWindowListener(new WindowAdapter() {
