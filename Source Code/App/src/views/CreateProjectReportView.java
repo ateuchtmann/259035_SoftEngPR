@@ -41,9 +41,11 @@ public class CreateProjectReportView {
 	private ProjectList listProject;
 	int yCoor = 100;
 	int xCoor = 50;
+	private ProjectList prjctList; 
 
 	
-	public CreateProjectReportView() {
+	public CreateProjectReportView(ProjectList prjctList) {
+		this.prjctList = prjctList; 
 		initialize();
 	}
 
@@ -66,7 +68,7 @@ public class CreateProjectReportView {
 		
 		
 		for(Project p : list){
-			ProjectReportView pr = new ProjectReportView(creReportFrame, xCoor, yCoor);
+			ProjectReportView pr = new ProjectReportView(p, creReportFrame, xCoor, yCoor);
 			
 			pr.setName(p.getName());
 			int count = p.getTaskGroupNr();

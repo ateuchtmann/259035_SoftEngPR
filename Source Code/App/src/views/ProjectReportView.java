@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import javax.swing.border.MatteBorder;
+
+import models.Project;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -39,6 +42,7 @@ public class ProjectReportView {
 	private JFrame frame;
 	private int xCoor;
 	private int yCoor;
+	private Project prjct;
 	JLabel lblProjektname;
 	JLabel lblTaskGroupNr;
 	JLabel lblTaskNr;
@@ -48,10 +52,11 @@ public class ProjectReportView {
 	JProgressBar progressBar;
 
 
-	public ProjectReportView(JFrame frame, int xCoor, int yCoor) {
+	public ProjectReportView(Project prjct, JFrame frame, int xCoor, int yCoor) {
 		this.xCoor = xCoor;
 		this.yCoor = yCoor;
 		this.frame = frame;
+		this.prjct = prjct;
 		initialize();
 	}
 	
@@ -165,32 +170,68 @@ public class ProjectReportView {
 		progressBar.setBounds(38, 261, 441, 24);
 		prjctReportPanel.add(progressBar);
 		
-		/*
+
 		JButton btnMonthReport = new JButton("Monatsreport");
 		btnMonthReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProjectBarChart pb = new ProjectBarChart(prjct, prjct.getName(),"Monatsreport des Projekts");
+				String type = "SingMonth";
+				ProjectBarChart pb = new ProjectBarChart(type, prjct, prjct.getName(),"Monatsreport des Projekts pro Person");
 				pb.pack();
 				pb.setBounds(500, 200, 900, 600);
 				pb.setVisible(true);
 			}
 		});
-		btnMonthReport.setBounds(421, 16, 122, 25);
+		btnMonthReport.setBounds(421, 52, 122, 25);
 		prjctReportPanel.add(btnMonthReport);
 		
 		JButton btnWeekReport = new JButton("Wochenreport");
 		btnWeekReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProjectBarChart pb = new ProjectBarChart(prjct, prjct.getName(),"Wochenreport des Projekts");
+				String type = "SingWeek";
+				ProjectBarChart pb = new ProjectBarChart(type, prjct, prjct.getName(),"Wochenreport des Projekts pro Person");
 				pb.pack();
 				pb.setBounds(500, 200, 900, 600);
 				pb.setVisible(true);
 			}
 		});
-		btnWeekReport.setBounds(421, 52, 122, 25);
+		btnWeekReport.setBounds(421, 90, 122, 25);
 		prjctReportPanel.add(btnWeekReport);
 		
-		*/
+		JButton btnMonthReport2 = new JButton("Monatsreport");
+		btnMonthReport2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String type = "AllMonth";
+				ProjectBarChart pb = new ProjectBarChart(type, prjct, prjct.getName(),"Monatsreport des Projekts");
+				pb.pack();
+				pb.setBounds(500, 200, 900, 600);
+				pb.setVisible(true);
+			}
+		});		
+		btnMonthReport2.setBounds(290, 52, 122, 25);
+		prjctReportPanel.add(btnMonthReport2);
+		
+		JButton btnWeekReport2 = new JButton("Wochenreport");
+		btnWeekReport2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String type = "AllWeek";
+				ProjectBarChart pb = new ProjectBarChart(type, prjct, prjct.getName(),"Wochenreport des Projekts");
+				pb.pack();
+				pb.setBounds(500, 200, 900, 600);
+				pb.setVisible(true);
+			}
+		});
+		btnWeekReport2.setBounds(290, 90, 122, 25);
+		prjctReportPanel.add(btnWeekReport2);
+		
+		JLabel lblAllPersons = new JLabel("  Alle Personen:");
+		lblAllPersons.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAllPersons.setBounds(282, 19, 134, 16);
+		prjctReportPanel.add(lblAllPersons);
+		
+		JLabel lblIndividual = new JLabel("  Einzeln:");
+		lblIndividual.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblIndividual.setBounds(413, 19, 122, 16);
+		prjctReportPanel.add(lblIndividual);
 		
 	}
 	

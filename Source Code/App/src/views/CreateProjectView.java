@@ -228,7 +228,7 @@ public class CreateProjectView {
 		btnPrjctReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				CreateProjectReportView cv = new CreateProjectReportView();
+				CreateProjectReportView cv = new CreateProjectReportView(prjctList);
 			
 			}
 		});
