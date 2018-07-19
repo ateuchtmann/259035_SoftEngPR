@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 
 import javax.swing.border.MatteBorder;
 
+import models.Person;
 import models.Project;
 
 import javax.swing.JPanel;
@@ -174,11 +175,13 @@ public class ProjectReportView {
 		JButton btnMonthReport = new JButton("Monatsreport");
 		btnMonthReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				for (Person p : prjct.getPersonList()) {
 				String type = "SingMonth";
-				ProjectBarChart pb = new ProjectBarChart(type, prjct, prjct.getName(),"Monatsreport des Projekts pro Person");
+				ProjectBarChart pb = new ProjectBarChart(p, type, prjct, prjct.getName(),"Monatsreport des Projekts pro Person");
 				pb.pack();
 				pb.setBounds(500, 200, 900, 600);
 				pb.setVisible(true);
+				}
 			}
 		});
 		btnMonthReport.setBounds(421, 52, 122, 25);
@@ -187,11 +190,13 @@ public class ProjectReportView {
 		JButton btnWeekReport = new JButton("Wochenreport");
 		btnWeekReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				for (Person p : prjct.getPersonList()) {
 				String type = "SingWeek";
-				ProjectBarChart pb = new ProjectBarChart(type, prjct, prjct.getName(),"Wochenreport des Projekts pro Person");
+				ProjectBarChart pb = new ProjectBarChart(p, type, prjct, prjct.getName(),"Wochenreport des Projekts pro Person");
 				pb.pack();
 				pb.setBounds(500, 200, 900, 600);
 				pb.setVisible(true);
+				}
 			}
 		});
 		btnWeekReport.setBounds(421, 90, 122, 25);
@@ -201,7 +206,8 @@ public class ProjectReportView {
 		btnMonthReport2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String type = "AllMonth";
-				ProjectBarChart pb = new ProjectBarChart(type, prjct, prjct.getName(),"Monatsreport des Projekts");
+				Person p = null;
+				ProjectBarChart pb = new ProjectBarChart(p, type, prjct, prjct.getName(),"Monatsreport des Projekts");
 				pb.pack();
 				pb.setBounds(500, 200, 900, 600);
 				pb.setVisible(true);
@@ -214,7 +220,8 @@ public class ProjectReportView {
 		btnWeekReport2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String type = "AllWeek";
-				ProjectBarChart pb = new ProjectBarChart(type, prjct, prjct.getName(),"Wochenreport des Projekts");
+				Person p = null;
+				ProjectBarChart pb = new ProjectBarChart(p, type, prjct, prjct.getName(),"Wochenreport des Projekts");
 				pb.pack();
 				pb.setBounds(500, 200, 900, 600);
 				pb.setVisible(true);

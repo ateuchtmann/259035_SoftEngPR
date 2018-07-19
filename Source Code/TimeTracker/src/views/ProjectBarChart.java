@@ -22,7 +22,7 @@ public class ProjectBarChart extends JFrame {
 	private Project prjct;
 	private String type;
 
-	public ProjectBarChart(String type, Project prjct, String applicationTitle, String chartTitle) {
+	public ProjectBarChart(Person pers, String type, Project prjct, String applicationTitle, String chartTitle) {
 		super(applicationTitle);
 		this.prjct = prjct;
 		this.type = type;
@@ -49,30 +49,22 @@ public class ProjectBarChart extends JFrame {
 		
 		// bar charts for every single Person and months of 2018
 		if (type == "SingMonth") {
-		
-			for (Person p : prjct.getPersonList()) {
-			JFreeChart barChart = ChartFactory.createBarChart(chartTitle, "Person", "Stunden", createDsSingMonth(p),
+			JFreeChart barChart = ChartFactory.createBarChart(chartTitle, "Person", "Stunden", createDsSingMonth(pers),
 					PlotOrientation.VERTICAL, true, true, false);
 
 			ChartPanel chartPanel = new ChartPanel(barChart);
 			chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
 			setContentPane(chartPanel);
-			}
-		
 		}
 		
 		// bar charts for every single Person and weeks of 2018
 		if (type == "SingWeek") {
-			
-			for (Person p : prjct.getPersonList()) {
-				JFreeChart barChart = ChartFactory.createBarChart(chartTitle, "Person", "Stunden", createDsSingWeek(p),
+				JFreeChart barChart = ChartFactory.createBarChart(chartTitle, "Person", "Stunden", createDsSingWeek(pers),
 						PlotOrientation.VERTICAL, true, true, false);
 
 				ChartPanel chartPanel = new ChartPanel(barChart);
 				chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
 				setContentPane(chartPanel);
-			}
-			
 		}
 
 	}
@@ -231,9 +223,6 @@ public class ProjectBarChart extends JFrame {
 				for (Activity a : db_load.LoadPerson.personActivities(p)) {
 
 					if (db_load.LoadActivity.activityMonth(a) == month) {
-						
-						System.out.print(a.getMonth());
-						System.out.print(month);
 					
 						Time start = new Time(0, 0);
 						Time end = new Time(0, 0);
