@@ -74,15 +74,15 @@ public class ProjectBarChart extends JFrame {
 
 		DefaultCategoryDataset result = new DefaultCategoryDataset();
 		double investTime = 0;
-		for (Person p : prjct.getPersonList()) {
+		for (Person p : prjct.getPersonList()) { // loading all persons
 
-			for (int month = 1; month < 13; month++) {
+			for (int month = 1; month < 13; month++) { // adding all months to the graph
 				
 				investTime = 0;
 				
-				for (Activity a : db_load.LoadPerson.personActivities(p)) {
+				for (Activity a : db_load.LoadPerson.personActivities(p)) { // make sum of all activities
 
-					if (db_load.LoadActivity.activityMonth(a) == month) {
+					if (db_load.LoadActivity.activityMonth(a) == month) { 
 					
 						Time start = new Time(0, 0);
 						Time end = new Time(0, 0);
@@ -140,7 +140,7 @@ public class ProjectBarChart extends JFrame {
 				}
 
 				if (investTime >= 0) {
-					result.addValue(investTime, p.getLastName(), monat);
+					result.addValue(investTime, p.getLastName(), monat); // creating dataset
 				}
 
 			}
@@ -160,14 +160,13 @@ public class ProjectBarChart extends JFrame {
 		Date activityDate;
 		Calendar cl = Calendar.getInstance();
 		
-		for (Person p : prjct.getPersonList()) {
+		for (Person p : prjct.getPersonList()) { // loading all persons
 
-			for (int week = 1; week < 53; week++) {
+			for (int week = 1; week < 53; week++) { // all weeks
 				
 				investTime = 0;
 				
-				for (Activity a : db_load.LoadPerson.personActivities(p)) {
-					
+				for (Activity a : db_load.LoadPerson.personActivities(p)) { // all activities per person
 					
 					int year = db_load.LoadActivity.activityYear(a); 
 					int month = db_load.LoadActivity.activityMonth(a); 
@@ -197,7 +196,7 @@ public class ProjectBarChart extends JFrame {
 
 				}
 				
-				if (investTime != 0) {
+				if (investTime != 0) { // only display weeks with activities
 					String woche = "KW" + week ;
 					result.addValue(investTime, p.getLastName(), woche);
 				}

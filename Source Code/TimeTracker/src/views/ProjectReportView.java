@@ -175,7 +175,7 @@ public class ProjectReportView {
 		JButton btnMonthReport = new JButton("Monatsreport");
 		btnMonthReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (Person p : prjct.getPersonList()) {
+				for (Person p : prjct.getPersonList()) { // creates a graph for each person
 				String type = "SingMonth";
 				ProjectBarChart pb = new ProjectBarChart(p, type, prjct, prjct.getName(),"Monatsreport des Projekts pro Person");
 				pb.pack();
@@ -190,7 +190,7 @@ public class ProjectReportView {
 		JButton btnWeekReport = new JButton("Wochenreport");
 		btnWeekReport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for (Person p : prjct.getPersonList()) {
+				for (Person p : prjct.getPersonList()) { // creates a graph for each person
 				String type = "SingWeek";
 				ProjectBarChart pb = new ProjectBarChart(p, type, prjct, prjct.getName(),"Wochenreport des Projekts pro Person");
 				pb.pack();

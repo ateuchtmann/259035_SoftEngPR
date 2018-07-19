@@ -28,15 +28,11 @@ public class TaskGroupPieChart extends JFrame {
 		super(applicationTitle);
 		this.tskgrp = tskgrp;
 		this.prjct = prjct;
-		// This will create the dataset
+		
 		PieDataset dataset = createDataset();
-		// based on the dataset we create the chart
 		JFreeChart chart = createChart(dataset, chartTitle);
-		// we put the chart into a panel
 		ChartPanel chartPanel = new ChartPanel(chart);
-		// default size
 		chartPanel.setPreferredSize(new java.awt.Dimension(500, 400));
-		// add it to our application
 		setContentPane(chartPanel);
 
 	}

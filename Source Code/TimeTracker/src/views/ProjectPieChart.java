@@ -23,15 +23,11 @@ public class ProjectPieChart extends JFrame{
     public ProjectPieChart(Project prjct, String applicationTitle, String chartTitle) {
         super(applicationTitle);
         this.prjct = prjct;
-        // This will create the dataset
+        
         PieDataset dataset = createDataset();
-        // based on the dataset we create the chart
         JFreeChart chart = createChart(dataset, chartTitle);
-        // we put the chart into a panel
         ChartPanel chartPanel = new ChartPanel(chart);
-        // default size
         chartPanel.setPreferredSize(new java.awt.Dimension(500,400));
-        // add it to our application
         setContentPane(chartPanel);
         
     }
@@ -42,7 +38,7 @@ public class ProjectPieChart extends JFrame{
             
             double leftTime = prjct.getPlanTime();
             
-            for(Person p : prjct.getPersonList()) {
+            for(Person p : prjct.getPersonList()) { // goes throught the list of persons
             	
             	double investTime = 0;
          
@@ -69,7 +65,7 @@ public class ProjectPieChart extends JFrame{
             			       (investTime/prjct.getPlanTime()*100));
             	}
             		
-            }//forPerson
+            }
            
             if(leftTime > 0) result.setValue("Noch Offen = " + (leftTime/prjct.getPlanTime()*100) + "%",
             		           (leftTime/prjct.getPlanTime()*100));
@@ -77,7 +73,7 @@ public class ProjectPieChart extends JFrame{
     
             return result;
 
-        }//createDataset
+        } // createDataset
         
         private JFreeChart createChart(PieDataset dataset, String title) {
 
